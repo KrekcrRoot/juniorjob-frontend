@@ -13,7 +13,7 @@ const menu = [
     link: "/",
   },
   {
-    title: "Профессиональные сборы",
+    title: "Профессиональные пборы",
     icon: badgeIcon,
     link: "/",
   },
