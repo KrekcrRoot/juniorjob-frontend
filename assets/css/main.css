@@ -34,19 +34,6 @@ body {
     font-weight: 600;
 }
 
-.slide-left-enter-active,
-.slide-left-leave-active {
-  transition: left 0.3s; /* Измените на left */
-}
-
-.slide-left-enter,
-.slide-left-leave-to /* .slide-left-leave-active in <2.1.8 */ {
-  left: 0; /* Измените на left: 0; */
-}
-.slide-left-enter-to,
-.slide-left-leave /* .slide-left-enter-active in <2.1.8 */ {
-  left: -200px; /* Измените на отрицательное значение */
-}
 /* Media запрос для устройств с шириной экрана 1024px и больше (большие десктопы) */
 @media (min-width: 1024px) {
 

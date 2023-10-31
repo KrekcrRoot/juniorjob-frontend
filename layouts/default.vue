@@ -259,6 +259,7 @@ onMounted(() => {
 .burger-menu {
   width: 32px;
   height: 32px;
+  -webkit-tap-highlight-color: transparent;
 
   & img {
     width: 100%;
