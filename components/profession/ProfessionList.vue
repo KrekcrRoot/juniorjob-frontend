@@ -27,8 +27,8 @@ const professionList = [
 
 <template>
   <div>
-    <h1 class="main-title">Профессиональные сборы</h1>
-    <div class="mt-7">
+    <h1 class="main-title">Профессиональные пробы</h1>
+    <div class="xl:mt-7 mt-3">
         <ProfessionItem v-for="professionItem in professionList" :profession="professionItem" :key="professionItem.icon" />
     </div>
   </div>
