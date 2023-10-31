@@ -351,8 +351,9 @@ onMounted(() => {
   font-weight: 400;
   line-height: 110%;
 }
-.slide-enter-from {
- opacity: 0;
+/*.slide-enter-from {
+  opacity: 0;
+  transition: opacity .25s;
 }
 .slide-enter-active {
   transition: opacity .25s;
@@ -362,12 +363,25 @@ onMounted(() => {
 }
 
 .slide-enter, .slide-leave-to {
-    opacity: 0;
     transition: opacity .25s;
 
 }
-.slide-enter-to {
- opacity: 0.5;
+.slide-leave-to {
+ opacity: 0;
+}*/
+.slide-enter-active {
+  animation: bounce-in 0.5s;
+}
+.slide-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: translateX(-300px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
     .sidebar-backdrop {
@@ -378,7 +392,7 @@ onMounted(() => {
         top: 0;
         left: 0;
         opacity: 1;
-        transition: opacity 5s;
+        transition: opacity 0.1s;
         cursor: pointer;
     }
 
