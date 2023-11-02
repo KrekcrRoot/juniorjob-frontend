@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.main-title {
+    color: #2C1B47;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+}
+.bolder-title {
+    color: #2C1B47;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px; 
+}
+.btn {
+    padding: 11px 20px;
+    border-radius: 20px;
+    background: #AAA2D8;
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Media запрос для устройств с шириной экрана 1024px и больше (большие десктопы) */
+@media (min-width: 1024px) {
+
+}
+
+/* Media запрос для устройств с шириной экрана между 768px и 1023px (средние десктопы) */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+/* Media запрос для устройств с шириной экрана между 480px и 767px (планшеты в альбомной ориентации) */
+@media (min-width: 480px) and (max-width: 767px) {
+
+}
+@media (min-width: 480px) {
+    .mobile-show {
+        display: none;
+    }
+}
+/* Media запрос для устройств с шириной экрана меньше 480px (планшеты и мобильные) */
+@media (max-width: 479px) {
+    body {
+        background-color: #BFB9E2;
+    }
+    .mobile-hide {
+        display: none;
+    }
+    .header-wrapper {
+        background-color: #BFB9E2;
+    }
+}
