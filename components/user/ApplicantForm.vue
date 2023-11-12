@@ -2,11 +2,9 @@
 import { ref } from 'vue';
 </script>
 <template>
-    <div class="container-centered white-bg">
-        <h1 class="user-title pb-6">Регистрация</h1>
-    
-        
-            <form class="mt-5">
+    <div class="container-centered">
+        <h1 class="user-title">Регистрация</h1>
+            <form class="user-form mt-5">
                 <FormUploadImage @change="uploadImage" />
                 <input placeholder="Фамилия" type="text" class="field mt-3">
                 <input placeholder="Имя" type="text" class="field mt-3">
@@ -16,22 +14,22 @@ import { ref } from 'vue';
                 <input placeholder="Город" type="text" class="field mt-6">
                 <input placeholder="Место учебы" type="text" class="field mt-3">
                 <input placeholder="ИНН" type="text" class="field mt-3">
-                <input placeholder="Компетенции" type="text" class="field mt-3">
+                <FormMultiSelect class="mt-3" />
                 <textarea placeholder="Обо мне" class="field mt-3"></textarea>
                 <button type="submit" class="btn w-full mt-3">Зарегистрироваться</button>
-                <div class="mt-3 mb-12">
-                    <p class="ask-text">Уже зарегистрированы? <NuxtLink to="/login" class="ask-text__link">Войти</NuxtLink></p>
-                </div>
             </form>
+            <div class="mt-3 pb-12">
+                <p class="ask-text">Уже зарегистрированы? <NuxtLink to="/login" class="ask-text__link">Войти</NuxtLink></p>
+            </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
+.user-form {
+    max-width: 313px;
+}
 .container-centered {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: flex-start;
 }
 .ask-text {
     color: #604D9E;

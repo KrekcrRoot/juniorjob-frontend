@@ -115,13 +115,17 @@ onMounted(() => {
             class="header__search col-start-1 col-span-8"
             placeholder="Поиск вакансий"
           />
-          <div class="flex items-center gap-4 col-span-2">
+          <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2">
             <button class="filter-btn">
-              <img src="@/assets/images/icons/filter_alt.svg" alt="" />
+              <div class="filter-btn__icon">
+                <img src="@/assets/images/icons/filter_alt.svg" alt="" />
+              </div>
               <span> Фильтры </span>
             </button>
             <button class="filter-btn">
-              <img src="@/assets/images/icons/sync_alt.svg" alt="" />
+              <div class="filter-btn__icon">
+                <img src="@/assets/images/icons/sync_alt.svg" alt="" />
+              </div>
               <span> Сортировка </span>
             </button>
           </div>
@@ -200,9 +204,10 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  padding: 10px;
+  padding: 10px 0;
 
   &__icon {
+    user-select: none;
     cursor: pointer;
     width: 30px;
     height: 30px;
@@ -238,9 +243,10 @@ onMounted(() => {
 }
 
 .filter-btn {
+  flex-shrink: 0;
   border-radius: 30px;
   background: #d9d9d9;
-  padding: 12px 20px;
+  padding: 8px 20px;
   color: #2c1b47;
   display: flex;
   align-items: center;
@@ -254,7 +260,19 @@ onMounted(() => {
   &__icon {
     width: 24px;
     height: 24px;
-    object-fit: contain;
+    @media (max-width: 390px) {
+      width: 20px;
+    height: 20px;
+    }
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  @media (max-width: 390px) {
+    padding: 8px 15px;
+    gap: 6px;
   }
 }
 
@@ -325,6 +343,7 @@ onMounted(() => {
 }
 
 .logo {
+  user-select: none;
   height: 50px;
 }
 
@@ -357,24 +376,6 @@ onMounted(() => {
   font-weight: 400;
   line-height: 110%;
 }
-/*.slide-enter-from {
-  opacity: 0;
-  transition: opacity .25s;
-}
-.slide-enter-active {
-  transition: opacity .25s;
-}
-  .slide-leave-active {
-    transition: opacity .25s;
-}
-
-.slide-enter, .slide-leave-to {
-    transition: opacity .25s;
-
-}
-.slide-leave-to {
- opacity: 0;
-}*/
 .slide-enter-active {
   animation: bounce-in 0.5s;
 }

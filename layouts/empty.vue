@@ -1,16 +1,14 @@
 <script setup>
-import logo from "@/assets/images/logo.svg";
+
 </script>
 
 <template>
-        <header class="xl:container mx-auto">
+        <header class="xl:container mx-auto px-4 xl:px-0">
             <div class="header-inner py-7">
-                <div class="flex gap-5 items-center">
-                    <UiButton />
-                      <div class="logo">
-                        <img :src="logo" alt="">
-                      </div>
-                </div>
+                
+                    <UiButtonBackWithLogo />
+                      
+               
             </div>
         </header>
         <div class="xl:container mx-auto">
@@ -20,9 +18,6 @@ import logo from "@/assets/images/logo.svg";
 
 <style lang="scss">
 @import url("~/assets/css/main.css");
-header {
-    background-color: white !important;
-}
 .logo {
     height: 51px;
     * img {

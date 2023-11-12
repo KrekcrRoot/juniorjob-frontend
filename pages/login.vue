@@ -1,26 +1,27 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 definePageMeta({
-  layout: "empty",
+    layout: "empty",
 });
 
 const loading = ref(true)
 
 onMounted(() => {
 
-loading.value = false
+    loading.value = false
 })
 </script>
 <template>
-    <!-- Экран загрузки -->
-  <template v-if="loading">
-    <UiLoader />
-  </template>
-  <!-- Формы регистрации -->
-    <template v-else>
-      <UserLoginForm />
-    </template>
+    <div class="">
+        <!-- Экран загрузки -->
+        <template v-if="loading">
+            <UiLoader />
+        </template>
+        <!-- Формы регистрации -->
+        <template v-else>
+            <UserLoginForm />
+        </template>
+    </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

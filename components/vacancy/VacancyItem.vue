@@ -30,14 +30,20 @@ const props = defineProps({
 <style lang="scss" scoped>
 .vacancy {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 15px;
 
   &__title {
+    font-family: 'Source Sans Pro';
     color: #000;
     font-size: 20px;
     font-weight: 400;
     margin-bottom: 5px;
+    line-height: normal;
+    @media (max-width: 390px) {
+      font-size: 17px;
+      font-weight: 500;
+    }
   }
   &__text {
     color: #604d9e;
@@ -46,6 +52,7 @@ const props = defineProps({
   }
 
   &__icon {
+    flex-shrink: 0;
     width: 50px;
     height: 50px;
     & img {

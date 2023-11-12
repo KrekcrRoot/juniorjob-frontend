@@ -2,11 +2,10 @@
 import { ref } from 'vue';
 </script>
 <template>
-    <div class="container-centered white-bg">
-        <h1 class="user-title pb-6">Вход</h1>
-    
-        
+    <div class="container-centered">
+        <h1 class="user-title">Вход</h1>
             <form class="mt-5">
+
                 <input placeholder="Email" type="text" class="field mt-3">
                 <input placeholder="Пароль" type="password" class="field mt-3">
                 <button type="submit" class="btn w-full mt-3">Войти</button>
@@ -18,13 +17,6 @@ import { ref } from 'vue';
 </template>
 
 <style lang="scss" scoped>
-.container-centered {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 .ask-text {
     color: #604D9E;
 text-align: center;

@@ -10,9 +10,9 @@ import logoBig from "@/assets/images/big-logo.svg";
     <p class="register-welcome__postitle mt-5">
         Начни зарабатывать вместе с нами!
     </p>
-    <div class="flex items-center gap-7 mt-7">
-        <NuxtLink to="/register/applicant" class="btn">Я соискатель</NuxtLink>
-        <NuxtLink to="/register/employer" class="btn">Я работодатель</NuxtLink>
+    <div class="flex justify-center flex-wrap items-center gap-4 xl:gap-7 mt-7">
+        <NuxtLink to="/register/applicant" class="btn register-welcome__btn">Я соискатель</NuxtLink>
+        <NuxtLink to="/register/employer" class="btn register-welcome__btn">Я работодатель</NuxtLink>
     </div>
   </div>
 </template>
@@ -32,6 +32,14 @@ import logoBig from "@/assets/images/big-logo.svg";
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+  &__btn {
+    padding: 12px 35px;
+    min-width: 276px;
+  }
+  @media (max-width: 490px) {
+    padding-left: 50px;
+    padding-right: 50px;
   }
 }
 </style>

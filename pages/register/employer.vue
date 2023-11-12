@@ -16,9 +16,7 @@ loading.value = false
 <template>
     <!-- Экран загрузки -->
   <template v-if="loading">
-    <div class="w-full h-full flex items-center justify-center">
-      <VueSpinner size="20" color="red" />
-    </div>
+    <UiLoader />
   </template>
 
   <!-- Формы регистрации -->
