@@ -85,12 +85,12 @@ onMounted(() => {
                 alt="Уведомления"
               />
             </div>
-            <div class="header__icon">
+            <NuxtLink to="/login" class="header__icon">
               <img
                 src="@/assets/images/icons/account_circle.svg"
                 alt="Профиль"
               />
-            </div>
+            </NuxtLink>
           </div>
         </div>
 

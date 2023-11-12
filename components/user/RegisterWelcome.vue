@@ -2,10 +2,6 @@
 import { defineEmits,watch,ref } from 'vue'
 import logoBig from "@/assets/images/big-logo.svg";
 
-const emit = defineEmits(['setrole'])
-const setRole = (role) => {
-    emit('setrole', role);
-}
 </script>
 
 <template>
@@ -15,8 +11,8 @@ const setRole = (role) => {
         Начни зарабатывать вместе с нами!
     </p>
     <div class="flex items-center gap-7 mt-7">
-        <button @click.prevent="setRole('applicant')" class="btn">Я соискатель</button>
-        <button @click.prevent="setRole('employer')" class="btn">Я работодатель</button>
+        <NuxtLink to="/register/applicant" class="btn">Я соискатель</NuxtLink>
+        <NuxtLink to="/register/employer" class="btn">Я работодатель</NuxtLink>
     </div>
   </div>
 </template>

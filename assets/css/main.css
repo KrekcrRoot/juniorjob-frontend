@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url(~/assets/fonts/SourceSansPro-Regular.ttf);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -17,13 +22,25 @@ body {
     font-weight: 600;
     line-height: 20px;
 }
+
+.user-title {
+    color: #2C1B47;
+    text-align: center;
+    font-family: 'Source Sans Pro';
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
 .bolder-title {
     color: #2C1B47;
     font-size: 23px;
     font-style: normal;
     font-weight: 400;
-    line-height: 25px; 
+    line-height: 25px;
 }
+
 .btn {
     padding: 11px 20px;
     border-radius: 20px;
@@ -34,33 +51,57 @@ body {
     font-weight: 600;
 }
 
-/* Media запрос для устройств с шириной экрана 1024px и больше (большие десктопы) */
-@media (min-width: 1024px) {
-
+.field {
+    outline: none;
+    min-width: 313px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid #545388;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #FFF;
 }
+
+.field::placeholder {
+    margin-top: 0;
+    padding-top: 0;
+    color: #AAA2D8;
+    font-family: 'Source Sans Pro';
+    font-size: 20px;
+    font-weight: 300;
+}
+textarea.field {
+    padding-top: 20px;
+    min-height: 252px;
+}
+
+/* Media запрос для устройств с шириной экрана 1024px и больше (большие десктопы) */
+@media (min-width: 1024px) {}
 
 /* Media запрос для устройств с шириной экрана между 768px и 1023px (средние десктопы) */
-@media (min-width: 768px) and (max-width: 1023px) {
-
-}
+@media (min-width: 768px) and (max-width: 1023px) {}
 
 /* Media запрос для устройств с шириной экрана между 480px и 767px (планшеты в альбомной ориентации) */
-@media (min-width: 480px) and (max-width: 767px) {
+@media (min-width: 480px) and (max-width: 767px) {}
 
-}
 @media (min-width: 480px) {
     .mobile-show {
         display: none;
     }
 }
+
 /* Media запрос для устройств с шириной экрана меньше 480px (планшеты и мобильные) */
 @media (max-width: 479px) {
     body {
         background-color: #BFB9E2;
     }
+
     .mobile-hide {
         display: none;
     }
+
     .header-wrapper {
         background-color: #BFB9E2;
     }
