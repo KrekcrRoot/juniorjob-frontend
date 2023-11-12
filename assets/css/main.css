@@ -1,3 +1,20 @@
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url(~/assets/fonts/SourceSansPro-SemiBold.ttf);
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url(~/assets/fonts/SourceSansPro-Regular.ttf);
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url(~/assets/fonts/SourceSansPro-Light.ttf);
+    font-weight: 300;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,9 +22,18 @@
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     margin: 0;
     padding: 0;
+}
+
+.container-centered {
+    width: 100%;
+    height: calc(100vh - 106px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-title {
@@ -17,50 +43,147 @@ body {
     font-weight: 600;
     line-height: 20px;
 }
+
+.user-title {
+    color: #2C1B47;
+    text-align: center;
+    font-family: 'Source Sans Pro';
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
 .bolder-title {
     color: #2C1B47;
     font-size: 23px;
     font-style: normal;
     font-weight: 400;
-    line-height: 25px; 
+    line-height: 25px;
 }
+
 .btn {
     padding: 11px 20px;
     border-radius: 20px;
     background: #AAA2D8;
     color: #FFF;
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
 }
-
-/* Media запрос для устройств с шириной экрана 1024px и больше (большие десктопы) */
-@media (min-width: 1024px) {
-
+.btn:hover,
+.btn:focus {
+  background: #0AAF48;
+  background: -moz-linear-gradient(-45deg,  #AAA2D8 0%, #AAA2D8 40%, #ccc4f7 50%, #AAA2D8 60%, #AAA2D8 100%);
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#AAA2D8), color-stop(40%,#AAA2D8), color-stop(50%,#ccc4f7), color-stop(60%,#AAA2D8), color-stop(100%,#AAA2D8));
+	background: -webkit-linear-gradient(-45deg,  #AAA2D8 0%,#AAA2D8 40%,#ccc4f7 50%,#AAA2D8 60%,#AAA2D8 100%);
+	background: -o-linear-gradient(-45deg,  #AAA2D8 0%,#AAA2D8 40%,#ccc4f7 50%,#AAA2D8 60%,#AAA2D8 100%);
+	background: -ms-linear-gradient(-45deg,  #AAA2D8 0%,#AAA2D8 40%,#ccc4f7 50%,#AAA2D8 60%,#AAA2D8 100%);
+	background: linear-gradient(135deg,  #AAA2D8 0%,#AAA2D8 40%,#ccc4f7 50%,#AAA2D8 60%,#AAA2D8 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#AAA2D8', endColorstr='#AAA2D8',GradientType=1 );
+	background-size: 500%;
+	-webkit-animation: btnBlink .9s;
+          animation: btnBlink .9s;
 }
+@-webkit-keyframes btnBlink {
+	0% {
+		background-position:-600px; 
+	}
+	100% { 
+		background-position:0px; 
+	}
+}
+@-moz-keyframes btnBlink {
+	0% {
+		background-position:-600px; 
+	}
+	100% { 
+		background-position:0px; 
+	}
+}
+@keyframes btnBlink {
+	0% {
+		background-position:-600px; 
+	}
+	100% { 
+		background-position:0px; 
+	}
+}
+
+.field {
+    outline: none;
+    min-width: 313px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid #545388;
+    transition: 0.5s;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: #FFF;
+}
+.field--multi-select {
+    user-select: none;
+    cursor: pointer;
+}
+.field--multi-select p {
+    color: #AAA2D8;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: normal;
+}
+.field:focus {
+    border: 1px solid #a190ff;
+    box-shadow: 0 0 10px rgba(161, 144, 255, 0.15);
+}
+
+.field::placeholder {
+    margin-top: 0;
+    padding-top: 0;
+    color: #AAA2D8;
+    font-family: 'Source Sans Pro';
+    font-size: 20px;
+    font-weight: 300;
+}
+textarea.field {
+    padding-top: 20px;
+    min-height: 252px;
+}
+.textblock {
+    padding: 12px 17px;
+    color: #AAA2D8;
+    text-align: center;
+    font-family: 'Source Sans Pro';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px;
+    border-radius: 15px;
+    border: 1px solid #AAA2D8;
+}
+/* Media запрос для устройств с шириной экрана 1024px и больше (большие десктопы) */
+@media (min-width: 1024px) {}
 
 /* Media запрос для устройств с шириной экрана между 768px и 1023px (средние десктопы) */
-@media (min-width: 768px) and (max-width: 1023px) {
-
-}
+@media (min-width: 768px) and (max-width: 1023px) {}
 
 /* Media запрос для устройств с шириной экрана между 480px и 767px (планшеты в альбомной ориентации) */
-@media (min-width: 480px) and (max-width: 767px) {
+@media (min-width: 480px) and (max-width: 767px) {}
 
-}
-@media (min-width: 480px) {
+@media (min-width: 980px) {
     .mobile-show {
         display: none;
     }
 }
+
 /* Media запрос для устройств с шириной экрана меньше 480px (планшеты и мобильные) */
-@media (max-width: 479px) {
-    body {
-        background-color: #BFB9E2;
-    }
+@media (max-width: 979px) {
+
     .mobile-hide {
         display: none;
     }
+
     .header-wrapper {
         background-color: #BFB9E2;
     }

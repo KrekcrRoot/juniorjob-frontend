@@ -7,5 +7,9 @@ export default defineNuxtConfig({
   app: {
     head: {
     }
-  }
+  },
+  css: [
+    '~/assets/css/main.css',
+    // Другие ваши стили
+  ],
 })

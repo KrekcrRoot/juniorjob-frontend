@@ -44,7 +44,7 @@ const isBurgerMenuVisible = ref(false);
 
 const checkScreenWidth = () => {
   if (typeof window !== "undefined") {
-    isMobile.value = 1 < 479;
+    isMobile.value = 1 < 979;
   }
 };
 
@@ -85,12 +85,12 @@ onMounted(() => {
                 alt="Уведомления"
               />
             </div>
-            <div class="header__icon">
+            <NuxtLink to="/login" class="header__icon">
               <img
                 src="@/assets/images/icons/account_circle.svg"
                 alt="Профиль"
               />
-            </div>
+            </NuxtLink>
           </div>
         </div>
 
@@ -115,13 +115,17 @@ onMounted(() => {
             class="header__search col-start-1 col-span-8"
             placeholder="Поиск вакансий"
           />
-          <div class="flex items-center gap-4 col-span-2">
+          <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2">
             <button class="filter-btn">
-              <img src="@/assets/images/icons/filter_alt.svg" alt="" />
+              <div class="filter-btn__icon">
+                <img src="@/assets/images/icons/filter_alt.svg" alt="" />
+              </div>
               <span> Фильтры </span>
             </button>
             <button class="filter-btn">
-              <img src="@/assets/images/icons/sync_alt.svg" alt="" />
+              <div class="filter-btn__icon">
+                <img src="@/assets/images/icons/sync_alt.svg" alt="" />
+              </div>
               <span> Сортировка </span>
             </button>
           </div>
@@ -147,8 +151,8 @@ onMounted(() => {
                 />
               </div>
               <div>
-                <p class="bolder-title mb-2">Регистрация</p>
-                <p class="bolder-title">Авторизация</p>
+                <NuxtLink to="/register-welcome" class="block bolder-title mb-2">Регистрация</NuxtLink>
+                <NuxtLink to="/login" class="block bolder-title">Вход</NuxtLink>
               </div>
             </div>
             <div class="mt-6">
@@ -177,19 +181,21 @@ onMounted(() => {
 
 <style lang="scss">
 @import url("~/assets/css/main.css");
+
 .header-wrapper {
   position: relative;
 }
 .header-search-wrapper {
-  @media (max-width: 479px) {
+  @media (max-width: 979px) {
     width: 100%;
     display: flex;
     flex-direction: column;
     position: absolute;
     left: 0;
-    bottom: -50%;
+    bottom: calc(-50% + 15px);
     padding-left: 20px;
     padding-right: 20px;
+    z-index: 1200;
   }
 }
 .header {
@@ -198,9 +204,10 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  padding: 10px;
+  padding: 10px 0;
 
   &__icon {
+    user-select: none;
     cursor: pointer;
     width: 30px;
     height: 30px;
@@ -229,30 +236,43 @@ onMounted(() => {
     }
   }
 
-  @media (max-width: 479px) {
+  @media (max-width: 979px) {
     padding-top: 40px;
     padding-bottom: 60px;
   }
 }
 
 .filter-btn {
+  flex-shrink: 0;
   border-radius: 30px;
   background: #d9d9d9;
-  padding: 12px 20px;
+  padding: 8px 20px;
   color: #2c1b47;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   flex-shrink: 0;
-  @media (max-width: 479px) {
+  @media (max-width: 979px) {
     flex: 1 0 auto;
   }
 
   &__icon {
     width: 24px;
     height: 24px;
-    object-fit: contain;
+    @media (max-width: 390px) {
+      width: 20px;
+    height: 20px;
+    }
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  @media (max-width: 390px) {
+    padding: 8px 15px;
+    gap: 6px;
   }
 }
 
@@ -316,13 +336,14 @@ onMounted(() => {
       object-fit: contain;
     }
   }
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 979px) {
     flex-direction: column;
     align-items: center;
   }
 }
 
 .logo {
+  user-select: none;
   height: 50px;
 }
 
@@ -333,12 +354,15 @@ onMounted(() => {
 }
 
 .main-wrapper {
-  @media (max-width: 479px) {
+  @media (max-width: 979px) {
+    position: relative;
+    margin-top: -25px;
     padding-top: 100px;
     background: #fff;
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
     box-shadow: 0px -10px 15px 0px rgba(44, 27, 71, 0.08);
+    z-index: 1000;
   }
 }
 
@@ -352,24 +376,6 @@ onMounted(() => {
   font-weight: 400;
   line-height: 110%;
 }
-/*.slide-enter-from {
-  opacity: 0;
-  transition: opacity .25s;
-}
-.slide-enter-active {
-  transition: opacity .25s;
-}
-  .slide-leave-active {
-    transition: opacity .25s;
-}
-
-.slide-enter, .slide-leave-to {
-    transition: opacity .25s;
-
-}
-.slide-leave-to {
- opacity: 0;
-}*/
 .slide-enter-active {
   animation: bounce-in 0.5s;
 }
@@ -395,6 +401,7 @@ onMounted(() => {
         opacity: 1;
         transition: opacity 0.1s;
         cursor: pointer;
+        z-index: 4999;
     }
 
     .sidebar-panel {
@@ -403,7 +410,7 @@ onMounted(() => {
       left: 0px; /* Изначально сдвигаем меню за пределы экрана */
       top: 0;
       height: 100vh;
-      z-index: 999;
+      z-index: 5000;
       padding: 3rem 20px 2rem 20px;
       width: 300px;
       transition: .25s; /* Добавляем анимацию сдвига меню */

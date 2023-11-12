@@ -10,7 +10,7 @@
         </div>
       </div>
       <div>
-        <div class="xl:mt-12 mt-4">
+        <div class="xl:mt-12">
           <ArticlesList />
         </div>
       </div>

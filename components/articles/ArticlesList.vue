@@ -18,7 +18,7 @@ const articlesList = [
 
 <template>
   <div>
-    <h1 class="main-title">Новые вакансии</h1>
+    <h1 class="main-title">Статьи</h1>
     <div class="xl:mt-7 mt-3">
         <ArticlesItem v-for="articlesItem in articlesList" :article="articlesItem" :key="articlesItem.icon" />
     </div>
