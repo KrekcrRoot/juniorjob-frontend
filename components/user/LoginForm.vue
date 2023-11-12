@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 </script>
 <template>
-    <div class="container-centered">
+    <div class="container-centered white-bg">
         <h1 class="user-title pb-6">Вход</h1>
     
         
@@ -20,6 +20,7 @@ import { ref } from 'vue';
 <style lang="scss" scoped>
 .container-centered {
     width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;

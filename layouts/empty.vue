@@ -22,6 +22,9 @@ import logo from "@/assets/images/logo.svg";
 
 <style lang="scss">
 @import url("~/assets/css/main.css");
+header {
+    background-color: white !important;
+}
 .logo {
     height: 51px;
     * img {

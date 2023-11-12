@@ -97,6 +97,9 @@ textarea.field {
     body {
         background-color: #BFB9E2;
     }
+    .container-centered.white-bg {
+        background-color: #FFF;
+    }
 
     .mobile-hide {
         display: none;

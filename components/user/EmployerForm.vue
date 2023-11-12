@@ -7,7 +7,7 @@ const switchRole = (value) => {
 }
 </script>
 <template>
-    <div class="container-centered">
+    <div class="container-centered white-bg">
         <h1 class="user-title pb-6">Регистрация</h1>
         <UiSwitcher :selectedValue="selectedRole" @update="switchRole" />
         <template v-if="selectedRole === 'corporate'">

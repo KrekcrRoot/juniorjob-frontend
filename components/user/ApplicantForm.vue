@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 </script>
 <template>
-    <div class="container-centered">
+    <div class="container-centered white-bg">
         <h1 class="user-title pb-6">Регистрация</h1>
     
         

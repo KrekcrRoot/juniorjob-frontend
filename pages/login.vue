@@ -23,5 +23,4 @@ loading.value = false
 </template>
 
 <style lang="scss" scoped>
-
 </style>
