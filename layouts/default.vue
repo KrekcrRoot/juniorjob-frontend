@@ -139,7 +139,7 @@ onMounted(() => {
         <transition name="slide">
                 <div v-if="isBurgerMenuVisible" @click.stop class="sidebar-panel burger-menu-content">
           <div class="flex-col">
-            <div class="flex items-center gap-3">
+            <NuxtLink to="/login" class="flex items-center gap-3">
               <div class="burger-menu-content__icon">
                 <img
                   src="@/assets/images/icons/account_circle.svg"
@@ -150,7 +150,7 @@ onMounted(() => {
                 <p class="bolder-title mb-2">Регистрация</p>
                 <p class="bolder-title">Авторизация</p>
               </div>
-            </div>
+            </NuxtLink>
             <div class="mt-6">
               <RouterLink
                 v-for="(menuItem, index) in menu"
@@ -177,6 +177,9 @@ onMounted(() => {
 
 <style lang="scss">
 @import url("~/assets/css/main.css");
+
+
+
 .header-wrapper {
   position: relative;
 }
