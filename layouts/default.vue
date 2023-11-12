@@ -44,7 +44,7 @@ const isBurgerMenuVisible = ref(false);
 
 const checkScreenWidth = () => {
   if (typeof window !== "undefined") {
-    isMobile.value = 1 < 479;
+    isMobile.value = 1 < 979;
   }
 };
 
@@ -139,7 +139,7 @@ onMounted(() => {
         <transition name="slide">
                 <div v-if="isBurgerMenuVisible" @click.stop class="sidebar-panel burger-menu-content">
           <div class="flex-col">
-            <NuxtLink to="/login" class="flex items-center gap-3">
+            <div class="flex items-center gap-3">
               <div class="burger-menu-content__icon">
                 <img
                   src="@/assets/images/icons/account_circle.svg"
@@ -147,10 +147,10 @@ onMounted(() => {
                 />
               </div>
               <div>
-                <p class="bolder-title mb-2">Регистрация</p>
-                <p class="bolder-title">Вход</p>
+                <NuxtLink to="/register-welcome" class="block bolder-title mb-2">Регистрация</NuxtLink>
+                <NuxtLink to="/login" class="block bolder-title">Вход</NuxtLink>
               </div>
-            </NuxtLink>
+            </div>
             <div class="mt-6">
               <RouterLink
                 v-for="(menuItem, index) in menu"
@@ -182,15 +182,16 @@ onMounted(() => {
   position: relative;
 }
 .header-search-wrapper {
-  @media (max-width: 479px) {
+  @media (max-width: 979px) {
     width: 100%;
     display: flex;
     flex-direction: column;
     position: absolute;
     left: 0;
-    bottom: -50%;
+    bottom: calc(-50% + 15px);
     padding-left: 20px;
     padding-right: 20px;
+    z-index: 1200;
   }
 }
 .header {
@@ -230,7 +231,7 @@ onMounted(() => {
     }
   }
 
-  @media (max-width: 479px) {
+  @media (max-width: 979px) {
     padding-top: 40px;
     padding-bottom: 60px;
   }
@@ -246,7 +247,7 @@ onMounted(() => {
   justify-content: center;
   gap: 10px;
   flex-shrink: 0;
-  @media (max-width: 479px) {
+  @media (max-width: 979px) {
     flex: 1 0 auto;
   }
 
@@ -317,7 +318,7 @@ onMounted(() => {
       object-fit: contain;
     }
   }
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 979px) {
     flex-direction: column;
     align-items: center;
   }
@@ -334,12 +335,15 @@ onMounted(() => {
 }
 
 .main-wrapper {
-  @media (max-width: 479px) {
+  @media (max-width: 979px) {
+    position: relative;
+    margin-top: -25px;
     padding-top: 100px;
     background: #fff;
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
     box-shadow: 0px -10px 15px 0px rgba(44, 27, 71, 0.08);
+    z-index: 1000;
   }
 }
 
@@ -396,6 +400,7 @@ onMounted(() => {
         opacity: 1;
         transition: opacity 0.1s;
         cursor: pointer;
+        z-index: 4999;
     }
 
     .sidebar-panel {
@@ -404,7 +409,7 @@ onMounted(() => {
       left: 0px; /* Изначально сдвигаем меню за пределы экрана */
       top: 0;
       height: 100vh;
-      z-index: 999;
+      z-index: 5000;
       padding: 3rem 20px 2rem 20px;
       width: 300px;
       transition: .25s; /* Добавляем анимацию сдвига меню */

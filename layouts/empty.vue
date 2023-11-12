@@ -1,23 +1,21 @@
 <script setup>
 import logo from "@/assets/images/logo.svg";
-
 </script>
 
 <template>
-    <header class="xl:container mx-auto">
-        <div class="header-inner py-7">
-            <div class="flex gap-5 items-center">
-                <UiButton />
-                  <div class="logo">
-                    <img :src="logo" alt="">
-                  </div>
+        <header class="xl:container mx-auto">
+            <div class="header-inner py-7">
+                <div class="flex gap-5 items-center">
+                    <UiButton />
+                      <div class="logo">
+                        <img :src="logo" alt="">
+                      </div>
+                </div>
             </div>
+        </header>
+        <div class="xl:container mx-auto">
+            <slot/>
         </div>
-    </header>
-    <div class="xl:container mx-auto">
-        <slot/>
-    </div>
-
 </template>
 
 <style lang="scss">

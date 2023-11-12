@@ -76,7 +76,9 @@ textarea.field {
     padding-top: 20px;
     min-height: 252px;
 }
-
+.white-bg {
+    background-color: #FFF !important;
+}
 /* Media запрос для устройств с шириной экрана 1024px и больше (большие десктопы) */
 @media (min-width: 1024px) {}
 
@@ -86,20 +88,14 @@ textarea.field {
 /* Media запрос для устройств с шириной экрана между 480px и 767px (планшеты в альбомной ориентации) */
 @media (min-width: 480px) and (max-width: 767px) {}
 
-@media (min-width: 480px) {
+@media (min-width: 980px) {
     .mobile-show {
         display: none;
     }
 }
 
 /* Media запрос для устройств с шириной экрана меньше 480px (планшеты и мобильные) */
-@media (max-width: 479px) {
-    body {
-        background-color: #BFB9E2;
-    }
-    .container-centered.white-bg {
-        background-color: #FFF;
-    }
+@media (max-width: 979px) {
 
     .mobile-hide {
         display: none;
