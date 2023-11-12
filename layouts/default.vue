@@ -148,7 +148,7 @@ onMounted(() => {
               </div>
               <div>
                 <p class="bolder-title mb-2">Регистрация</p>
-                <p class="bolder-title">Авторизация</p>
+                <p class="bolder-title">Вход</p>
               </div>
             </NuxtLink>
             <div class="mt-6">
@@ -177,8 +177,6 @@ onMounted(() => {
 
 <style lang="scss">
 @import url("~/assets/css/main.css");
-
-
 
 .header-wrapper {
   position: relative;
