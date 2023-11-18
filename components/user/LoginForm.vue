@@ -1,18 +1,16 @@
 <script setup>
 import { ref } from 'vue';
-
-
 </script>
 
 <script>
 
-import {$fetch} from "ofetch";
+import api from "~/api";
+import { useUserStore } from "~/store/user.ts";
 
 export default defineComponent({
   name: 'LoginForm',
   data() {
     return {
-      api: {},
       form: {
         email: '',
         password: '',
@@ -21,25 +19,23 @@ export default defineComponent({
   },
   methods: {
     async submit() {
+      const response = api.auth.login(this.form);
 
-      $fetch('/auth/local/signin', {
-        method: 'POST',
-        baseURL: 'https://api.junior-job.ru',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: this.form,
-      }).then(res => {
-        console.log(res);
-      }, error => {
-        console.log(error.data)
-      })
+      response.then(
+          (res) => {
+
+            const user = useUserStore();
+            user.access_token = res.data.access_token;
+            user.refresh_token = res.data.refresh_token;
+
+          })
+          .catch(
+          (error) => {
+            alert('Ошибка');
+          }
+        )
     }
   },
-  mounted() {
-    const { $api } = useNuxtApp();
-    this.api = $api
-  }
 })
 
 </script>

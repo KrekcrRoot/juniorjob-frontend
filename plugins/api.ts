@@ -1,4 +1,4 @@
-import ApiModule from "~/api/ApiModule";
+import ApiModule from "~/api";
 
 export default defineNuxtPlugin((nuxtApp) => {
     return {
