@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+
+const { $api } = useNuxtApp()
+console.log($api)
 </script>
 <template>
     <div class="container-centered">

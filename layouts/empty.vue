@@ -1,5 +1,23 @@
 <script setup>
+import { ref, onMounted } from 'vue'
+// import createApi from "@/api";
 
+// const token = 'ваш-токен'; // Здесь вы можете установить токен
+
+// const api = createApi(token);
+
+// const fetchUserData = async () => {
+//   try {
+//     const usersData = await api().users().getAll();
+//     console.log(usersData);
+//   } catch (error) {
+//     console.error('Error fetching user data:', error);
+//   }
+// };
+
+// onMounted(async () => {
+//   fetchUserData();
+// })
 </script>
 
 <template>
