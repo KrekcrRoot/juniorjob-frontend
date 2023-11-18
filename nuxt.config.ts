@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      baseURL: process.env.API_URL,
+      baseURL: 'https://api.junior-job.ru/',
     },
   },
   modules: [

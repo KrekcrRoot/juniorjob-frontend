@@ -1,7 +1,9 @@
+import ApiModule from "~/api/ApiModule";
+
 export default defineNuxtPlugin((nuxtApp) => {
     return {
         provide: {
-            api: {test: 'test'},
+            api: ApiModule,
         }
     }
 })
