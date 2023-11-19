@@ -62,6 +62,12 @@ body {
     line-height: 25px;
 }
 
+.error-message {
+    color: rgb(239, 40, 86);
+    font-size: 14px;
+    font-weight: 500;
+}
+
 .btn {
     padding: 11px 20px;
     border-radius: 20px;

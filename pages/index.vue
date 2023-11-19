@@ -1,3 +1,6 @@
+<script setup>
+</script>
+
 <template>
   <div class="container mx-auto xl:mt-14 px-5">
     <div class="grid xl:grid-cols-2 sm:grid-cols-1 xl:gap-20">
@@ -17,9 +20,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-</script>
 
 <style scoped>
 </style>

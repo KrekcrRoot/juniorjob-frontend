@@ -1,0 +1,6 @@
+{
+    "ru": {
+        "password must be longer than or equal to 5 characters": "Пароль должен содержать не менее 5 символов",
+        "email must be an email": "Некорректный e-mail"
+    }
+}

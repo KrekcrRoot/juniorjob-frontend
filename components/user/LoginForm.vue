@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from 'vue';
+import translationService from '~/services/translationService';
 </script>
 
 <script>
 
 import api from "~/api";
 import { useUserStore } from "~/store/user.ts";
+
 
 export default defineComponent({
   name: 'LoginForm',
@@ -15,6 +17,7 @@ export default defineComponent({
         email: '',
         password: '',
       },
+      formErrors: []
     }
   },
   methods: {
@@ -31,7 +34,19 @@ export default defineComponent({
           })
           .catch(
           (error) => {
-            alert('Ошибка');
+             // Проверка наличия ошибок в ответе сервера
+        if (error.response && error.response.data && error.response.data.message) {
+
+          this.formErrors = error.response.data.message;
+
+          this.formErrors = this.formErrors.map((error) => {
+            return translationService.translateError(error, 'ru')
+          })
+        } else {
+          // Обработка других видов ошибок
+          this.formErrors = ["Ошибка отправки формы"];
+          console.error('Ошибка при выполнении запроса:', error);
+        }
           }
         )
     }
@@ -47,6 +62,13 @@ export default defineComponent({
             <input v-model="form.email" placeholder="Email" type="text" class="field mt-3">
             <input v-model="form.password" placeholder="Пароль" type="password" class="field mt-3">
             <button type="submit" class="btn w-full mt-3">Войти</button>
+            <template v-if="formErrors">
+              <div class="py-4">
+                <p class="error-message" v-for="formError in formErrors">
+                  {{ formError }}
+                </p>
+              </div>
+            </template>
             <div class="mt-3">
                 <p class="ask-text">Нет аккаунта? <NuxtLink to="/register-welcome" class="ask-text__link">Зарегистрироваться</NuxtLink></p>
             </div>
