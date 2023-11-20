@@ -1,6 +1,11 @@
 {
     "ru": {
         "password must be longer than or equal to 5 characters": "Пароль должен содержать не менее 5 символов",
-        "email must be an email": "Некорректный e-mail"
+        "email must be an email": "Некорректный e-mail",
+        "email should not be empty": "Заполните e-mail",
+        "password should not be empty": "Поле Пароль обязательно",
+        "city_uuid must be a UUID": "Ошибка выбора города",
+        "city_uuid should not be empty": "Заполните город",
+        "User already exist": "Пользователь с таким e-mail уже зарегистрирован"
     }
 }

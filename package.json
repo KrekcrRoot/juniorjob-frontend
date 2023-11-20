@@ -12,6 +12,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.8.1",
+    "base64url": "^3.0.1",
     "nuxt": "^3.8.0",
     "sass": "^1.69.5",
     "vue": "^3.3.7",
