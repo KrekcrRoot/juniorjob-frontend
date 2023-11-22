@@ -5,7 +5,9 @@ import base64url from "base64url";
 export const useUserStore = defineStore('user', {
     state() {
         return {
-            user: {},
+            user: {
+                userData: {},
+            },
             payload: '',
             roles: {},
             access_token: '',
@@ -67,9 +69,11 @@ export const useUserStore = defineStore('user', {
                 console.log(error)
             }
         },
-        async updateUserDataByRole() {
-
-        }
     },
     persist: true,
+    getters: {
+        currentRoleId() {
+            return this.roles[this.payload.role].uuid
+        }
+    }
 })

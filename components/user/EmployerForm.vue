@@ -20,7 +20,7 @@ const formCorporate = ref({
         name: '',
         inn: '',
         contact: '',
-        help: ''
+        summary: ''
     }
 })
 
@@ -33,7 +33,7 @@ const formIndividual = ref({
         surname: '',
         name: '',
         patronymic: '',
-        help: ''
+        summary: ''
     }
 })
 
@@ -55,6 +55,9 @@ const submit = async (form) => {
 
         
         await userStore.setRole(form.role)
+        const currentRole = userStore.payload.role;
+        const updateResponse = await api.roles[currentRole](userStore.currentRoleId, form.userData)
+        userStore.user.userData = updateResponse.data
         
     }
     catch (error) {
@@ -97,7 +100,7 @@ const submit = async (form) => {
                     <input v-model="formCorporate.email" placeholder="Рабочий Email" type="email" class="field mt-3">
                     <input v-model="formCorporate.password" placeholder="Пароль" type="password" class="field mt-3">
                     <FormSelect v-model="formCorporate.city_uuid" />
-                    <textarea v-model="formCorporate.userData.help" placeholder="Какая помощь необходима" class="field mt-3"></textarea>
+                    <textarea v-model="formCorporate.userData.summary" placeholder="Какая помощь необходима" class="field mt-3"></textarea>
                     <template v-if="formErrors">
                         <div class="py-4">
                           <p class="error-message text-center" v-for="formError in formErrors">
@@ -118,7 +121,7 @@ const submit = async (form) => {
                     <input v-model="formIndividual.password" placeholder="Пароль" type="password" class="field mt-3">
                     <FormSelect v-model="formIndividual.city_uuid" />
                     
-                    <textarea v-model="formIndividual.userData.help" placeholder="Какая помощь необходима" class="field mt-3"></textarea>
+                    <textarea v-model="formIndividual.userData.summary" placeholder="Какая помощь необходима" class="field mt-3"></textarea>
                     <template v-if="formErrors">
                         <div class="py-4">
                           <p class="error-message text-center" v-for="formError in formErrors">

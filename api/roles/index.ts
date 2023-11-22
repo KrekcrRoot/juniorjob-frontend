@@ -1,7 +1,8 @@
 import { AxiosInstance } from "axios";
 import RoleResultDto from "./RoleResultDto";
 import RoleDto from "./dto/RoleDto";
-import type RolesMyDto from "./dto/RolesMyDto";
+import RolesMyDto from "./dto/RolesMyDto";
+import ApplicantDto from "./dto/ApplicantDto";
 
 export default (instance: AxiosInstance) => {
     return {
@@ -10,6 +11,15 @@ export default (instance: AxiosInstance) => {
         },
         async my() {
             return instance.get<RolesMyDto>('/roles/my')
+        },
+        async applicant<ApplicantDto>(id: string, applicantDto: ApplicantDto) {
+            return instance.put(`/roles/applicant/${id}`, applicantDto)
+        },
+        async individual<IndividualDto>(id: string, individualDto: IndividualDto) {
+            return instance.put(`/roles/individual/${id}`, individualDto)
+        },
+        async legal_entity<LegalEntityDto>(id: string, legalEntityDto: LegalEntityDto) {
+            return instance.put(`/roles/legal-entity/${id}`, legalEntityDto)
         }
     }
 }
