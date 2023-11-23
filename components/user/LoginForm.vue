@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import translationService from '~/services/translationService';
+
 </script>
 
 <script>
@@ -30,6 +31,8 @@ export default defineComponent({
             const user = useUserStore();
             user.access_token = res.data.access_token;
             user.refresh_token = res.data.refresh_token;
+
+            this.$router.push('/profile')
 
           })
           .catch(

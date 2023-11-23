@@ -3,7 +3,9 @@ import { ref, onMounted, computed } from 'vue';
 import api from '~/api';
 import translationService from '~/services/translationService';
 import { useUserStore } from '~/store/user';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 
 const userStore = useUserStore();
 
@@ -43,6 +45,8 @@ const submit = async () => {
     const currrentRole = userStore.payload.role
     const updateResponse = await api.roles[currrentRole](userStore.currentRoleId, form.value.userData)
     userStore.user.userData = updateResponse.data
+
+    router.push('/profile')
 
 
   } catch (error) {

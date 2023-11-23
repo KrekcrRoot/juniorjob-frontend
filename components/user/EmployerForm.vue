@@ -3,6 +3,9 @@ import { ref } from 'vue';
 import api from '~/api';
 import translationService from '~/services/translationService';
 import { useUserStore } from '~/store/user';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const selectedRole = ref('corporate');
 const userStore = useUserStore();
@@ -17,9 +20,9 @@ const formCorporate = ref({
     city_uuid: '',
     role: 'legal_entity',
     userData: {
-        name: '',
+        title: '',
         inn: '',
-        contact: '',
+        contact_info : '',
         summary: ''
     }
 })
@@ -39,8 +42,20 @@ const formIndividual = ref({
 
 const formErrors = ref([])
 
+const resetFormData = (form) => {
+    form.email = '';
+    form.password = '';
+    form.city_uuid = '';
+    form.userData = {
+    };
+};
+
+
 const submit = async (form) => {
     try {
+const otherForm = form === formCorporate ? formIndividual : formCorporate;
+        resetFormData(otherForm);
+
         formErrors.value = []
         const response = await api.auth.register(form);
 
@@ -58,6 +73,7 @@ const submit = async (form) => {
         const currentRole = userStore.payload.role;
         const updateResponse = await api.roles[currentRole](userStore.currentRoleId, form.userData)
         userStore.user.userData = updateResponse.data
+        router.push('/profile')
         
     }
     catch (error) {
@@ -80,6 +96,9 @@ const submit = async (form) => {
         else {
             formErrors.value = ["Ошибка отправки формы. Временные работы на сайте"]; 
         }
+    } finally {
+        const otherForm = form === formCorporate ? formIndividual : formCorporate;
+        resetFormData(otherForm);
     }
 }
 </script>
@@ -94,9 +113,9 @@ const submit = async (form) => {
             <template v-if="selectedRole === 'corporate'">
                 <form @submit.prevent="submit(formCorporate)" class="mt-5">
                     <FormUploadImage @change="uploadImage" />
-                    <input v-model="formCorporate.userData.name" placeholder="Название" type="text" class="field mt-3">
+                    <input v-model="formCorporate.userData.title" placeholder="Название" type="text" class="field mt-3">
                     <input v-model="formCorporate.userData.inn" placeholder="ИНН" type="text" class="field mt-3">
-                    <textarea v-model="formCorporate.userData.contact" placeholder="Контактная информация" class="field mt-3"></textarea>
+                    <textarea v-model="formCorporate.userData.contact_info" placeholder="Контактная информация" class="field mt-3"></textarea>
                     <input v-model="formCorporate.email" placeholder="Рабочий Email" type="email" class="field mt-3">
                     <input v-model="formCorporate.password" placeholder="Пароль" type="password" class="field mt-3">
                     <FormSelect v-model="formCorporate.city_uuid" />

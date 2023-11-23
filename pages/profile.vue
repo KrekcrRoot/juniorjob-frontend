@@ -1,27 +1,33 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useUserStore } from '~/store/user';
 
-definePageMeta({
-    layout: "empty",
-});
+const userStore = useUserStore();
+
+const user = ref({})
 
 const loading = ref(true)
 
 onMounted(() => {
+    user.value = userStore.user
     loading.value = false
 })
 </script>
+
 <template>
-    <div class="">
+    <div>
         <!-- Экран загрузки -->
         <template v-if="loading">
             <UiLoader />
         </template>
-        <!-- Формы регистрации -->
         <template v-else>
-            <UserLoginForm />
+            Hello, {{ user.email }}
         </template>
+
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+
+<style lang="scss" scoped>
+
+</style>
