@@ -47,7 +47,7 @@ export default defineComponent({
 
           this.formErrors = error.response.data.message;
                 if(Array.isArray(this.formErrors)) {
-                  this.formErrors.value = this.formErrors.map((error) => {
+                  this.formErrors = this.formErrors.map((error) => {
                     return translationService.translateError(error, 'ru')
                 })
                 }
