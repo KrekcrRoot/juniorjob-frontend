@@ -46,10 +46,14 @@ export default defineComponent({
         if (error.response && error.response.data && error.response.data.message) {
 
           this.formErrors = error.response.data.message;
-
-          this.formErrors = this.formErrors.map((error) => {
-            return translationService.translateError(error, 'ru')
-          })
+                if(Array.isArray(this.formErrors)) {
+                  this.formErrors.value = this.formErrors.map((error) => {
+                    return translationService.translateError(error, 'ru')
+                })
+                }
+                else {
+                  this.formErrors = [translationService.translateError(this.formErrors, 'ru')]
+                }
         } else {
           // Обработка других видов ошибок
           this.formErrors = ["Ошибка отправки формы"];
