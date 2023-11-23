@@ -20,6 +20,9 @@ export default (instance: AxiosInstance) => {
         },
         async legal_entity<LegalEntityDto>(id: string, legalEntityDto: LegalEntityDto) {
             return instance.put(`/roles/legal-entity/${id}`, legalEntityDto)
+        },
+        async get_data(role: string, id: string) {
+            return instance.get(`/roles/${role}/${id}`)
         }
     }
 }
