@@ -11,8 +11,11 @@ const instance = axios.create({
 })
 
 instance.interceptors.request.use((config) => {
-    const userStore = useUserStore()
-    config.headers.Authorization = `Bearer ${userStore.access_token}`
+    if(process.client) {
+        const userStore = useUserStore()
+        config.headers.Authorization = `Bearer ${userStore.access_token}`
+
+    }
     return config
 })
 
