@@ -1,5 +1,5 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, defineEmits } from 'vue';
   
   const options = [
     { label: 'Публичные выступления', value: '1' },
@@ -8,6 +8,7 @@
     { label: 'Общение с животными', value: '4' },
   ];
   
+  const emit = defineEmits([['modelValue']]);
   const selectedItems = ref([]);
   const isOpen = ref(false);
   
@@ -17,6 +18,7 @@
     } else {
       selectedItems.value.push(option);
     }
+    emit('update:modelValue', JSON.stringify(selectedItems.value));
   };
   
   const isSelected = (option) => selectedItems.value.some((item) => item.value === option.value);
