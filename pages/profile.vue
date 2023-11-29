@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { useUserStore } from '~/store/user';
 if(process.client) {
+    const loading = ref(true)
     const userStore = useUserStore();
 
 onMounted(() => {
@@ -10,10 +11,7 @@ onMounted(() => {
 })
 }
 
-
 const user = ref({})
-
-const loading = ref(true)
 
 </script>
 

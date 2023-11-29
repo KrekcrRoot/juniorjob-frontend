@@ -1,6 +1,6 @@
 import { AxiosInstance } from "axios";
 
-import UserDto from "./UserDto";
+import UserDto from "./dto/UserDto";
 
 export default (instance: AxiosInstance) => {
     return {

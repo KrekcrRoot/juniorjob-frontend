@@ -34,7 +34,8 @@ export default defineComponent({
 
             await user.fetchUser()
             await user.fetchRoles()
-            const currentRole = user.payload.role
+            const currentRole = (user.payload.role === "legal_entity")? 'legal-entity' : user.payload.role
+
             const updateResponse = await api.roles.get_data(currentRole, user.currentRoleId)
             user.user.userData = updateResponse.data
             this.$router.push('/profile')

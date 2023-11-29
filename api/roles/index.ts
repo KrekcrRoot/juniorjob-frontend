@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import RoleResultDto from "./RoleResultDto";
+import RoleResultDto from "./dto/RoleResultDto";
 import RoleDto from "./dto/RoleDto";
 import RolesMyDto from "./dto/RolesMyDto";
 import ApplicantDto from "./dto/ApplicantDto";

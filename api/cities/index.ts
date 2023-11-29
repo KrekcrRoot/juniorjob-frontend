@@ -1,7 +1,7 @@
 import {AxiosInstance} from "axios";
 
 import CitiesDto from "./dto/CitiesDto"
-import CityDto from "./CityDto";
+import CityDto from "./dto/CityDto";
 
 export default (instance: AxiosInstance) => {
     return {
