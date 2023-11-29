@@ -169,6 +169,24 @@ textarea.field {
     border-radius: 15px;
     border: 1px solid #AAA2D8;
 }
+
+.profile {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    justify-content: space-between;
+}
+
+.profile__left {
+    flex: 1 0 30%;
+    background-color: #94c2a6;
+}
+
+.profile__right {
+    flex: 1 0 70%;
+    background-color: rgb(196, 132, 132);
+}
+
 /* Media запрос для устройств с шириной экрана 1024px и больше (большие десктопы) */
 @media (min-width: 1024px) {}
 

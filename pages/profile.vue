@@ -22,9 +22,10 @@ const user = ref({})
             <UiLoader />
         </template>
         <template v-else>
-            <p style="margin: 70px; padding: 40px; font-size: 30px;color: black;font-weight: 700;">
+            <ProfileApplicant />
+            <!-- <p style="margin: 70px; padding: 40px; font-size: 30px;color: black;font-weight: 700;">
                 Добро пожаловать, {{ user.email }}
-            </p>
+            </p> -->
         </template>
 
     </div>
