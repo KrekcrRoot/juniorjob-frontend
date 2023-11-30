@@ -5,7 +5,7 @@ if(process.client) {
     const loading = ref(true)
     const userStore = useUserStore();
 
-onMounted(() => {
+    onMounted(() => {
     user.value = userStore.user
     loading.value = false
 })
@@ -22,7 +22,8 @@ const user = ref({})
             <UiLoader />
         </template>
         <template v-else>
-            <ProfileApplicant />
+            <ProfileEmployerInner />
+            <!-- <ProfileApplicant /> -->
             <!-- <p style="margin: 70px; padding: 40px; font-size: 30px;color: black;font-weight: 700;">
                 Добро пожаловать, {{ user.email }}
             </p> -->
