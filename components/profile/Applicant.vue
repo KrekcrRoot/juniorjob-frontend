@@ -92,7 +92,7 @@ if (process.client) {
                         Общение с животными
                     </div>
                 </div>
-                <div class="profile__reviews-section">
+                <div class="profile__reviews-section mt-3">
                     <h2 class="profile__reviews-section-title">
                         Отзывы
                     </h2>
@@ -111,16 +111,18 @@ if (process.client) {
                                         <img src="@/assets/images/icons/star-color.svg" alt="star">
                                         <img src="@/assets/images/icons/star-color.svg" alt="star">
                                     </div>
-                            </div>
-                        </a>
-                        <p class="profile__reviews-item-comment">
-                            Шпицы довольны. 5 звезд!
-                        </p>
+                                </div>
+                            </a>
+                            <p class="profile__reviews-item-comment">
+                                Шпицы довольны. 5 звезд!
+                            </p>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div></template>
+</template>
 
 <style lang="scss" scoped></style>

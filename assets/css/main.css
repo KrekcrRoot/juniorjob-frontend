@@ -80,9 +80,15 @@ body {
     user-select: none;
 }
 
+.btn--small {
+    padding: 10px;
+    font-size: 16px;
+    line-height: normal;
+}
+
 .btn:hover,
 .btn:focus {
-    background: #0AAF48;
+    background: #AAA2D8;
     background: -moz-linear-gradient(-45deg, #AAA2D8 0%, #AAA2D8 40%, #ccc4f7 50%, #AAA2D8 60%, #AAA2D8 100%);
     background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #AAA2D8), color-stop(40%, #AAA2D8), color-stop(50%, #ccc4f7), color-stop(60%, #AAA2D8), color-stop(100%, #AAA2D8));
     background: -webkit-linear-gradient(-45deg, #AAA2D8 0%, #AAA2D8 40%, #ccc4f7 50%, #AAA2D8 60%, #AAA2D8 100%);
@@ -296,7 +302,7 @@ textarea.field {
 .profile__reviews-item-name {
     color: #000;
     font-family: 'Marmelad';
-    font-size: 25px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -336,6 +342,14 @@ textarea.field {
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
+    line-height: normal;
+}
+.profile__vacancy-title {
+    color: #000;
+    font-family: 'Marmelad';
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
     line-height: normal;
 }
 /* //PROFILE */
