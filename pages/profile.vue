@@ -5,10 +5,10 @@ if(process.client) {
     const loading = ref(true)
     const userStore = useUserStore();
 
-    onMounted(() => {
-    user.value = userStore.user
-    loading.value = false
-})
+    onMounted(async () => {
+  user.value = userStore.$state.user;
+  loading.value = false;
+});
 }
 
 const user = ref({})
@@ -22,8 +22,16 @@ const user = ref({})
             <UiLoader />
         </template>
         <template v-else>
-            <ProfileEmployerInner />
-            <!-- <ProfileApplicant /> -->
+            <template v-if="user.role">
+                <template v-if="user.role.current === 'applicant'">
+                    <ProfileApplicant :user="user"  />
+                </template>
+                <template v-else>
+                    <ProfileEmployerInner :user="user"  />
+                </template>
+            </template>
+            
+
             <!-- <p style="margin: 70px; padding: 40px; font-size: 30px;color: black;font-weight: 700;">
                 Добро пожаловать, {{ user.email }}
             </p> -->

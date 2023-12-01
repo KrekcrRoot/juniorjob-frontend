@@ -1,12 +1,39 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, defineProps, computed } from 'vue';
 import api from '~/api';
 import { useUserStore } from '~/store/user';
 import { useRouter } from 'vue-router';
+
+
 if (process.client) {
     const router = useRouter();
     const userStore = useUserStore();
 }
+
+const props = defineProps({
+  user: {
+    type: Object,
+    required: true
+  }
+})
+
+const userName = computed(() => {
+    return props.user?.userData.name + " " + props.user?.userData.surname
+})
+
+const userAge = computed(() => {
+  const birthdate = new Date(props.user.userData.birthday);
+  const today = new Date();
+
+  let age = today.getFullYear() - birthdate.getFullYear();
+  const monthDiff = today.getMonth() - birthdate.getMonth();
+
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+    age--;
+  }
+
+  return age;
+});
 
 </script>
 <template>
@@ -21,7 +48,7 @@ if (process.client) {
                         <!-- Имя -->
                         <div class="w-full flex justify-between">
                             <p class="profile__name">
-                                Иван Чернявский
+                                {{ userName }}
                             </p>
                             <a>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -39,7 +66,7 @@ if (process.client) {
                             </a>
                         </div>
                         <!-- Информация -->
-                        <p class="profile__info mt-4">17 лет</p>
+                        <p class="profile__info mt-4">{{ userAge }} лет</p>
                         <p class="profile__info mt-1">МБОУ “СШ №40”</p>
                         <p class="profile__info flex items-center gap-1 mt-1">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

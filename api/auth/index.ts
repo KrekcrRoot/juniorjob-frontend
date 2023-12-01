@@ -14,6 +14,9 @@ export default (instance: AxiosInstance) => {
         async register(registerDto: RegisterDto) {
             return instance.post<TokenDto>('/auth/local/signup', registerDto);
         },
+        async logout() {
+            return instance.post('/auth/logout');
+        },
         async refresh(tokenDto: TokenDto) {
             return instance.post<TokenDto>('/auth/refresh', tokenDto);
         }

@@ -5,6 +5,9 @@ import cardIcon from "@/assets/images/icons/add_card.svg";
 import starIcon from "@/assets/images/icons/star.svg";
 import noteIcon from "@/assets/images/icons/note.svg";
 import settingIcon from "@/assets/images/icons/settings.svg";
+import { useUserStore } from "~/store/user";
+import api from "~/api";
+import { useRouter } from "vue-router";
 
 const menu = [
   {
@@ -38,6 +41,7 @@ const menu = [
     link: "/",
   },
 ];
+  const router = useRouter();
 
 const isMobile = ref(false);
 const isBurgerMenuVisible = ref(false);
@@ -47,6 +51,18 @@ const checkScreenWidth = () => {
     isMobile.value = 1 < 979;
   }
 };
+
+
+
+const logout = async () => {
+  if(process.client) {
+    const userStore = useUserStore()
+    await userStore.logout()
+    router.push('/login')
+  }
+
+
+}
 
 onMounted(() => {
   if (typeof window !== "undefined") {
@@ -106,6 +122,7 @@ onMounted(() => {
             </span>
             {{ menuItem.title }}
           </RouterLink>
+          <button @click="logout" class="main-menu__link">Выйти</button>
         </div>
         <div
           class="header-search-wrapper grid xl:grid-cols-12 md:grid-cols-1 gap-4"

@@ -24,12 +24,15 @@ instance.interceptors.response.use((response) => {
     return response
 }, async function (error) {
     const originalRequest = error.config;
-    if ( error.response.status === 403 && !originalRequest._retry ) {
+    if ( (error.response.status === 403 || error.response.status === 401) && !originalRequest._retry ) {
         originalRequest._retry = true;
 
-        
-        // await api.auth.refresh()
+        const userStore = useUserStore()
+        await userStore.refresh()
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + userStore.access_token;
+        return instance(originalRequest)
     }
+    return Promise.reject(error);
 }
 )
 
