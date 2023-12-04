@@ -24,11 +24,16 @@ instance.interceptors.response.use((response) => {
     return response
 }, async function (error) {
     const originalRequest = error.config;
-    if ( error.response.status === 403 && !originalRequest._retry ) {
+    if ( (error.response.status === 403 || error.response.status === 401) && !originalRequest._retry ) {
         originalRequest._retry = true;
 
-        
-        // await api.auth.refresh()
+        if(process.client) {
+            const userStore = useUserStore()
+        await api.auth.refresh({
+            access_token: userStore.access_token,
+            refresh_token: userStore.refresh_token
+        })
+    }
     }
 }
 )

@@ -15,6 +15,7 @@ if(process.client) {
     userStore = useUserStore();
 }
 
+
 const menu = [
   {
     title: "Вакансии",
@@ -59,7 +60,6 @@ const checkScreenWidth = () => {
 
 const logout = async () => {
   await api.auth.logout()
-  useRouter().go(0)
 }
 
 onMounted(() => {
@@ -124,29 +124,6 @@ onMounted(() => {
               Выход
           </button>
         </div>
-        <div
-          class="header-search-wrapper grid xl:grid-cols-12 md:grid-cols-1 gap-4"
-        >
-          <input
-            type="text"
-            class="header__search col-start-1 col-span-8"
-            placeholder="Поиск вакансий"
-          />
-          <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2">
-            <button class="filter-btn">
-              <div class="filter-btn__icon">
-                <img src="@/assets/images/icons/filter_alt.svg" alt="" />
-              </div>
-              <span> Фильтры </span>
-            </button>
-            <button class="filter-btn">
-              <div class="filter-btn__icon">
-                <img src="@/assets/images/icons/sync_alt.svg" alt="" />
-              </div>
-              <span> Сортировка </span>
-            </button>
-          </div>
-        </div>
       </div>
     </header>
     </div>
@@ -168,13 +145,14 @@ onMounted(() => {
                 />
               </div>
               <div v-if="userStore.user && userStore.access_token">
-                <NuxtLink to="/register-welcome" class="block bolder-title mb-2">Регистрация</NuxtLink>
-                <NuxtLink to="/login" class="block bolder-title">Вход</NuxtLink>
-              </div>
-              <div v-else>
                 <button @click="logout" class="block bolder-title mb-2">
               Выход
           </button>
+              </div>
+              <div v-else>
+                <NuxtLink to="/register-welcome" class="block bolder-title mb-2">Регистрация</NuxtLink>
+                <NuxtLink to="/login" class="block bolder-title">Вход</NuxtLink>
+                
               </div>
             </div>
             <div class="mt-6">
@@ -261,6 +239,9 @@ onMounted(() => {
   @media (max-width: 979px) {
     padding-top: 40px;
     padding-bottom: 60px;
+  }
+  @media (max-width: 510px) {
+    padding-bottom: 120px;
   }
 }
 

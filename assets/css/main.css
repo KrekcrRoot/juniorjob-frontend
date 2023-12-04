@@ -197,6 +197,20 @@ textarea.field {
     justify-content: space-between;
 }
 
+@media screen and (max-width: 1090px) {
+    .profile {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 50px;
+        justify-content: space-between;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 50px;
+        margin-top: -50px;
+    } 
+}
+
 .profile__title {
     color: #000;
     font-family: 'Source Sans Pro';
@@ -286,6 +300,15 @@ textarea.field {
     gap: 10px;
 }
 
+@media screen and (max-width: 1090px) {
+    /* .profile__reviews-item-head {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+    }  */
+}
+
 .profile__reviews-item-avatar {
     width: 50px;
     height: 50px;
@@ -317,6 +340,7 @@ textarea.field {
     font-weight: 300;
     line-height: normal;
 }
+
 
 .profile__vacancies {
    display: flex;

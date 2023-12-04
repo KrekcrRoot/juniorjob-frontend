@@ -16,6 +16,9 @@ export default (instance: AxiosInstance) => {
         },
         async refresh(tokenDto: TokenDto) {
             return instance.post<TokenDto>('/auth/refresh', tokenDto);
+        },
+        async logout() {
+            return instance.post('/auth/logout');
         }
     }
 
