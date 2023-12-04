@@ -43,6 +43,7 @@ export default defineComponent({
           })
           .catch(
           (error) => {
+
              // Проверка наличия ошибок в ответе сервера
         if (error.response && error.response.data && error.response.data.message) {
 

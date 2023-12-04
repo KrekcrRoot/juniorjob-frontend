@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const userStore = useUserStore();
 const competitions = computed(() => {
-    return JSON.parse(userStore.user.userData.competitions)
+    return JSON.parse(userStore?.user?.userData?.competitions)
 })
 
 const age = computed(() => {

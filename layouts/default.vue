@@ -57,6 +57,13 @@ const checkScreenWidth = () => {
   }
 };
 
+const isLoggedIn = computed(() => {
+  if(process.client) {
+    const userStore = useUserStore();
+    return userStore.loggedId
+  }
+})
+
 const logout = async () => {
   await api.auth.logout()
   useRouter().go(0)
@@ -120,7 +127,7 @@ onMounted(() => {
             </span>
             {{ menuItem.title }}
           </RouterLink>
-          <button @click="logout" class="main-menu__link">
+          <button v-if="isLoggedIn" @click="logout" class="main-menu__link">
               Выход
           </button>
         </div>

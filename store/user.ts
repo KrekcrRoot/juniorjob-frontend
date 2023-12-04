@@ -79,12 +79,26 @@ export const useUserStore = defineStore('user', {
                 console.log(error)
             }
             
+        },
+        async login(data: any) {
+            try {
+                const r = await api.auth.login(data)
+                console.log(r)
+            } catch(e) {
+                console.log(e)
+            }
         }
     },
     persist: true,
     getters: {
         currentRoleId() {
             return this.roles[this.payload.role].uuid
+        },
+        loggedId() {
+            if(this.access_token && this.user) {
+                return true
+            }
+            return false
         }
     }
 })
