@@ -59,7 +59,13 @@ const checkScreenWidth = () => {
 };
 
 const logout = async () => {
-  await api.auth.logout()
+  if(process.client) {
+    
+    await useUserStore().logout()
+  }
+
+  navigateTo('/login')
+  
 }
 
 onMounted(() => {

@@ -69,6 +69,17 @@ export const useUserStore = defineStore('user', {
                 console.log(error)
             }
         },
+        async logout() {
+            try {
+                await api.auth.logout()
+                this.access_token = '';
+                this.refresh_token = '';
+                this.user = null;
+            } catch (error: any) {
+                console.log(error)
+            }
+            
+        }
     },
     persist: true,
     getters: {
