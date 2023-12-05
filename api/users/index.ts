@@ -6,6 +6,9 @@ export default (instance: AxiosInstance) => {
     return {
         async my() {
             return instance.get<UserDto>('/users/my')
+        },
+        async getById(id: string) {
+            return instance.get<UserDto>(`/users/${id}`)
         }
     }
 }

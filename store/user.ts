@@ -87,6 +87,14 @@ export const useUserStore = defineStore('user', {
             } catch(e) {
                 console.log(e)
             }
+        },
+        async getUserById(id: string) {
+            try {
+                const user = await api.users.getById(id)
+                console.log(user)
+            } catch(error: any) {
+                console.log(error)
+            }
         }
     },
     persist: true,
