@@ -27,23 +27,23 @@ export default defineComponent({
 
       response.then(
           async (res) => {
-
+console.log(res)
             const user = useUserStore();
-            user.access_token = res.data.access_token;
-            user.refresh_token = res.data.refresh_token;
+            user.access_token = res.access_token;
+            user.refresh_token = res.refresh_token;
 
             await user.fetchUser()
             await user.fetchRoles()
             const currentRole = (user.payload.role === "legal_entity")? 'legal-entity' : user.payload.role
 
             const updateResponse = await api.roles.get_data(currentRole, user.currentRoleId)
-            user.user.userData = updateResponse.data
+            user.user.userData = updateResponse
             this.$router.push('/profile')
 
           })
           .catch(
           (error) => {
-
+console.log(error)
              // Проверка наличия ошибок в ответе сервера
         if (error.response && error.response.data && error.response.data.message) {
 

@@ -20,16 +20,16 @@ export const useUserStore = defineStore('user', {
                 access_token: this.access_token, 
                 refresh_token: this.refresh_token
             })
-            if(response.data.access_token) {
-                this.access_token = response.data.access_token
+            if(response.access_token) {
+                this.access_token = response.access_token
             }
-            if(response.data.refresh_token) {
-                this.refresh_token = response.data.refresh_token
+            if(response.refresh_token) {
+                this.refresh_token = response.refresh_token
             }
         },
         async fetchUser() {
             const response = await api.users.my()
-            this.user = response.data
+            this.user = response
         },
         //get payload from access token
         async getPayload() {
@@ -62,7 +62,7 @@ export const useUserStore = defineStore('user', {
         async fetchRoles() {
             try {
                 const response = await api.roles.my()
-                this.roles = response.data
+                this.roles = response
                 await this.getPayload()
             }
             catch(error: any) {

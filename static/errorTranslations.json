@@ -6,6 +6,8 @@
         "password should not be empty": "Поле Пароль обязательно",
         "city_uuid must be a UUID": "Ошибка выбора города",
         "city_uuid should not be empty": "Заполните город",
-        "User already exist": "Пользователь с таким e-mail уже зарегистрирован"
+        "User already exist": "Пользователь с таким e-mail уже зарегистрирован",
+        "Login or password is incorrect": "Не верный логин или пароль",
+        "birthday must be a valid ISO 8601 date string": "Вы не указали дату рождения"
     }
 }

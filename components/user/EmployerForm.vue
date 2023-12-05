@@ -59,20 +59,20 @@ const otherForm = form === formCorporate ? formIndividual : formCorporate;
         formErrors.value = []
         const response = await api.auth.register(form);
 
-        if(response.data.access_token) {
-            userStore.access_token = response.data.access_token
+        if(response.access_token) {
+            userStore.access_token = response.access_token
 
             
         }
-        if(response.data.refresh_token) {
-            userStore.refresh_token = response.data.refresh_token
+        if(response.refresh_token) {
+            userStore.refresh_token = response.refresh_token
         }
 
         
         await userStore.setRole(form.role)
         const currentRole = userStore.payload.role;
         const updateResponse = await api.roles[currentRole](userStore.currentRoleId, form.userData)
-        userStore.user.userData = updateResponse.data
+        userStore.user.userData = updateResponse
         router.push('/profile')
         
     }

@@ -12,7 +12,7 @@ export const useCitiesStore = defineStore('cities', {
             const response = api.cities.all()
             response.then(
                 (res) => {
-                    this.cities = res.data
+                    this.cities = res
                 }
             )
         }
