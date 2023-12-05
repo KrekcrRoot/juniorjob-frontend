@@ -65,8 +65,13 @@ const isLoggedIn = computed(() => {
 })
 
 const logout = async () => {
-  await api.auth.logout()
-  useRouter().go(0)
+  if(process.client) {
+    
+    await useUserStore().logout()
+  }
+
+  navigateTo('/login')
+  
 }
 
 onMounted(() => {
@@ -175,13 +180,14 @@ onMounted(() => {
                 />
               </div>
               <div v-if="userStore.user && userStore.access_token">
-                <NuxtLink to="/register-welcome" class="block bolder-title mb-2">Регистрация</NuxtLink>
-                <NuxtLink to="/login" class="block bolder-title">Вход</NuxtLink>
-              </div>
-              <div v-else>
                 <button @click="logout" class="block bolder-title mb-2">
               Выход
           </button>
+              </div>
+              <div v-else>
+                <NuxtLink to="/register-welcome" class="block bolder-title mb-2">Регистрация</NuxtLink>
+                <NuxtLink to="/login" class="block bolder-title">Вход</NuxtLink>
+                
               </div>
             </div>
             <div class="mt-6">
