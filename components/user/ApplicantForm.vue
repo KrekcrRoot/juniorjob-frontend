@@ -72,6 +72,14 @@ const submit = async () => {
   }
 };
 
+const setDateInput = (e) => {
+  e.target.type = 'date'
+}
+
+const removeDateInput = (e) => {
+  e.target.type = 'text'
+}
+
 </script>
 <template>
   <div class="container-centered">
@@ -83,12 +91,12 @@ const submit = async () => {
       <input v-model="form.userData.patronymic" placeholder="Отчество" type="text" class="field mt-3">
       <input v-model="form.email" placeholder="Email" type="text" class="field mt-3">
       <input v-model="form.password" placeholder="Пароль" type="password" class="field mt-3">
-      <input v-model="form.userData.birthday" placeholder="Дата рождения" type="date" class="field mt-3">
+      <input v-model="form.userData.birthday" placeholder="Дата рождения" type="text" @focus="setDateInput" @focusout="removeDateInput" class="field mt-3">
       <FormSelect v-model="form.city_uuid" />
       <input v-model="form.userData.study_place" placeholder="Место учебы" type="text" class="field mt-3">
       <input v-model="form.userData.inn" placeholder="ИНН" type="text" class="field mt-3">
       <FormMultiSelect v-model="form.userData.competitions" class="mt-3" />
-      <textarea v-model="form.userData.summary" placeholder="Обо мне" class="field mt-3"></textarea>
+      <textarea v-model="form.userData.summary" placeholder="Резюме (расскажите о своих навыках, достижениях и качествах)" class="field mt-3"></textarea>
       <template v-if="formErrors">
         <div class="py-4">
           <p class="error-message text-center" v-for="formError in formErrors">

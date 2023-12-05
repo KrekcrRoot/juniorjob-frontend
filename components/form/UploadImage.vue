@@ -19,7 +19,7 @@ const handleFileChange = (event) => {
 </script>
 <template>
     <label class="image-upload">
-      <div v-if="preview" class="image-upload__avatar w-16 h-16 rounded-full overflow-hidden mr-4">
+      <div v-if="preview" class="image-upload__avatar rounded-full overflow-hidden mr-4">
         <img :src="preview" alt="Avatar Preview" class="w-full h-full object-cover" />
       </div>
         <span class="image-upload__caption">Сделайте фото или добавьте его из галереи</span>
@@ -41,6 +41,14 @@ const handleFileChange = (event) => {
         font-style: normal;
         font-weight: 300;
         line-height: normal;
+    }
+
+    &__avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
     }
   }
   </style>

@@ -58,6 +58,7 @@ const isScreenSmall = ref(window.innerWidth <= 490);
 <template>
     <div class="xl:container mx-auto">
         <div class="profile profile-mobile-main relative mt-10">
+            <!-- АВАТАР И ИМЯ СОИСКАТЕЛЯ НА МОБИЛКЕ -->
             <template v-if="isScreenSmall">
                 <div class="profile-mobile-wrapper">
                     <div class="profile-mobile profile__image">
@@ -81,7 +82,7 @@ const isScreenSmall = ref(window.innerWidth <= 490);
                                 </svg>
                             </button>
                 </div>
-                <div class="mb-6 mt-n5">
+                <div class="mb-6 mt-n5 profile-about-mobile">
                     <p class="profile-mobile-info profile__info mt-4">{{ age }}</p>
                         <p class="profile-mobile-info profile__info mt-1">
                             {{ userStore.user.userData.study_place }}
@@ -118,6 +119,7 @@ const isScreenSmall = ref(window.innerWidth <= 490);
                 </div>
 
             </template>
+            <!-- АВАТАР И ИМЯ СОИСКАТЕЛЯ НА ПК -->
             <template v-else>
                 <div class="profile__left">
                 <div class="flex gap-3">
@@ -184,7 +186,7 @@ const isScreenSmall = ref(window.innerWidth <= 490);
             </div>
             </template>
 
-            <div class="profile__right">
+            <div class="profile__right profile-about-mobile">
                 <div class="profile__about">
                     {{ userStore.user.userData.summary }}
                 </div>
@@ -233,8 +235,10 @@ const isScreenSmall = ref(window.innerWidth <= 490);
     transform: translate(0, -50%);
 }
 .profile-mobile-wrapper {
+    position: relative;
     display: flex;
     align-items: flex-start;
+    max-height: 100px;
 }
 
 .profile-mobile.profile__name {
@@ -252,6 +256,13 @@ const isScreenSmall = ref(window.innerWidth <= 490);
 }
 .profile-mobile-info {
     font-size: 26px;
+}
+
+.profile-about-mobile {
+    @media screen and (max-width: 500px) {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }
 
 </style>

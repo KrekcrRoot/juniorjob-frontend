@@ -43,7 +43,7 @@ watch(props.selectedValue, (newValue) => {
     align-items: center;
     justify-content: space-between;
     background: #AAA2D8;
-    border-radius: 15px;
+    border-radius: 18px;
 
     &__item {
         z-index: 5;

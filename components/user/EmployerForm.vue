@@ -140,7 +140,7 @@ const otherForm = form === formCorporate ? formIndividual : formCorporate;
                     <input v-model="formIndividual.password" placeholder="Пароль" type="password" class="field mt-3">
                     <FormSelect v-model="formIndividual.city_uuid" />
                     
-                    <textarea v-model="formIndividual.userData.summary" placeholder="Какая помощь необходима" class="field mt-3"></textarea>
+                    <textarea v-model="formIndividual.userData.summary" placeholder="Какая помощь необходима?" class="field mt-3"></textarea>
                     <template v-if="formErrors">
                         <div class="py-4">
                           <p class="error-message text-center" v-for="formError in formErrors">

@@ -12,7 +12,7 @@ export default defineNuxtRouteMiddleware((to) => {
             return navigateTo('/login');
         }
 
-        if(access_token.value && (isRegisterPage || to?.name === 'register-welcome' || to?.name === 'login')) {
+        if(access_token.value && (isRegisterPage || to?.name === 'register-welcome' || to?.name === 'login-welcome' || to?.name === 'login')) {
             abortNavigation();
             return navigateTo('/profile')
         }

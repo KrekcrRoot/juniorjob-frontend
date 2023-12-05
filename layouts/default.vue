@@ -67,7 +67,7 @@ const isLoggedIn = computed(() => {
 const logout = async () => {
   if(process.client) {
     
-    await useUserStore().logout()
+    useUserStore().logout()
   }
 
   navigateTo('/login')
@@ -111,7 +111,7 @@ onMounted(() => {
                 alt="Уведомления"
               />
             </div>
-            <NuxtLink to="/login" class="header__icon">
+            <NuxtLink to="/login-welcome" class="header__icon">
               <img
                 src="@/assets/images/icons/account_circle.svg"
                 alt="Профиль"
@@ -266,7 +266,7 @@ onMounted(() => {
     padding-left: 22px;
     &::placeholder {
       color: #aaa2d8;
-      font-size: 14px;
+      font-size: 18px;
       font-weight: 300;
     }
   }

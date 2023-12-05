@@ -11,7 +11,7 @@ if (process.client) {
 </script>
 <template>
     <div class="xl:container mx-auto">
-        <div class="profile mt-10">
+        <div class="profile profile-about-mobile mt-10">
             <div class="profile__left">
                 <h1 class="profile__title">
                     Мои вакансии
@@ -192,20 +192,23 @@ if (process.client) {
                     </h2>
                     <div class="profile__reviews mt-3">
                         <div class="profile__reviews-item">
-                            <a class="profile__reviews-item-head">
-                                <div class="profile__reviews-item-avatar">
-                                    <img src="@/assets/images/profile/review-demo.png" alt="">
-                                </div>
-                                <div>
-                                    <p class="profile__reviews-item-name">Чернявский Иван</p>
-                                    <div class="stars">
-                                        <img src="@/assets/images/icons/star-color.svg" alt="star">
-                                        <img src="@/assets/images/icons/star-color.svg" alt="star">
-                                        <img src="@/assets/images/icons/star-color.svg" alt="star">
-                                        <img src="@/assets/images/icons/star-color.svg" alt="star">
-                                        <img src="@/assets/images/icons/star-color.svg" alt="star">
+                            <a class="profile__reviews-item-head profile-reviews-head-mobile">
+                                <div class="flex items-center">
+                                    <div class="profile__reviews-item-avatar">
+                                        <img src="@/assets/images/profile/review-demo.png" alt="">
+                                    </div>
+                                    <div>
+                                        <p class="profile__reviews-item-name">Чернявский Иван</p>
+                                        <div class="stars">
+                                            <img src="@/assets/images/icons/star-color.svg" alt="star">
+                                            <img src="@/assets/images/icons/star-color.svg" alt="star">
+                                            <img src="@/assets/images/icons/star-color.svg" alt="star">
+                                            <img src="@/assets/images/icons/star-color.svg" alt="star">
+                                            <img src="@/assets/images/icons/star-color.svg" alt="star">
+                                        </div>
                                     </div>
                                 </div>
+                                
                                 <button class="btn btn--small ml-2">Выбрать исполнителем</button>
                             </a>
                             <p class="profile__reviews-item-comment">
@@ -220,4 +223,18 @@ if (process.client) {
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.profile-about-mobile {
+    @media screen and (max-width: 500px) {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+.profile-reviews-head-mobile {
+    @media screen and (max-width: 500px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    } 
+}
+</style>
