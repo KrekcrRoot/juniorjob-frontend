@@ -3,13 +3,8 @@
         <h1 class="user-title">Создание вакансии</h1>
         <form @submit.prevent="submit" class="mt-5">
             <input v-model="formData.title" placeholder="Название" type="text" class="field mt-3">
-            <select v-model="formData.category" class="field mt-3">
-                <option :value="'1'">Category1</option>
-                <option :value="'2'">Category2</option>
-                <option :value="'3'">Category3</option>
-                <option :value="'4'">Category4</option>
-            </select>
-            <input v-model="formData.time" placeholder="Время" type="text" class="field mt-3">
+            <FormSelectCategory v-model="formData.category_uuid" />
+            <input v-model="formData.time" placeholder="Время (например, каждый вторник с 10:00 по 12:00)" type="text" class="field mt-3">
             <input v-model="formData.place" placeholder="Место" type="text" class="field mt-3">
             <textarea v-model="formData.description" placeholder="Описание" type="text" class="field mt-3">
 
@@ -41,10 +36,15 @@
 </template>
 
 <script setup>
+import api from "~/api"
+import translationService from "~/services/translationService"
+import { useRouter } from "vue-router";
+
+const router = useRouter()
 
 const formErrors = ref([])
 const formData = ref({
-    category: {},
+    category_uuid: '',
     title: '',
     time: '',
     place: '',
@@ -52,6 +52,35 @@ const formData = ref({
     required_experience: false,
     several_applicants: false
 })
+
+const submit = async () => {
+    try {
+        const res = await api.vacancies.create(formData.value)
+        router.push('/profile')
+    } catch(error) {
+        if(error.response && error.response.status === 401) {
+            submit()
+        }
+        else if(error.response && error.response.data && error.response.data.message) {
+            formErrors.value = error.response.data.message;
+            if(Array.isArray(formErrors.value)) {
+                const allErrors = formErrors.value.map((error) => {
+                    return translationService.translateError(error, 'ru')
+                })
+                const uniqueErrors = new Set(allErrors)
+                formErrors.value = Array.from(uniqueErrors)
+            } else {
+                formErrors.value = [translationService.translateError(formErrors.value, 'ru')]
+            }
+            
+        } else {
+            formErrors.value = ["Ошибка при создании вакансии"];
+            console.error('Ошибка при выполнении запроса:', error);
+        }
+        
+    }
+    
+}
 
 </script>
 

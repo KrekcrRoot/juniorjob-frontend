@@ -4,9 +4,9 @@
 
   const { modelValue } = defineProps(['modelValue']);
 const emit = defineEmits([['modelValue']]);
-  const citiesStore = useCitiesStore();
+  const categoriesStore = useCategoriesStore();
   const dropdownVisible = ref(false);
-const selectedCity = ref(null);
+const selectedCategory = ref(null);
 
 const toggleDropdown = () => {
     dropdownVisible.value = !dropdownVisible.value;
@@ -22,30 +22,30 @@ const closeDropdown = (event) => {
   }
 };
 
-const selectCity = (city) => {
-    selectedCity.value = city;
-    emit('update:modelValue', city.uuid);
+const selectCategory = (category) => {
+    selectedCategory.value = category;
+    emit('update:modelValue', category.uuid);
     dropdownVisible.value = false;
     
 };
 
 onMounted(() => {
-    citiesStore.fetchCities()
+    categoriesStore.fetchCategories()
     document.addEventListener('click', closeDropdown);
 })
   </script>
 <template>
     <div class="field custom-field mt-6" @click.stop="toggleDropdown">
         <img class="custom-field__arrow" src="@/assets/images/icons/arrow-down.svg">
-        <div v-if="selectedCity === null" class="custom-field__placeholder">
-            Город
+        <div v-if="selectedCategory === null" class="custom-field__placeholder">
+            Категория
         </div>
         <div v-else class="custom-field__selected-option">
-            {{ selectedCity.title }}
+            {{ selectedCategory.title }}
         </div>
         <div v-show="dropdownVisible" class="custom-field__options">
-            <div class="custom-field__option" v-for="city in citiesStore.cities" :key="city.uuid" @click.stop="selectCity(city)">
-                {{ city.title }}
+            <div class="custom-field__option" v-for="category in categoriesStore.categories" :key="category.uuid" @click.stop="selectCategory(category)">
+                {{ category.title }}
             </div>
         </div>
     </div>

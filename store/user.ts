@@ -16,16 +16,22 @@ export const useUserStore = defineStore('user', {
     },
     actions: {
         async refresh() {
-            const response = await api.auth.refresh({
-                access_token: this.access_token, 
-                refresh_token: this.refresh_token
-            })
-            if(response.access_token) {
-                this.access_token = response.access_token
+            try {
+                const response = await api.auth.refresh({
+                    access_token: this.access_token, 
+                    refresh_token: this.refresh_token
+                })
+                if(response.access_token) {
+                    this.access_token = response.access_token
+                }
+                if(response.refresh_token) {
+                    this.refresh_token = response.refresh_token
+                }
+            } catch (error: any) {
+                console.error('Error refreshing token:', error.message);
+                throw error; // rethrow the error to propagate it further
             }
-            if(response.refresh_token) {
-                this.refresh_token = response.refresh_token
-            }
+            
         },
         async fetchUser() {
             const response = await api.users.my()

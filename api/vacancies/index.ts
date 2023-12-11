@@ -5,7 +5,7 @@ import VacancyRequestDto from "./dto/VacancyRequestDto";
 export default (instance: AxiosInstance) => {
     return {
         async create(data: VacancyRequestDto) {
-            return instance.post<VacancyDto>('/vacancies/create')
+            return instance.post<VacancyDto>('/vacancies/create', data)
         },
         async ban(id: string) {
             return instance.post<VacancyDto>('/vacancies/ban')

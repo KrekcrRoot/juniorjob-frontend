@@ -8,6 +8,20 @@
         "city_uuid should not be empty": "Заполните город",
         "User already exist": "Пользователь с таким e-mail уже зарегистрирован",
         "Login or password is incorrect": "Не верный логин или пароль",
-        "birthday must be a valid ISO 8601 date string": "Вы не указали дату рождения"
+        "birthday must be a valid ISO 8601 date string": "Вы не указали дату рождения",
+        "title must be shorter than or equal to 512 characters": "Заголовок должен быть короче или равен 512 символам",
+        "title should not be empty": "Поле «Заголовок» не заполнено",
+        "title must be a string": "Поле «Заголовок» не заполнено",
+        "category_uuid must be a UUID": "Вы не выбрали категорию",
+        "category_uuid should not be empty": "Вы не выбрали категорию",
+        "time must be shorter than or equal to 2048 characters": "Слишком длинный текст в поле «Время» (максимум: 2048)",
+        "time should not be empty": "Поле «Время» не заполнено",
+        "time must be a string": "Поле «Время» не заполнено",
+        "place must be shorter than or equal to 2048 characters": "Слишком длинный текст в поле «Место» (максимум: 2048)",
+        "place should not be empty": "Поле «Место» не заполнено",
+        "place must be a string": "Поле «Место» не заполнено",
+        "description must be shorter than or equal to 8192 characters": "Слишком длинный текст в поле «Описание»",
+        "description should not be empty": "Поле «Описание» не заполнено",
+        "description must be a string": "Поле «Описание» не заполнено"
     }
 }

@@ -27,7 +27,7 @@ instance.interceptors.response.use(
     async function (error) {
       console.log(error)
       const originalRequest = error.config;
-      if ((error.response.status === 403 || error.response.status === 401) && !originalRequest._retry) {
+      if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
   
         if (process.client) {
@@ -38,10 +38,8 @@ instance.interceptors.response.use(
           //   refresh_token: userStore.refresh_token,
           // });
   
-          // После успешного обновления токенов, повторяем оригинальный запрос
           const retryResponse = await instance(originalRequest);
-  
-          // Возвращаем только тело ответа
+
           return retryResponse.data;
         }
       }
