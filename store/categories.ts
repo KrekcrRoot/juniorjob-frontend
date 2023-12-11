@@ -1,18 +1,18 @@
 import { defineStore } from "pinia";
 import api from "~/api";
 
-export const useCitiesStore = defineStore('cities', {
+export const useCategoriesStore = defineStore('category', {
     state() {
         return {
-            cities: {}
+            categories: {}
         }
     },
     actions: {
-        fetchCities() {
-            const response = api.cities.all()
+        fetchCategories() {
+            const response = api.categories.all()
             response.then(
                 (res) => {
-                    this.cities = res
+                    this.categories = res
                 }
             )
         }
