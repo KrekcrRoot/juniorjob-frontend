@@ -145,9 +145,9 @@ if (process.client) {
                         </p>
                     </a>
                     <!-- //VACANCIES ITEM -->
-                    <button class="btn mt-7">
+                    <NuxtLink to="/vacancies/create" class="btn mt-7">
                         Новая вакансия
-                    </button>
+                    </NuxtLink>
                 </div>
             </div>
             <div class="profile__right">

@@ -90,10 +90,18 @@ export const useUserStore = defineStore('user', {
         },
         async getUserById(id: string) {
             try {
-                const user = await api.users.getById(id)
-                console.log(user)
+                const user = await api.users.getById(id);
+
+                const userRoles = await api.roles.get_user_roles(user.uuid)
+
+
+                const response = await api.roles.get_data(user.role.current, userRoles[user.role.current].uuid)
+
+                console.log(response)
+                user.userData = response
+                return user
             } catch(error: any) {
-                console.log(error)
+                return error
             }
         }
     },

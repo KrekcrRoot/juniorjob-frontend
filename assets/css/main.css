@@ -68,6 +68,15 @@ body {
     line-height: 25px;
 }
 
+.page-title {
+    color: #2C1B47;
+    font-family: 'Source Sans Pro';
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+}
+
 .error-message {
     color: rgb(239, 40, 86);
     font-size: 14px;
@@ -83,6 +92,22 @@ body {
     font-size: 20px;
     font-weight: 600;
     user-select: none;
+}
+
+.btn-outline {
+    padding: 11px 20px;
+    border-radius: 20px;
+    border: 3px solid #604D9E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #604D9E;
+    text-align: center;
+    font-family: 'Source Sans Pro';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
 .btn--small {

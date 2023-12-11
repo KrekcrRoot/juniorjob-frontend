@@ -25,16 +25,18 @@ instance.interceptors.response.use(
       return response.data;
     },
     async function (error) {
+      console.log(error)
       const originalRequest = error.config;
-      if ((error.response.statusCode === 403 || error.response.statusCode === 401) && !originalRequest._retry) {
+      if ((error.response.status === 403 || error.response.status === 401) && !originalRequest._retry) {
         originalRequest._retry = true;
   
         if (process.client) {
           const userStore = useUserStore();
-          await api.auth.refresh({
-            access_token: userStore.access_token,
-            refresh_token: userStore.refresh_token,
-          });
+          userStore.refresh()
+          // await api.auth.refresh({
+          //   access_token: userStore.access_token,
+          //   refresh_token: userStore.refresh_token,
+          // });
   
           // После успешного обновления токенов, повторяем оригинальный запрос
           const retryResponse = await instance(originalRequest);

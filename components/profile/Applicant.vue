@@ -39,7 +39,7 @@ const age = computed(() => {
 })
 
 
-const isScreenSmall = ref(window.innerWidth <= 490);
+    const isScreenSmall = ref(window.innerWidth <= 490);
 
     const handleResize = () => {
       isScreenSmall.value = window.innerWidth <= 490;

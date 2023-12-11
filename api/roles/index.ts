@@ -22,7 +22,11 @@ export default (instance: AxiosInstance) => {
             return instance.put(`/roles/legal-entity/${id}`, legalEntityDto)
         },
         async get_data(role: string, id: string) {
+            role = role.replace(/_/g, '-')
             return instance.get(`/roles/${role}/${id}`)
+        },
+        async get_user_roles(userId: string) {
+            return instance.get(`/roles/user/${userId}`)
         }
     }
 }
