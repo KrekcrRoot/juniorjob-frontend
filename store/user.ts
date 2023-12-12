@@ -12,6 +12,7 @@ export const useUserStore = defineStore('user', {
             roles: {},
             access_token: '',
             refresh_token: '',
+            vacancies: {}
         }
     },
     actions: {
@@ -109,6 +110,14 @@ export const useUserStore = defineStore('user', {
             } catch(error: any) {
                 return error
             }
+        },
+        getVacancies() {
+            const response = api.vacancies.my()
+            response.then(
+                (res) => {
+                    this.vacancies = res
+                }
+            )
         }
     },
     persist: true,
