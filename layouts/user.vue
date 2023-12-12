@@ -20,7 +20,7 @@ const menu = [
   {
     title: "Вакансии",
     icon: workIcon,
-    link: "/",
+    link: "/vacancies",
   },
   {
     title: "Профессиональные пробы",

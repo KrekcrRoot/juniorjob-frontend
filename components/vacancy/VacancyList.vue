@@ -1,28 +1,22 @@
 <script setup>
+import {  ref, onMounted } from 'vue';
 import vacancyLogo from "@/assets/images/vacancy/temp_vacancy.svg";
-const vacancyList = [
-  {
-    id: 1,
-    title: "ООО «Демидовский огурец»",
-    logo: vacancyLogo,
-    time: "Ежедневно с 11:00 до 14:00",
-    short_text: "Собирать продукцию...",
-  },
-  {
-    id: 2,
-    title: "ООО «Демидовский огурец2»",
-    logo: vacancyLogo,
-    time: "Ежедневно с 11:00 до 14:00",
-    short_text: "Собирать продукцию...",
-  },
-  {
-    id: 3,
-    title: "ООО «Демидовский огурец3»",
-    logo: vacancyLogo,
-    time: "Ежедневно с 11:00 до 14:00",
-    short_text: "Собирать продукцию...",
-  }
-];
+import { useVacanciesStore } from "~/store/vacancies";
+
+const vacancyList = ref(null)
+
+if(process.client) {
+  const vacanciesStore = useVacanciesStore();
+
+
+
+
+onMounted(async() => {
+  await vacanciesStore.fetchVacancies()
+  vacancyList.value = vacanciesStore.vacancies.slice(0, 3)
+})
+}
+
 </script>
 
 <template>

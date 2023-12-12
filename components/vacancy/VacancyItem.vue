@@ -20,7 +20,7 @@ const props = defineProps({
           {{ vacancy.time }}
         </span>
         <span class="vacancy__text">
-          {{ vacancy.short_text }}
+          {{ vacancy.description }}
         </span>
       </div>
     </div>

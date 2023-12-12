@@ -14,7 +14,7 @@ export default (instance: AxiosInstance) => {
             return instance.post<VacancyDto>('/vacancies/unban')
         },
         async edit(data: VacancyRequestDto) {
-            return instance.put<VacancyDto>('/vacancies/unban')
+            return instance.put<VacancyDto>('/vacancies/edit', data)
         },
         async delete(id: string) {
             return instance.delete<VacancyDto>('/vacancies/delete')

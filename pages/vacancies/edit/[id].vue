@@ -1,6 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
+definePageMeta({
+    layout: "empty",
+});
+
 const loading = ref(true)
 
 onMounted(() => {
@@ -15,14 +19,9 @@ onMounted(() => {
         </template>
         <!-- Формы регистрации -->
         <template v-else>
-            <div class="xl:container mx-auto">
-            <CategoryPage />
-            </div>
-
+            <VacancyEdit />
         </template>
     </div>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

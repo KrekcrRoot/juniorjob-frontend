@@ -41,7 +41,7 @@ onMounted(async() => {
                             </NuxtLink>
                             <div class="flex gap-2">
                                 <!-- РЕДАКТИРОВАТЬ -->
-                                <a>
+                                <NuxtLink class="cursor-pointer" :to="{ name: 'vacancies-edit-id', params: { id: vacancy.uuid } }">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <mask id="mask0_1986_2674" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0"
@@ -54,7 +54,7 @@ onMounted(async() => {
                                                 fill="#604D9E" />
                                         </g>
                                     </svg>
-                                </a>
+                                </NuxtLink>
                                 <!-- //РЕДАКТИРОВАТЬ -->
                                 <!-- УДАЛИТЬ -->
                                 <a>

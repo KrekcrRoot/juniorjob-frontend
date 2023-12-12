@@ -36,11 +36,16 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import api from "~/api"
 import translationService from "~/services/translationService"
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+import { useVacanciesStore } from '~/store/vacancies';
 
 const router = useRouter()
+const route = useRoute()
+
+const vacanciesStore = useVacanciesStore()
 
 const formErrors = ref([])
 const formData = ref({
@@ -55,7 +60,7 @@ const formData = ref({
 
 const submit = async () => {
     try {
-        const res = await api.vacancies.create(formData.value)
+        const res = await api.vacancies.edit(formData.value)
         router.push('/profile')
     } catch(error) {
         if(error.response && error.response.status === 401) {
@@ -81,6 +86,15 @@ const submit = async () => {
     }
     
 }
+
+onMounted(() => {
+    const response = vacanciesStore.getById(route.params.id)
+    response.then((res) => {
+        console.log(res)
+        formData.value = res
+        formData.value.category_uuid = res.category.category_uuid
+    })
+})
 
 </script>
 

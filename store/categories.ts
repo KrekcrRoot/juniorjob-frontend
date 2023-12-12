@@ -4,7 +4,7 @@ import api from "~/api";
 export const useCategoriesStore = defineStore('category', {
     state() {
         return {
-            categories: {}
+            categories: []
         }
     },
     actions: {

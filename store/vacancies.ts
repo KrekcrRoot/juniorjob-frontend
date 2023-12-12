@@ -8,14 +8,21 @@ export const useVacanciesStore = defineStore('vacancies', {
         }
     },
     actions: {
-        getById(id: string) {
+        async getById(id: string) {
             try {
-                const res = api.vacancies.getById(id)
+                const res = await api.vacancies.getById(id)
                 return res
             } catch (error) {
                 return error
-            }
-            
+            }   
+        },
+        fetchVacancies() {
+            const response = api.vacancies.all()
+            response.then(
+                (res) => {
+                    this.vacancies = res
+                }
+            )
         }
     },
     persist: true,

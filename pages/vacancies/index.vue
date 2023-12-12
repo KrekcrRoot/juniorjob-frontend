@@ -20,72 +20,7 @@ onMounted(() => {
                     <h1 class="page-title mt-12 mb-9">
                         Категории
                     </h1>
-                    <div class="categories__container">
-                        <NuxtLink  class="categories__item">
-                            <div class="categories__image">
-                                <img src="@/assets/images/categories/bytovue.png" alt="">
-                            </div>
-                            <p class="categories__item-title">
-                                Бытовые задачи
-                            </p>
-                        </NuxtLink>
-                        <div class="categories__item">
-                            <div class="categories__image">
-                                <img src="@/assets/images/categories/bytovue.png" alt="">
-                            </div>
-                            <p class="categories__item-title">
-                                Бытовые задачи
-                            </p>
-                        </div>
-                        <div class="categories__item">
-                            <div class="categories__image">
-                                <img src="@/assets/images/categories/bytovue.png" alt="">
-                            </div>
-                            <p class="categories__item-title">
-                                Бытовые задачи
-                            </p>
-                        </div>
-                        <div class="categories__item">
-                            <div class="categories__image">
-                                <img src="@/assets/images/categories/bytovue.png" alt="">
-                            </div>
-                            <p class="categories__item-title">
-                                Бытовые задачи
-                            </p>
-                        </div>
-                        <div class="categories__item">
-                            <div class="categories__image">
-                                <img src="@/assets/images/categories/bytovue.png" alt="">
-                            </div>
-                            <p class="categories__item-title">
-                                Бытовые задачи
-                            </p>
-                        </div>
-                        <div class="categories__item">
-                            <div class="categories__image">
-                                <img src="@/assets/images/categories/bytovue.png" alt="">
-                            </div>
-                            <p class="categories__item-title">
-                                Бытовые задачи
-                            </p>
-                        </div>
-                        <div class="categories__item">
-                            <div class="categories__image">
-                                <img src="@/assets/images/categories/bytovue.png" alt="">
-                            </div>
-                            <p class="categories__item-title">
-                                Бытовые задачи
-                            </p>
-                        </div>
-                        <div class="categories__item">
-                            <div class="categories__image">
-                                <img src="@/assets/images/categories/bytovue.png" alt="">
-                            </div>
-                            <p class="categories__item-title">
-                                Бытовые задачи
-                            </p>
-                        </div>
-                    </div>
+                    <CategoryList />
                 </div>
             </div>
             
@@ -94,7 +29,7 @@ onMounted(() => {
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .categories {
     @media screen and (max-width: 1080px) {
         padding-left: 20px;
@@ -102,7 +37,7 @@ onMounted(() => {
     }
     &__container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(100px, 100px));
         gap: 30px;
         justify-content: space-between;
 
