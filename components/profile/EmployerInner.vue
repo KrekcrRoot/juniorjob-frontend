@@ -36,10 +36,11 @@ onMounted(async() => {
                     <!-- VACANCIES ITEM -->
                     <a v-for="vacancy in userStore.vacancies" :key="vacancy.uuid" class="profile__vacancies-item">
                         <div class="profile__vacancies-item-head">
-                            <p class="profile__vacancies-item-name">
+                            <NuxtLink :to="{ name: 'vacancies-id', params: { id: vacancy.uuid } }" class="profile__vacancies-item-name">
                                 {{ vacancy.title }}
-                            </p>
+                            </NuxtLink>
                             <div class="flex gap-2">
+                                <!-- РЕДАКТИРОВАТЬ -->
                                 <a>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -54,6 +55,8 @@ onMounted(async() => {
                                         </g>
                                     </svg>
                                 </a>
+                                <!-- //РЕДАКТИРОВАТЬ -->
+                                <!-- УДАЛИТЬ -->
                                 <a>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -68,6 +71,7 @@ onMounted(async() => {
                                         </g>
                                     </svg>
                                 </a>
+                                <!-- //УДАЛИТЬ -->
                             </div>
                         </div>
                         <p class="profile__info">
