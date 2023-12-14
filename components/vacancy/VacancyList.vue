@@ -13,7 +13,10 @@ if(process.client) {
 
 onMounted(async() => {
   await vacanciesStore.fetchVacancies()
-  vacancyList.value = vacanciesStore.vacancies.slice(0, 3)
+  if(vacanciesStore.vacancies.length > 0) {
+    vacancyList.value = vacanciesStore.vacancies.slice(0, 3)
+  }
+  
 })
 }
 

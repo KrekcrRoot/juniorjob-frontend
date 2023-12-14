@@ -4,7 +4,7 @@ import api from "~/api";
 export const useVacanciesStore = defineStore('vacancies', {
     state() {
         return {
-            vacancies: {}
+            vacancies: []
         }
     },
     actions: {
