@@ -16,13 +16,14 @@ export const useVacanciesStore = defineStore('vacancies', {
                 return error
             }   
         },
-        fetchVacancies() {
-            const response = api.vacancies.all()
-            response.then(
-                (res) => {
-                    this.vacancies = res
-                }
-            )
+        async fetchVacancies() {
+            try {
+                const response = await api.vacancies.all()
+                this.vacancies = response
+            } catch(error) {
+                console.log(error)
+            }
+
         }
     },
     persist: true,
