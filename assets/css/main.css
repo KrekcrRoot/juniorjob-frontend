@@ -126,7 +126,7 @@ body {
     background: -ms-linear-gradient(-45deg, #AAA2D8 0%, #AAA2D8 40%, #ccc4f7 50%, #AAA2D8 60%, #AAA2D8 100%);
     background: linear-gradient(135deg, #AAA2D8 0%, #AAA2D8 40%, #ccc4f7 50%, #AAA2D8 60%, #AAA2D8 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#AAA2D8', endColorstr='#AAA2D8', GradientType=1);
-    background-size: 2000px;
+    background-size: 1000px;
     -webkit-animation: btnBlink .9s;
     animation: btnBlink .9s;
 }

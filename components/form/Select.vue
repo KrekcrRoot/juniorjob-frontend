@@ -2,7 +2,6 @@
 import { ref, onMounted, defineProps, defineEmits } from "vue";
 import { useCitiesStore } from "~/store/cities";
 
-if (process.client) {
   const { modelValue } = defineProps(["modelValue"]);
   const emit = defineEmits([["modelValue"]]);
   const citiesStore = useCitiesStore();
@@ -33,7 +32,7 @@ if (process.client) {
     citiesStore.fetchCities();
     document.addEventListener("click", closeDropdown);
   });
-}
+
 </script>
 <template>
   <div class="field custom-field mt-6" @click.stop="toggleDropdown">
