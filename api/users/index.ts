@@ -9,6 +9,9 @@ export default (instance: AxiosInstance) => {
         },
         async getById(id: string) {
             return instance.get<UserDto>(`/users/${id}`)
+        },
+        async uploadImage(data: any) {
+            return instance.post('/users/uploadImage', data)
         }
     }
 }

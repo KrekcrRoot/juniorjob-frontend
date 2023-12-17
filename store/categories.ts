@@ -4,17 +4,13 @@ import api from "~/api";
 export const useCategoriesStore = defineStore('category', {
     state() {
         return {
-            categories: []
+            categories: {}
         }
     },
     actions: {
-        fetchCategories() {
-            const response = api.categories.all()
-            response.then(
-                (res) => {
-                    this.categories = res
-                }
-            )
+        async fetchCategories() {
+            const response = await api.categories.all()
+            this.categories = response
         }
     },
     persist: true,

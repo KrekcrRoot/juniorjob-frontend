@@ -4,13 +4,16 @@ import api from '~/api';
 import { useUserStore } from '~/store/user';
 import { useRouter } from 'vue-router';
 import textService from '@/services/textService'
+import { useVacanciesStore } from '~/store/vacancies';
+
+const vacanciesStore = useVacanciesStore();
 
 const router = useRouter();
 const userStore = useUserStore();
 
 const actualVacancy = computed(() => {
-    if(userStore.vacancies && userStore.vacancies.length > 0) {
-        return userStore.vacancies[0]
+    if(vacanciesStore.vacanciesUser && vacanciesStore.vacanciesUser.length > 0) {
+        return vacanciesStore.vacanciesUser[0]
     }
 })
 
@@ -20,8 +23,14 @@ const truncate = (text) => {
     return textService.truncateText(text, shortDescriptionLength.value)
 }
 
+const deleteVacancy = (id) => {
+    vacanciesStore.delete({
+        "vacancy_uuid": id
+    })
+}
+
 onMounted(async() => {
-    userStore.getVacancies()
+    vacanciesStore.getMyVacancies()
 })
 
 </script>
@@ -34,7 +43,7 @@ onMounted(async() => {
                 </h1>
                 <div class="profile__vacancies mt-5">
                     <!-- VACANCIES ITEM -->
-                    <a v-for="vacancy in userStore.vacancies" :key="vacancy.uuid" class="profile__vacancies-item">
+                    <a v-for="vacancy in vacanciesStore.vacanciesUser" :key="vacancy.uuid" class="profile__vacancies-item">
                         <div class="profile__vacancies-item-head">
                             <NuxtLink :to="{ name: 'vacancies-id', params: { id: vacancy.uuid } }" class="profile__vacancies-item-name">
                                 {{ vacancy.title }}
@@ -57,7 +66,7 @@ onMounted(async() => {
                                 </NuxtLink>
                                 <!-- //РЕДАКТИРОВАТЬ -->
                                 <!-- УДАЛИТЬ -->
-                                <a>
+                                <a class="cursor-pointer" @click="deleteVacancy(vacancy.uuid)">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <mask id="mask0_1986_2677" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0"
@@ -85,9 +94,10 @@ onMounted(async() => {
                 </div>
             </div>
             <div class="profile__right">
-                <h1 class="profile__vacancy-title">
+                <template>
+                    <NuxtLink :to="{ name: 'vacancies-id', params: { id: vacancy.uuid } }" class="profile__vacancy-title">
                     {{ actualVacancy?.title }}
-                </h1>
+                </NuxtLink>
                 <div class="flex items-center gap-1 mt-4">
                     <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_1986_2713" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -153,6 +163,8 @@ onMounted(async() => {
                         </div>
                     </div>
                 </div>
+                </template>
+                
             </div>
         </div>
     </div>

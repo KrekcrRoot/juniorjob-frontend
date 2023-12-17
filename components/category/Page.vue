@@ -3,8 +3,8 @@
         <h1 class="page-title mt-12 mb-7">
             Вакансии
         </h1>
-        <div class="vacancies-list">
-            <div class="vacancies-list__item">
+        <div v-if="vacancies" class="vacancies-list">
+            <div v-for="vacancy in vacancies" :key="vacancy.uuuid" class="vacancies-list__item">
                 <div class="flex items-center gap-2">
                     <div class="vacancies-list__item-star">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -20,14 +20,14 @@
                         <img src="@/assets/images/profile/review-demo.png" alt="">
                     </div>
                     <div>
-                        <NuxtLink class="vacancies-list__title">
-                            Выгул шпицев
+                        <NuxtLink :to="{ name: 'vacancies-id', params: { id: vacancy.uuid } }" class="vacancies-list__title">
+                            {{ vacancy.title }}
                         </NuxtLink>
                         <p class="vacancies-list__text">
-                            Промышленный р-н
+                            {{ vacancy.place }}
                         </p>
                         <p class="vacancies-list__text">
-                            Вторник 17:00-17:30
+                            {{ vacancy.time }}
                         </p>
                     </div>
         
@@ -37,18 +37,33 @@
                 </button>
             </div>
         </div>
+        <UiLoader v-else />
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useCategoriesStore } from "~/store/categories";
+import { useVacanciesStore } from '~/store/vacancies';
+import { useRoute, useRouter } from "vue-router";
 
 const categoriesStore = useCategoriesStore();
+const vacanciesStore = useVacanciesStore();
 
-onMounted(() => {
+const vacancies = ref([])
+
+const route = useRoute()
+
+onMounted(async() => {
+    alert(route.params.id)
     if(categoriesStore.categories.length === 0) {
-        useCategoriesStore.fetchCategories()
+        await useCategoriesStore.fetchCategories() 
+    }
+    if(route.params.id) {
+        if(vacanciesStore.vacancies.length === 0) {
+            await vacanciesStore.fetchVacancies()
+        }
+        vacancies.value = vacanciesStore.vacancies.filter(vacancy => vacancy.category.uuid === route.params.id)
     }
 })
 

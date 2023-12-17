@@ -5,6 +5,9 @@ import { useVacanciesStore } from '~/store/vacancies';
 
 const loading = ref(true)
 const route = useRoute()
+definePageMeta({
+    layout: "user",
+});
 if (process.client) {
 
     const vacanciesStore = useVacanciesStore()
@@ -27,7 +30,7 @@ if (process.client) {
         <!-- Формы регистрации -->
         <template v-else>
             <div class="xl:container mx-auto">
-                {{ route.params.id }}
+                <ProfileVacancy />
             </div>
 
         </template>

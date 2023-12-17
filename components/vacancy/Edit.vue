@@ -1,6 +1,6 @@
 <template>
     <div class="container-centered">
-        <h1 class="user-title">Создание вакансии</h1>
+        <h1 class="user-title">Обновление вакансии</h1>
         <form @submit.prevent="submit" class="mt-5">
             <input v-model="formData.title" placeholder="Название" type="text" class="field mt-3">
             <FormSelectCategory v-model="formData.category_uuid" />
@@ -23,7 +23,7 @@
                 </span>
                 <span class="checkbox-item__text">Несколько исполнителей</span>
             </label>
-            <button type="submit" class="btn w-full mt-3">Создать</button>
+            <button type="submit" class="btn w-full mt-3">Изменить</button>
             <template v-if="formErrors">
               <div class="py-4">
                 <p class="error-message" v-for="formError in formErrors">
@@ -91,8 +91,17 @@ onMounted(() => {
     const response = vacanciesStore.getById(route.params.id)
     response.then((res) => {
         console.log(res)
-        formData.value = res
-        formData.value.category_uuid = res.category.category_uuid
+        formData.value = {
+            uuid: res.uuid,
+    category_uuid: res.category.category_uuid,
+    title: res.title,
+    time: res.time,
+    place: res.place,
+    description: res.description,
+    required_experience: res.required_experience,
+    several_applicants: res.several_applicants
+}
+
     })
 })
 

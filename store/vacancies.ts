@@ -4,7 +4,8 @@ import api from "~/api";
 export const useVacanciesStore = defineStore('vacancies', {
     state() {
         return {
-            vacancies: []
+            vacancies: {},
+            vacanciesUser: {}
         }
     },
     actions: {
@@ -24,6 +25,25 @@ export const useVacanciesStore = defineStore('vacancies', {
                 console.log(error)
             }
 
+        },
+
+        async delete(data: any) {
+            try {
+                await api.vacancies.delete(data)
+                this.getMyVacancies()
+                this.fetchVacancies()
+                
+            } catch(error) {
+                console.log(error)
+            }
+        },
+        getMyVacancies() {
+            const response = api.vacancies.my()
+            response.then(
+                (res) => {
+                    this.vacanciesUser = res
+                }
+            )
         }
     },
     persist: true,

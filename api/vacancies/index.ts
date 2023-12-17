@@ -1,6 +1,7 @@
 import { AxiosInstance } from "axios";
 import VacancyDto from "./dto/VacancyDto";
 import VacancyRequestDto from "./dto/VacancyRequestDto";
+import VacancyUuidDto from "./dto/VacancyUuidDto"
 
 export default (instance: AxiosInstance) => {
     return {
@@ -16,8 +17,8 @@ export default (instance: AxiosInstance) => {
         async edit(data: VacancyRequestDto) {
             return instance.put<VacancyDto>('/vacancies/edit', data)
         },
-        async delete(id: string) {
-            return instance.delete<VacancyDto>('/vacancies/delete')
+        async delete(data: VacancyUuidDto) {
+            return instance.delete('/vacancies/delete', { data: data })
         },
         async all() {
             return instance.get<VacancyDto>('/vacancies/all')

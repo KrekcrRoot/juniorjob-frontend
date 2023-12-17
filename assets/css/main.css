@@ -60,6 +60,15 @@ body {
     line-height: normal;
 }
 
+.text {
+    color: #AAA2D8;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
 .bolder-title {
     color: #2C1B47;
     font-size: 23px;
@@ -272,6 +281,10 @@ textarea.field {
     flex-shrink: 0;
     overflow: hidden;
 }
+.profile__image--vacancy {
+    width: 70px;
+    height: 70px;
+}
 
 .profile__image img {
     width: 100%;
@@ -288,6 +301,11 @@ textarea.field {
     line-height: normal;
     margin-top: 15px;
     max-width: 160px;
+}
+
+.profile__name--vacancy {
+    margin-top: 3px;
+    font-size: 24px;
 }
 
 .profile__info {
