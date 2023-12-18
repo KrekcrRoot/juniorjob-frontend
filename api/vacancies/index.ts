@@ -20,8 +20,9 @@ export default (instance: AxiosInstance) => {
         async delete(data: VacancyUuidDto) {
             return instance.delete('/vacancies/delete', { data: data })
         },
-        async all(data?: any) {
-            return instance.get<VacancyDto>('/vacancies/all', data)
+        async all(params?: any) {
+            console.log("Request parameters:", params);
+            return instance.get<VacancyDto>('/vacancies/all', { params })
         },
         async my() {
             return instance.get<VacancyDto>('/vacancies/my')

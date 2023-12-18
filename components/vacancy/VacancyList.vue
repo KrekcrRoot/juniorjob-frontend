@@ -12,13 +12,13 @@ if (process.client) {
   const vacanciesStore = useVacanciesStore();
 
   onMounted(async () => {
-    const res = await api.vacancies.all({"row": 1})
+    const res = await api.vacancies.all({ row: 1 })
       console.log(res)
 
-      vacancyList.value = await vacanciesStore.getWithFilter({
-        "row": 1,
-        "sortByCreatedAt": "Up"
-      })
+      // vacancyList.value = await vacanciesStore.getWithFilter({
+      //   "row": 1,
+      //   "sortByCreatedAt": "Up"
+      // })
       loading.value = false
     
   })
