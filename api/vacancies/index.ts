@@ -21,9 +21,7 @@ export default (instance: AxiosInstance) => {
             return instance.delete('/vacancies/delete', { data: data })
         },
         async all(data?: any) {
-            return instance.get<VacancyDto>('/vacancies/all', {
-                 data
-            })
+            return instance.get<VacancyDto>('/vacancies/all', data)
         },
         async my() {
             return instance.get<VacancyDto>('/vacancies/my')
