@@ -44,6 +44,14 @@ export const useVacanciesStore = defineStore('vacancies', {
                     this.vacanciesUser = res
                 }
             )
+        },
+        async getWithFilter(data: any) {
+            try {
+                const res = await api.vacancies.all(data)
+                return res
+            } catch (error) {
+                return error
+            }   
         }
     },
     persist: true,

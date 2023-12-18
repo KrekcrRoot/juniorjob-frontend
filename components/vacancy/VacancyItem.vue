@@ -22,6 +22,9 @@ const props = defineProps({
         <span class="vacancy__text">
           {{ vacancy.description }}
         </span>
+        <span class="vacancy__text">
+          {{ vacancy.created_at }}
+        </span>
       </div>
     </div>
   </div>

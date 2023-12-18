@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import vacancyLogo from "@/assets/images/vacancy/temp_vacancy.svg";
 import { useVacanciesStore } from "~/store/vacancies";
+import api from '~/api';
 
 const vacancyList = ref(null)
 
@@ -11,12 +12,15 @@ if (process.client) {
   const vacanciesStore = useVacanciesStore();
 
   onMounted(async () => {
+    const res = await api.vacancies.all({"row": 1})
+      console.log(res)
 
-    await vacanciesStore.fetchVacancies()
-    if (vacanciesStore.vacancies.length > 0) {
-      vacancyList.value = vacanciesStore.vacancies.slice(0, 3)
+      vacancyList.value = await vacanciesStore.getWithFilter({
+        "row": 1,
+        "sortByCreatedAt": "Up"
+      })
       loading.value = false
-    }
+    
   })
 }
 
