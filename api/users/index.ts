@@ -10,8 +10,13 @@ export default (instance: AxiosInstance) => {
         async getById(id: string) {
             return instance.get<UserDto>(`/users/${id}`)
         },
-        async uploadImage(data: any) {
-            return instance.post('/users/uploadImage', data)
+        async uploadImage(formData: FormData) {
+            return instance.post('/users/uploadImage', formData, {
+                headers: {
+                    ...instance.defaults.headers, // сохраняем текущие заголовки
+                    'Content-Type': 'multipart/form-data',
+                },
+              })
         }
     }
 }

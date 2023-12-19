@@ -95,9 +95,9 @@ onMounted(async() => {
             </div>
             <div class="profile__right">
                 <template>
-                    <NuxtLink :to="{ name: 'vacancies-id', params: { id: vacancy.uuid } }" class="profile__vacancy-title">
+                    <p class="profile__vacancy-title">
                     {{ actualVacancy?.title }}
-                </NuxtLink>
+                    </p>
                 <div class="flex items-center gap-1 mt-4">
                     <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_1986_2713" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"

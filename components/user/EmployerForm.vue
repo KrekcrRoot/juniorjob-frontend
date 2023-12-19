@@ -14,6 +14,8 @@ const switchRole = (value) => {
     selectedRole.value = value
 }
 
+const avatar = ref(null);
+
 const formCorporate = ref({
     email: '',
     password: '',
@@ -50,6 +52,10 @@ const resetFormData = (form) => {
     };
 };
 
+const uploadImage = (e) => {
+    avatar.value = e.target.files[0]
+}
+
 
 const submit = async (form) => {
     try {
@@ -73,6 +79,9 @@ const otherForm = form === formCorporate ? formIndividual : formCorporate;
         const currentRole = userStore.payload.role;
         const updateResponse = await api.roles[currentRole](userStore.currentRoleId, form.userData)
         userStore.user.userData = updateResponse
+        if(userStore.user.access_token) {
+            //генерация файла
+        }
         router.push('/profile')
         
     }
