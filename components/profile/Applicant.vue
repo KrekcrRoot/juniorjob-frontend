@@ -62,7 +62,8 @@ const age = computed(() => {
             <template v-if="isScreenSmall">
                 <div class="profile-mobile-wrapper">
                     <div class="profile-mobile profile__image">
-                        <img src="@/assets/images/profile/profile.svg" alt="profile">
+                        <!-- <img src="@/assets/images/profile/profile.svg" alt="profile"> -->
+                        <img :src="userStore.user.image" alt="">
                     </div>
                     <p class="profile-mobile profile__name">
                                 {{ userStore.user.userData.name }} {{ userStore.user.userData.surname }}
@@ -124,7 +125,8 @@ const age = computed(() => {
                 <div class="profile__left">
                 <div class="flex gap-3">
                     <div class="profile__image">
-                        <img src="@/assets/images/profile/profile.svg" alt="profile">
+                        <!-- <img src="@/assets/images/profile/profile.svg" alt="profile"> -->
+                        <img :src="userStore.user.image" alt="">
                     </div>
                     <div class="w-full">
                         <!-- Имя -->
