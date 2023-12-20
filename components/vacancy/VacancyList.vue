@@ -79,10 +79,6 @@ if (process.client) {
         <UiLoader />
       </template>
     <div class="xl:mt-7 mt-3">
-      <input type="file" @change="change">
-      <!-- <template v-if="useUserStore().user?.image"> -->
-          <!-- <img :src="`https://api.junior-job.ru${useUserStore().user.image}`" alt=""> -->
-      <!-- </template> -->
         <VacancyItem v-for="vacancyItem in vacancyList" :vacancy="vacancyItem" :key="vacancyItem.icon" />
     </div>
   </div>

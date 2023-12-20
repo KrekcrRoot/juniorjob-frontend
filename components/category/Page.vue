@@ -71,8 +71,8 @@ onMounted(async () => {
     }
     if (route.params.id) {
 
-        console.log(vacanciesStore.vacancies.filter(vacancy => vacancy.category.uuid === route.params.id))
-        vacancies.value = vacanciesStore.vacancies.filter(vacancy => vacancy.category.uuid === route.params.id)
+        console.log(vacanciesStore?.vacancies.filter(vacancy => vacancy.category.uuid === route.params.id))
+        vacancies.value = vacanciesStore?.vacancies.filter(vacancy => vacancy.category.uuid === route.params.id)
 
     }
 })
