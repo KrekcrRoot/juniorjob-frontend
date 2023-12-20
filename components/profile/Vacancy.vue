@@ -342,16 +342,20 @@ onBeforeUnmount(() => {
             <p class="profile__info">Необходим опыт работы</p>
           </div>
           <!-- //НЕОБХОДИМ ОПЫТ РАБОТЫ -->
+          
+          
+        </div>
+        <div class="profile__right">
           <p class="profile__about mt-3">
             {{ vacancy?.time }}. {{ vacancy?.description }}
           </p>
           <div
-            class="w-full flex flex-col mt-3 mb-3"
+            class="w-full flex mt-3 mb-3 gap-4"
             v-if="userStore.user.role.current === 'applicant'"
           >
-            <button class="btn">Откликнуться</button>
-            <button class="btn mt-2">Написать</button>
-            <div class="items-center justify-center flex items-center mt-3">
+            <button class="btn vacancy__btn">Откликнуться</button>
+            <button class="btn vacancy__btn">Написать</button>
+            <div class="items-center justify-center flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -423,9 +427,6 @@ onBeforeUnmount(() => {
             </div>
           </div>
         </div>
-        <div class="profile__right">
-
-        </div>
       </template>
     </div>
   </div>
@@ -476,5 +477,9 @@ onBeforeUnmount(() => {
     align-items: flex-start;
     gap: 20px;
   }
+}
+
+.vacancy__btn {
+  padding: 8px 25px;
 }
 </style>

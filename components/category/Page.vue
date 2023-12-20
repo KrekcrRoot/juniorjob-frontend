@@ -4,7 +4,8 @@
             Вакансии
         </h1>
         <div v-if="vacancies" class="vacancies-list">
-            <div v-for="vacancy in vacancies" :key="vacancy.uuuid" class="vacancies-list__item">
+            <template v-if="vacancies.length > 0">
+                <div v-for="vacancy in vacancies" :key="vacancy.uuid" class="vacancies-list__item">
                 <div class="flex items-center gap-2">
                     <div class="vacancies-list__item-star">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -36,6 +37,11 @@
                     Откликнуться
                 </button>
             </div>
+            </template>
+            <template v-else>
+                <h1 class="color-purple">Нет вакансий по этой категории</h1>
+            </template>
+            
         </div>
         <UiLoader v-else />
     </div>
@@ -55,7 +61,6 @@ const vacancies = ref([])
 const route = useRoute()
 
 onMounted(async() => {
-    alert(route.params.id)
     if(categoriesStore.categories.length === 0) {
         await useCategoriesStore.fetchCategories() 
     }
@@ -63,7 +68,10 @@ onMounted(async() => {
         if(vacanciesStore.vacancies.length === 0) {
             await vacanciesStore.fetchVacancies()
         }
-        vacancies.value = vacanciesStore.vacancies.filter(vacancy => vacancy.category.uuid === route.params.id)
+        if(vacanciesStore.vacancies) {
+            console.log(vacanciesStore.vacancies.filter(vacancy => vacancy.category.uuid === route.params.id))
+            vacancies.value = vacanciesStore.vacancies.filter(vacancy => vacancy.category.uuid === route.params.id)
+        }
     }
 })
 
