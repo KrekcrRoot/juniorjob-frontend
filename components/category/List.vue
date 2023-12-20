@@ -6,7 +6,7 @@ import type SelectCategoryVue from '../form/SelectCategory.vue';
     <div v-if="categories" class="categories__container">
         <NuxtLink v-for="category in categories" :key="category.uuid" :to="{ name: 'categories-id', params: { id: category.uuid } }" class="categories__item">
             <div class="categories__image">
-                <img :src="'https://api.junior-job.ru' + category.image" alt="">
+                <img :src="`${process.env.API_BASE_URL}${category.image}`" alt="">
             </div>
             <p class="categories__item-title">
                 {{ category.title }}

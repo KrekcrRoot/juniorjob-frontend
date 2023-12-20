@@ -88,6 +88,11 @@ const setDateInput = (e) => {
 const removeDateInput = (e) => {
   e.target.type = "text";
 };
+
+const uploadImage = (e) => {
+  avatar.value = e.target.files[0];
+};
+
 </script>
 <template>
   <div class="container-centered">
