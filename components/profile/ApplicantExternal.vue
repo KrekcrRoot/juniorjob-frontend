@@ -9,6 +9,14 @@ const competitions = computed(() => {
     return JSON.parse(userStore?.user?.userData?.competitions)
 })
 
+const props = defineProps({
+  user: {
+    type: Object,
+    default: {},
+    required: true,
+  },
+});
+
 const age = computed(() => {
     const birthdate = new Date(userStore.user.userData.birthday);
       const today = new Date();
