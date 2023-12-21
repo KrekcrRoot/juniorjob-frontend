@@ -155,7 +155,7 @@ onBeforeUnmount(() => {
         <p class="profile__about mt-3">
           {{ vacancy?.time }}. {{ vacancy?.description }}
         </p>
-        <template v-if="userStore.user && userStore.user.role !== null">
+        <template v-if="userStore.access_token !== ''">
           <div
             class="w-full flex flex-col mt-3 mb-3"
             v-if="userStore.user.role.current === 'applicant'"
@@ -358,7 +358,7 @@ onBeforeUnmount(() => {
           <p class="profile__about mt-3">
             {{ vacancy?.time }}. {{ vacancy?.description }}
           </p>
-          <template v-if="userStore.user && userStore.user.role !== null">
+          <template v-if="userStore.access_token !== ''">
             <div
               class="w-full flex mt-3 mb-3 gap-4"
               v-if="userStore.user.role.current === 'applicant'"
