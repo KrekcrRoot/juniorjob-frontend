@@ -16,10 +16,17 @@ const handleResize = () => {
   isScreenSmall.value = window.innerWidth <= 490;
 };
 
-const isInMyVacancies = computed(() => {
-  return vacanciesStore.vacanciesUser.some(
-    (vacancy) => vacancy.uuid === route?.params?.id
-  );
+const isInMyVacancies = computed(async() => {
+  if (vacanciesStore.vacanciesUser) {
+    await vacanciesStore.getMyVacancies()
+    if(Object.entries(vacanciesStore.vacanciesUser).length !== 0) {
+      return vacanciesStore.vacanciesUser.some(
+      (vacancy) => vacancy.uuid === route?.params?.id
+    );
+    }
+    
+  }
+  return false;
 });
 onMounted(async () => {
   window.addEventListener("resize", handleResize);
@@ -148,81 +155,85 @@ onBeforeUnmount(() => {
         <p class="profile__about mt-3">
           {{ vacancy?.time }}. {{ vacancy?.description }}
         </p>
-        <div
-          class="w-full flex flex-col mt-3 mb-3"
-          v-if="userStore.user.role.current === 'applicant'"
-        >
-          <button class="btn">Откликнуться</button>
-          <button class="btn mt-2">Написать</button>
-          <div class="items-center justify-center flex mt-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="19"
-              viewBox="0 0 20 19"
-              fill="none"
-            >
-              <path
-                d="M6.85 14.825L10 12.925L13.15 14.85L12.325 11.25L15.1 8.85L11.45 8.525L10 5.125L8.55 8.5L4.9 8.825L7.675 11.25L6.85 14.825ZM3.825 19L5.45 11.975L0 7.25L7.2 6.625L10 0L12.8 6.625L20 7.25L14.55 11.975L16.175 19L10 15.275L3.825 19Z"
-                fill="#545388"
-              />
-            </svg>
-            <p class="color-purple text">В избранное</p>
+        <template v-if="userStore.user.role">
+          <div
+            class="w-full flex flex-col mt-3 mb-3"
+            v-if="userStore.user.role.current === 'applicant'"
+          >
+            <button class="btn">Откликнуться</button>
+            <button class="btn mt-2">Написать</button>
+            <div class="items-center justify-center flex mt-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="19"
+                viewBox="0 0 20 19"
+                fill="none"
+              >
+                <path
+                  d="M6.85 14.825L10 12.925L13.15 14.85L12.325 11.25L15.1 8.85L11.45 8.525L10 5.125L8.55 8.5L4.9 8.825L7.675 11.25L6.85 14.825ZM3.825 19L5.45 11.975L0 7.25L7.2 6.625L10 0L12.8 6.625L20 7.25L14.55 11.975L16.175 19L10 15.275L3.825 19Z"
+                  fill="#545388"
+                />
+              </svg>
+              <p class="color-purple text">В избранное</p>
+            </div>
           </div>
-        </div>
-        <div v-else>
-          <div v-if="isInMyVacancies" class="profile__reviews-section">
-            <h2 class="profile__reviews-section-title">Кандидаты</h2>
-            <div class="profile__reviews mt-3">
-              <div class="profile__reviews-item">
-                <a
-                  class="profile__reviews-item-head profile-reviews-head-mobile"
-                >
-                  <div class="flex items-center">
-                    <div class="profile__reviews-item-avatar">
-                      <img
-                        src="@/assets/images/profile/review-demo.png"
-                        alt=""
-                      />
-                    </div>
-                    <div>
-                      <p class="profile__reviews-item-name">Чернявский Иван</p>
-                      <div class="stars">
+          <div v-else>
+            <div v-if="isInMyVacancies" class="profile__reviews-section">
+              <h2 class="profile__reviews-section-title">Кандидаты</h2>
+              <div class="profile__reviews mt-3">
+                <div class="profile__reviews-item">
+                  <a
+                    class="profile__reviews-item-head profile-reviews-head-mobile"
+                  >
+                    <div class="flex items-center">
+                      <div class="profile__reviews-item-avatar">
                         <img
-                          src="@/assets/images/icons/star-color.svg"
-                          alt="star"
-                        />
-                        <img
-                          src="@/assets/images/icons/star-color.svg"
-                          alt="star"
-                        />
-                        <img
-                          src="@/assets/images/icons/star-color.svg"
-                          alt="star"
-                        />
-                        <img
-                          src="@/assets/images/icons/star-color.svg"
-                          alt="star"
-                        />
-                        <img
-                          src="@/assets/images/icons/star-color.svg"
-                          alt="star"
+                          src="@/assets/images/profile/review-demo.png"
+                          alt=""
                         />
                       </div>
+                      <div>
+                        <p class="profile__reviews-item-name">
+                          Чернявский Иван
+                        </p>
+                        <div class="stars">
+                          <img
+                            src="@/assets/images/icons/star-color.svg"
+                            alt="star"
+                          />
+                          <img
+                            src="@/assets/images/icons/star-color.svg"
+                            alt="star"
+                          />
+                          <img
+                            src="@/assets/images/icons/star-color.svg"
+                            alt="star"
+                          />
+                          <img
+                            src="@/assets/images/icons/star-color.svg"
+                            alt="star"
+                          />
+                          <img
+                            src="@/assets/images/icons/star-color.svg"
+                            alt="star"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                  <button class="btn btn--small ml-2">
-                    Выбрать исполнителем
-                  </button>
-                </a>
-                <p class="profile__reviews-item-comment">
-                  Хочу помочь вам с вашими чудесными мохнатиками!
-                </p>
+                    <button class="btn btn--small ml-2">
+                      Выбрать исполнителем
+                    </button>
+                  </a>
+                  <p class="profile__reviews-item-comment">
+                    Хочу помочь вам с вашими чудесными мохнатиками!
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </template>
       </template>
       <!-- АВАТАР И ИМЯ НА ПК -->
       <template v-else>
@@ -342,90 +353,90 @@ onBeforeUnmount(() => {
             <p class="profile__info">Необходим опыт работы</p>
           </div>
           <!-- //НЕОБХОДИМ ОПЫТ РАБОТЫ -->
-          
-          
         </div>
         <div class="profile__right">
           <p class="profile__about mt-3">
             {{ vacancy?.time }}. {{ vacancy?.description }}
           </p>
-          <div
-            class="w-full flex mt-3 mb-3 gap-4"
-            v-if="userStore.user.role.current === 'applicant'"
-          >
-            <button class="btn vacancy__btn">Откликнуться</button>
-            <button class="btn vacancy__btn">Написать</button>
-            <div class="items-center justify-center flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="19"
-                viewBox="0 0 20 19"
-                fill="none"
-              >
-                <path
-                  d="M6.85 14.825L10 12.925L13.15 14.85L12.325 11.25L15.1 8.85L11.45 8.525L10 5.125L8.55 8.5L4.9 8.825L7.675 11.25L6.85 14.825ZM3.825 19L5.45 11.975L0 7.25L7.2 6.625L10 0L12.8 6.625L20 7.25L14.55 11.975L16.175 19L10 15.275L3.825 19Z"
-                  fill="#545388"
-                />
-              </svg>
-              <p class="color-purple text">В избранное</p>
+          <template v-if="userStore.user.role">
+            <div
+              class="w-full flex mt-3 mb-3 gap-4"
+              v-if="userStore.user.role.current === 'applicant'"
+            >
+              <button class="btn vacancy__btn">Откликнуться</button>
+              <button class="btn vacancy__btn">Написать</button>
+              <div class="items-center justify-center flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="19"
+                  viewBox="0 0 20 19"
+                  fill="none"
+                >
+                  <path
+                    d="M6.85 14.825L10 12.925L13.15 14.85L12.325 11.25L15.1 8.85L11.45 8.525L10 5.125L8.55 8.5L4.9 8.825L7.675 11.25L6.85 14.825ZM3.825 19L5.45 11.975L0 7.25L7.2 6.625L10 0L12.8 6.625L20 7.25L14.55 11.975L16.175 19L10 15.275L3.825 19Z"
+                    fill="#545388"
+                  />
+                </svg>
+                <p class="color-purple text">В избранное</p>
+              </div>
             </div>
-          </div>
-          <div v-else>
-            <div v-if="isInMyVacancies" class="profile__reviews-section">
-              <h2 class="profile__reviews-section-title">Кандидаты</h2>
-              <div class="profile__reviews mt-3">
-                <div class="profile__reviews-item">
-                  <a
-                    class="profile__reviews-item-head profile-reviews-head-mobile"
-                  >
-                    <div class="flex items-center">
-                      <div class="profile__reviews-item-avatar">
-                        <img
-                          src="@/assets/images/profile/review-demo.png"
-                          alt=""
-                        />
-                      </div>
-                      <div>
-                        <p class="profile__reviews-item-name">
-                          Чернявский Иван
-                        </p>
-                        <div class="stars">
+            <div v-else>
+              <div v-if="isInMyVacancies" class="profile__reviews-section">
+                <h2 class="profile__reviews-section-title">Кандидаты</h2>
+                <div class="profile__reviews mt-3">
+                  <div class="profile__reviews-item">
+                    <a
+                      class="profile__reviews-item-head profile-reviews-head-mobile"
+                    >
+                      <div class="flex items-center">
+                        <div class="profile__reviews-item-avatar">
                           <img
-                            src="@/assets/images/icons/star-color.svg"
-                            alt="star"
-                          />
-                          <img
-                            src="@/assets/images/icons/star-color.svg"
-                            alt="star"
-                          />
-                          <img
-                            src="@/assets/images/icons/star-color.svg"
-                            alt="star"
-                          />
-                          <img
-                            src="@/assets/images/icons/star-color.svg"
-                            alt="star"
-                          />
-                          <img
-                            src="@/assets/images/icons/star-color.svg"
-                            alt="star"
+                            src="@/assets/images/profile/review-demo.png"
+                            alt=""
                           />
                         </div>
+                        <div>
+                          <p class="profile__reviews-item-name">
+                            Чернявский Иван
+                          </p>
+                          <div class="stars">
+                            <img
+                              src="@/assets/images/icons/star-color.svg"
+                              alt="star"
+                            />
+                            <img
+                              src="@/assets/images/icons/star-color.svg"
+                              alt="star"
+                            />
+                            <img
+                              src="@/assets/images/icons/star-color.svg"
+                              alt="star"
+                            />
+                            <img
+                              src="@/assets/images/icons/star-color.svg"
+                              alt="star"
+                            />
+                            <img
+                              src="@/assets/images/icons/star-color.svg"
+                              alt="star"
+                            />
+                          </div>
+                        </div>
                       </div>
-                    </div>
 
-                    <button class="btn btn--small ml-2">
-                      Выбрать исполнителем
-                    </button>
-                  </a>
-                  <p class="profile__reviews-item-comment">
-                    Хочу помочь вам с вашими чудесными мохнатиками!
-                  </p>
+                      <button class="btn btn--small ml-2">
+                        Выбрать исполнителем
+                      </button>
+                    </a>
+                    <p class="profile__reviews-item-comment">
+                      Хочу помочь вам с вашими чудесными мохнатиками!
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </template>
         </div>
       </template>
     </div>
