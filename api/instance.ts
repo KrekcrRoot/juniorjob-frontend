@@ -27,22 +27,25 @@ instance.interceptors.response.use(
     async function (error) {
       console.log(error)
       const originalRequest = error.config;
-      if (error.response.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
+      if(error.response) {
+        if ((error.response.status === 401 || error.response.status === 403) && !originalRequest._retry) {
+          originalRequest._retry = true;
+    
+          if (process.client) {
+            const userStore = useUserStore();
+            userStore.refresh()
+            // await api.auth.refresh({
+            //   access_token: userStore.access_token,
+            //   refresh_token: userStore.refresh_token,
+            // });
+    
+            const retryResponse = await instance(originalRequest);
   
-        if (process.client) {
-          const userStore = useUserStore();
-          userStore.refresh()
-          // await api.auth.refresh({
-          //   access_token: userStore.access_token,
-          //   refresh_token: userStore.refresh_token,
-          // });
-  
-          const retryResponse = await instance(originalRequest);
-
-          return retryResponse.data;
+            return retryResponse.data;
+          }
         }
       }
+
   
       // Если не 403 или повторная попытка, возвращаем ошибку
       return Promise.reject(error);

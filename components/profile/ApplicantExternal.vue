@@ -5,9 +5,7 @@ import { useUserStore } from '~/store/user';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const userStore = useUserStore();
-const competitions = computed(() => {
-    return JSON.parse(userStore?.user?.userData?.competitions)
-})
+
 
 const props = defineProps({
   user: {
@@ -17,8 +15,12 @@ const props = defineProps({
   },
 });
 
+const competitions = computed(() => {
+    return JSON.parse(props?.user?.userData?.competitions)
+})
+
 const age = computed(() => {
-    const birthdate = new Date(userStore.user.userData.birthday);
+    const birthdate = new Date(props.user.userData.birthday);
       const today = new Date();
       let age = today.getFullYear() - birthdate.getFullYear();
 
@@ -70,17 +72,17 @@ const age = computed(() => {
             <template v-if="isScreenSmall">
                 <div class="profile-mobile-wrapper">
                     <div class="profile-mobile profile__image">
-                        <img v-if="(userStore.user.image && userStore.user.image === 'image.png') || !userStore.user.image" src="@/assets/images/profile/profile.svg" alt="profile">
-                        <img v-else :src="`${$config.public.baseURL}${userStore.user.image}`" alt="">
+                        <img v-if="(props.user.image && props.user.image === 'image.png') || !props.user.image" src="@/assets/images/profile/profile.svg" alt="profile">
+                        <img v-else :src="`${$config.public.baseURL}${props.user.image}`" alt="">
                     </div>
                     <p class="profile-mobile profile__name">
-                                {{ userStore.user.userData.name }} {{ userStore.user.userData.surname }}
+                                {{ props.user.userData.name }} {{ props.user.userData.surname }}
                             </p>
                 </div>
                 <div class="mb-6 mt-n5 profile-about-mobile">
                     <p class="profile-mobile-info profile__info mt-4">{{ age }}</p>
                         <p class="profile-mobile-info profile__info mt-1">
-                            {{ userStore.user.userData.study_place }}
+                            {{ props.user.userData.study_place }}
 
                         </p>
                         <p class="profile-mobile-info profile__info flex items-center gap-1 mt-1">
@@ -95,7 +97,7 @@ const age = computed(() => {
                                         fill="#604D9E" />
                                 </g>
                             </svg>
-                            <span>г. {{ userStore.user.city.title }}</span>
+                            <span>г. {{ props.user.city.title }}</span>
                         </p>
                         <p class="profile-mobile-info profile__info flex items-center underline gap-1 mt-1">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,20 +123,20 @@ const age = computed(() => {
                 <div class="profile__left">
                 <div class="flex gap-3">
                     <div class="profile__image">
-                        <img v-if="(userStore.user.image && userStore.user.image === 'image.png') || !userStore.user.image" src="@/assets/images/profile/profile.svg" alt="profile">
-                        <img v-else :src="`${$config.public.baseURL}${userStore.user.image}`" alt="">
+                        <img v-if="(props.user.image && props.user.image === 'image.png') || !props.user.image" src="@/assets/images/profile/profile.svg" alt="profile">
+                        <img v-else :src="`${$config.public.baseURL}${props.user.image}`" alt="">
                     </div>
                     <div class="w-full">
                         <!-- Имя -->
                         <div class="w-full flex justify-between">
                             <p class="profile__name">
-                                {{ userStore.user.userData.name }} {{ userStore.user.userData.surname }}
+                                {{ props.user.userData.name }} {{ props.user.userData.surname }}
                             </p>
                         </div>
                         <!-- Информация -->
                         <p class="profile__info mt-4">{{ age }}</p>
                         <p class="profile__info mt-1">
-                            {{ userStore.user.userData.study_place }}
+                            {{ props.user.userData.study_place }}
 
                         </p>
                         <p class="profile__info flex items-center gap-1 mt-1">
@@ -149,7 +151,7 @@ const age = computed(() => {
                                         fill="#604D9E" />
                                 </g>
                             </svg>
-                            <span>г. {{ userStore.user.city.title }}</span>
+                            <span>г. {{ props.user.city.title }}</span>
                         </p>
                         <p class="profile__info flex items-center underline gap-1 mt-1">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -172,7 +174,7 @@ const age = computed(() => {
 
             <div class="profile__right profile-about-mobile">
                 <div class="profile__about">
-                    {{ userStore.user.userData.summary }}
+                    {{ props.user.userData.summary }}
                 </div>
                 <div class="tags-section mt-5">
                     <div v-for="competition in competitions" class="tags-section__item" :key="competition.value">

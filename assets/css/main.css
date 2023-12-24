@@ -308,6 +308,10 @@ textarea.field {
     font-size: 24px;
 }
 
+.profile__name--small {
+    font-size: 26px;
+}
+
 .profile__info {
     color: #604D9E;
     font-family: 'Source Sans Pro';

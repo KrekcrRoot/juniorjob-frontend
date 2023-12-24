@@ -37,13 +37,10 @@ export const useVacanciesStore = defineStore('vacancies', {
                 console.log(error)
             }
         },
-        getMyVacancies() {
-            const response = api.vacancies.my()
-            response.then(
-                (res) => {
-                    this.vacanciesUser = res
-                }
-            )
+        async getMyVacancies() {
+            const response = await api.vacancies.my()
+            this.vacanciesUser = response
+    
         },
         async getWithFilter(data: any) {
             try {

@@ -13,16 +13,20 @@ const user = ref({
   }
 });
 
-onMounted(() => {
+onMounted(async () => {
   if (route?.params?.id) {
-    const response = api.users.getById(route?.params?.id);
-    response.then((res) => {
-      user.value = res;
-      const uDataRes = api.roles.get_user_roles(user.value.uuid)
-      uDataRes.then((res) => {
-        user.value["userData"] = res[res.current]
-      })
-    });
+    const response = await api.users.getById(route?.params?.id);
+    user.value = response;
+    const uDataRes = await api.roles.get_user_roles(user.value.uuid)
+    user.value["userData"] = uDataRes[uDataRes.current]
+    // response.then(async(res) => {
+    //   user.value = res;
+    //   const uDataRes = await api.roles.get_user_roles(user.value.uuid)
+    //   console.log(uDataRes)
+    //   uDataRes.then((res) => {
+    //     user.value["userData"] = res[res.current]
+    //   })
+    // });
   }
 });
 </script>

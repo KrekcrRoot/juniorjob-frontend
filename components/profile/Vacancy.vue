@@ -16,21 +16,14 @@ const handleResize = () => {
   isScreenSmall.value = window.innerWidth <= 490;
 };
 
-const isInMyVacancies = computed(async() => {
-  if (vacanciesStore.vacanciesUser) {
-    await vacanciesStore.getMyVacancies()
-    if(Object.entries(vacanciesStore.vacanciesUser).length !== 0) {
-      return vacanciesStore.vacanciesUser.some(
-      (vacancy) => vacancy.uuid === route?.params?.id
-    );
-    }
-    
-  }
-  return false;
-});
+const isInMyVacancies = ref(false)
 onMounted(async () => {
   window.addEventListener("resize", handleResize);
   vacancy.value = await vacanciesStore.getById(route?.params?.id);
+  if(userStore.access_token !== "" && userStore.user.role.current !== 'applicant') {
+    await vacanciesStore.getMyVacancies()
+    isInMyVacancies.value = vacanciesStore.vacanciesUser.find(v => v.uuid === vacancy.value.uuid)? true : false;
+  }
 });
 
 onBeforeUnmount(() => {
