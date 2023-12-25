@@ -33,15 +33,18 @@ instance.interceptors.response.use(
     
           if (process.client) {
             const userStore = useUserStore();
-            userStore.refresh()
+            await userStore.refresh()
             // await api.auth.refresh({
             //   access_token: userStore.access_token,
             //   refresh_token: userStore.refresh_token,
             // });
     
             const retryResponse = await instance(originalRequest);
-  
-            return retryResponse.data;
+
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + userStore.access_token;
+            originalRequest.headers['Authorization'] = 'Bearer ' + userStore.access_token;
+
+            return axios(retryResponse);
           }
         }
       }
