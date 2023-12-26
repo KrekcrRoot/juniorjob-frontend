@@ -94,7 +94,7 @@ onMounted(async() => {
                 </div>
             </div>
             <div class="profile__right">
-                <template>
+       
                     <p class="profile__vacancy-title">
                     {{ actualVacancy?.title }}
                     </p>
@@ -163,7 +163,7 @@ onMounted(async() => {
                         </div>
                     </div>
                 </div>
-                </template>
+             
                 
             </div>
         </div>

@@ -33,7 +33,12 @@ instance.interceptors.response.use(
     
           if (process.client) {
             const userStore = useUserStore();
-            await userStore.refresh()
+            try {
+              await userStore.refresh()
+            }
+            catch(error: any) {
+              userStore.logout()
+            }
             // await api.auth.refresh({
             //   access_token: userStore.access_token,
             //   refresh_token: userStore.refresh_token,

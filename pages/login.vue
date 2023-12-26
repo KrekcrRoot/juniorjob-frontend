@@ -8,12 +8,13 @@ definePageMeta({
 const loading = ref(true)
 
 onMounted(() => {
+
     loading.value = false
 })
 </script>
 <template>
     <div class="">
-        <!-- Экран загрузки -->
+        <!-- Экран загрузки (LoginForm) -->
         <template v-if="loading">
             <UiLoader />
         </template>
