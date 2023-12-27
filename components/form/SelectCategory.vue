@@ -1,43 +1,49 @@
 <script setup>
-import { ref, onMounted, defineProps, defineEmits } from "vue";
+import { ref, onMounted, watch, defineProps, defineEmits } from "vue";
 import { useCategoriesStore } from "~/store/categories";
-  const { modelValue } = defineProps(["modelValue"]);
-  const emit = defineEmits([["modelValue"]]);
-  const categoriesStore = useCategoriesStore();
-  const dropdownVisible = ref(false);
-  const selectedCategory = ref(null);
+const props = defineProps({
+  modelValue: { type: [String, Number], default: null }
+});
+const emit = defineEmits([["modelValue"]]);
+const categoriesStore = useCategoriesStore();
+const dropdownVisible = ref(false);
+const selectedCategory = ref(null);
 
-  const toggleDropdown = () => {
-    dropdownVisible.value = !dropdownVisible.value;
-  };
+const toggleDropdown = () => {
+  dropdownVisible.value = !dropdownVisible.value;
+};
 
-  const closeDropdown = (event) => {
-    // Проверяем, был ли клик внутри кастомного селекта
-    const isClickInside = event.target.closest(".custom-select") !== null;
+const closeDropdown = (event) => {
+  // Проверяем, был ли клик внутри кастомного селекта
+  const isClickInside = event.target.closest(".custom-select") !== null;
 
-    // Закрываем выпадающий список, если клик был вне его
-    if (!isClickInside) {
-      dropdownVisible.value = false;
-    }
-  };
-
-  const selectCategory = (category) => {
-    selectedCategory.value = category;
-    emit("update:modelValue", category.uuid);
+  // Закрываем выпадающий список, если клик был вне его
+  if (!isClickInside) {
     dropdownVisible.value = false;
-  };
+  }
+};
 
-  onMounted(() => {
-    categoriesStore.fetchCategories();
-    document.addEventListener("click", closeDropdown);
-  });
+const selectCategory = (category) => {
+  selectedCategory.value = category;
+  emit("update:modelValue", category.uuid);
+  dropdownVisible.value = false;
+};
+
+onMounted(() => {
+  if (props.modelValue) {
+    selectedCategory.value = categoriesStore.categories.find(c => c.uuid === props.modelValue);
+  }
+  categoriesStore.fetchCategories();
+  document.addEventListener("click", closeDropdown);
+});
+
+watch(() => props.modelValue, (newValue, oldValue) => {
+  selectedCategory.value = categoriesStore.categories.find(c => c.uuid === newValue);
+});
 </script>
 <template>
   <div class="field custom-field mt-6" @click.stop="toggleDropdown">
-    <img
-      class="custom-field__arrow"
-      src="@/assets/images/icons/arrow-down.svg"
-    />
+    <img class="custom-field__arrow" src="@/assets/images/icons/arrow-down.svg" />
     <div v-if="selectedCategory === null" class="custom-field__placeholder">
       Категория
     </div>
@@ -45,12 +51,8 @@ import { useCategoriesStore } from "~/store/categories";
       {{ selectedCategory.title }}
     </div>
     <div v-show="dropdownVisible" class="custom-field__options">
-      <div
-        class="custom-field__option"
-        v-for="category in categoriesStore.categories"
-        :key="category.uuid"
-        @click.stop="selectCategory(category)"
-      >
+      <div class="custom-field__option" v-for="category in categoriesStore.categories" :key="category.uuid"
+        @click.stop="selectCategory(category)">
         {{ category.title }}
       </div>
     </div>
@@ -58,7 +60,7 @@ import { useCategoriesStore } from "~/store/categories";
 </template>
 
   
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
 .custom-field {
   position: relative;
 
@@ -81,6 +83,7 @@ import { useCategoriesStore } from "~/store/categories";
     top: 50%;
     transform: translateY(-50%);
   }
+
   &__options {
     width: 100%;
     position: absolute;
@@ -98,8 +101,10 @@ import { useCategoriesStore } from "~/store/categories";
     flex-direction: column;
     gap: 4px;
   }
+
   &__option {
     padding: 10px;
+
     &:hover {
       cursor: pointer;
       background: #aaa2d8;

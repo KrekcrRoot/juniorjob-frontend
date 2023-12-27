@@ -158,9 +158,14 @@ onMounted(() => {
                 />
               </div>
               <div v-if="userStore.user && userStore.access_token">
-                <button @click="logout" class="block bolder-title mb-2">
-              Выход
-          </button>
+                <NuxtLink to="/profile" class="block bolder-title">
+                  <template v-if="userStore.user.role.current === 'legal_entity'">
+                    {{ userStore.user.userData.title }}
+                  </template>
+                  <template v-else>
+                    {{ userStore.user.userData.name }}
+                  </template>
+          </NuxtLink>
               </div>
               <div v-else>
                 <NuxtLink to="/register-welcome" class="block bolder-title mb-2">Регистрация</NuxtLink>
@@ -186,6 +191,9 @@ onMounted(() => {
               разберетесь сами?
               <button class="btn mt-4">Помогите!</button>
             </div>
+            <button @click="logout" class="burger-menu__logout-btn btn mt-4">
+              Выход
+          </button>
           </div>
         </div>
         </transition>
@@ -334,6 +342,15 @@ onMounted(() => {
     z-index: 3000;
     opacity: 1;
     transition: all 0.3s ease-in-out;
+  }
+
+  &__logout-btn {
+    width: 100%;
+    left: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+    position: absolute;
+    bottom: 35px;
   }
 }
 

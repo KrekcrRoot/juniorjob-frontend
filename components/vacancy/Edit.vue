@@ -93,7 +93,7 @@ onMounted(() => {
         console.log(res)
         formData.value = {
             uuid: res.uuid,
-    category_uuid: res.category.category_uuid,
+    category_uuid: res.category.uuid,
     title: res.title,
     time: res.time,
     place: res.place,
