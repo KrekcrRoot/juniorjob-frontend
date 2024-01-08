@@ -51,20 +51,9 @@ if (process.client) {
   const userStore = useUserStore();
 
   onMounted(async () => {
-    axios.get(`https://api.junior-job.ru/vacancies/all`, {
-  headers: {
-    'Authorization':`Bearer ${userStore.access_token}`
-  },
-  params: {
-    row: 1,
-  },
-
-})
-      // vacancyList.value = await vacanciesStore.getWithFilter({
-      //   "row": 1,
-      //   "sortByCreatedAt": "Up"
-      // })
-      loading.value = false
+    const vacancies = await vacanciesStore.getWithFilter({row: 3})
+    vacancyList.value = vacancies
+    loading.value = false
     
   })
 }

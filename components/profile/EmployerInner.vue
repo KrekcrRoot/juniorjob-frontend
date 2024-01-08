@@ -173,8 +173,15 @@ onMounted(async() => {
 <style lang="scss" scoped>
 .profile-about-mobile {
     @media screen and (max-width: 500px) {
+        flex-direction: column;
         padding-left: 20px;
         padding-right: 20px;
+    }
+}
+.profile__right, .profile__left {
+    @media screen and (max-width: 500px) {
+       width: 100%;
+       flex: 1 0 100%;
     }
 }
 .profile-reviews-head-mobile {

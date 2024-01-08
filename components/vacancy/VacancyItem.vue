@@ -10,9 +10,9 @@ const props = defineProps({
 
 <template>
   <div class="my-5">
-    <div class="vacancy">
+    <NuxtLink :to="`/vacancies/${vacancy.uuid}`" class="vacancy">
       <div class="vacancy__icon">
-        <img :src="vacancy.logo" />
+        <img :src="`${$config.public.baseURL}${vacancy.employer.image}`" />
       </div>
       <div class="flex flex-col">
         <p class="vacancy__title">{{ vacancy.title }}</p>
@@ -23,10 +23,10 @@ const props = defineProps({
           {{ vacancy.description }}
         </span>
         <span class="vacancy__text">
-          {{ vacancy.created_at }}
+          {{ new Date(vacancy.created_at).toLocaleDateString('ru')  }}
         </span>
       </div>
-    </div>
+    </NuxtLink>
   </div>
 </template>
 

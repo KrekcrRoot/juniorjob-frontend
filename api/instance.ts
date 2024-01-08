@@ -37,7 +37,9 @@ instance.interceptors.response.use(
               await userStore.refresh()
             }
             catch(error: any) {
-              userStore.logout()
+              userStore.access_token = '';
+              userStore.refresh_token = '';
+              userStore.user = null;
             }
             // await api.auth.refresh({
             //   access_token: userStore.access_token,

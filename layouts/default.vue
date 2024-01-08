@@ -366,11 +366,6 @@ onMounted(() => {
 
   &__logout-btn {
     width: 100%;
-    left: 0;
-    margin-left: 20px;
-    margin-right: 20px;
-    position: absolute;
-    bottom: 35px;
   }
 }
 

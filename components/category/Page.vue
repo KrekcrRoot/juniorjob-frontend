@@ -37,7 +37,7 @@
                         </div>
 
                     </div>
-                    <button class="vacancies-list__btn btn-outline">
+                    <button v-if="userStore.user.role.current === 'applicant'" class="vacancies-list__btn btn-outline">
                         Откликнуться
                     </button>
                 </div>
@@ -55,10 +55,12 @@
 import { ref, onMounted, watch } from 'vue';
 import { useCategoriesStore } from "~/store/categories";
 import { useVacanciesStore } from '~/store/vacancies';
+import { useUserStore } from '~/store/user';
 import { useRoute, useRouter } from "vue-router";
 
 const categoriesStore = useCategoriesStore();
 const vacanciesStore = useVacanciesStore();
+const userStore = useUserStore();
 
 const vacancies = ref([])
 
