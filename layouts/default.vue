@@ -214,7 +214,7 @@ onMounted(() => {
               <button class="btn mt-4">Помогите!</button>
             </div>
 
-            <button @click="logout" class="burger-menu__logout-btn btn mt-4 w-full">
+            <button v-if="isLoggedIn" @click="logout" class="burger-menu__logout-btn btn mt-4 w-full">
               Выход
           </button>
           </div>

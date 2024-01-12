@@ -37,9 +37,11 @@
                         </div>
 
                     </div>
-                    <button v-if="userStore?.user?.role?.current === 'applicant'" class="vacancies-list__btn btn-outline">
-                        Откликнуться
-                    </button>
+                    <template v-if="userStore?.access_token">
+                        <button v-if="userStore?.user?.role?.current === 'applicant'" class="vacancies-list__btn btn-outline">
+                            Откликнуться
+                        </button>
+                    </template>
                 </div>
             </template>
             <template v-else>
