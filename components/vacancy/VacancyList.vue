@@ -51,7 +51,7 @@ if (process.client) {
   const userStore = useUserStore();
 
   onMounted(async () => {
-    const vacancies = await vacanciesStore.getWithFilter({row: 80})
+    const vacancies = await vacanciesStore.getWithFilter({row: 4, sortByCreatedAt: 'Down'})
     vacancyList.value = vacancies
     loading.value = false
     
