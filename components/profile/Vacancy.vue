@@ -38,7 +38,7 @@ onBeforeUnmount(() => {
       <template v-if="isScreenSmall">
         <div class="profile-mobile-wrapper">
           <div class="profile-mobile profile__image profile__image--vacancy">
-            <img src="@/assets/images/profile/profile.svg" alt="profile" />
+            <img :src="`${$config.public.baseURL}/storage/users/${vacancy.employer.image}`" alt="profile" />
           </div>
           <div>
             <p class="profile-mobile profile__name profile__name--vacancy">
@@ -233,7 +233,7 @@ onBeforeUnmount(() => {
         <div class="profile__left">
           <div class="flex gap-3">
             <div class="profile__image profile__image--vacancy">
-              <img src="@/assets/images/profile/profile.svg" alt="profile" />
+              <img :src="`${$config.public.baseURL}/storage/users/${vacancy.employer.image}`" alt="profile" />
             </div>
             <div class="w-full">
               <!-- Имя -->
