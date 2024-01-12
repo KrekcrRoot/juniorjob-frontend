@@ -26,18 +26,18 @@
                         <div>
                             <NuxtLink :to="{ name: 'vacancies-id', params: { id: vacancy.uuid } }"
                                 class="vacancies-list__title">
-                                {{ vacancy.title }}
+                                {{ vacancy?.title }}
                             </NuxtLink>
                             <p class="vacancies-list__text">
-                                {{ vacancy.place }}
+                                {{ vacancy?.place }}
                             </p>
                             <p class="vacancies-list__text">
-                                {{ vacancy.time }}
+                                {{ vacancy?.time }}
                             </p>
                         </div>
 
                     </div>
-                    <button v-if="userStore.user.role.current === 'applicant'" class="vacancies-list__btn btn-outline">
+                    <button v-if="userStore?.user?.role?.current === 'applicant'" class="vacancies-list__btn btn-outline">
                         Откликнуться
                     </button>
                 </div>
