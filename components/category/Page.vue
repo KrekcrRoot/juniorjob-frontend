@@ -21,7 +21,7 @@
                             </svg>
                         </div>
                         <div class="vacancies-list__avatar">
-                            <img src="@/assets/images/profile/review-demo.png" alt="">
+                            <img :src="`${$config.public.baseURL}/storage/users/${vacancy?.employer?.image}`" alt="">
                         </div>
                         <div>
                             <NuxtLink :to="{ name: 'vacancies-id', params: { id: vacancy.uuid } }"
@@ -80,7 +80,6 @@ onMounted(async () => {
 })
 
 watch(vacanciesStore.vacancies, (oldValue, newValue) => {
-    console.log(propModel.value)
     if (vacanciesStore.vacancies) {
         vacancies.value = newValue.filter(vacancy => vacancy.category.uuid === route.params.id)
     }
@@ -126,7 +125,7 @@ watch(vacanciesStore.vacancies, (oldValue, newValue) => {
         img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
     }
 

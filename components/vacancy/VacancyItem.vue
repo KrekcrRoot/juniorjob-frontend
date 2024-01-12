@@ -12,7 +12,7 @@ const props = defineProps({
   <div class="my-5">
     <NuxtLink :to="`/vacancies/${vacancy.uuid}`" class="vacancy">
       <div class="vacancy__icon">
-        <img :src="`${$config.public.baseURL}${vacancy.employer.image}`" />
+        <img :src="`${$config.public.baseURL}/storage/users/${vacancy.employer.image}`" />
       </div>
       <div class="flex flex-col">
         <p class="vacancy__title">{{ vacancy.title }}</p>
@@ -58,10 +58,12 @@ const props = defineProps({
     flex-shrink: 0;
     width: 50px;
     height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
     & img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
     }
   }
 }

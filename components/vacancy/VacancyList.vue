@@ -51,7 +51,7 @@ if (process.client) {
   const userStore = useUserStore();
 
   onMounted(async () => {
-    const vacancies = await vacanciesStore.getWithFilter({row: 3})
+    const vacancies = await vacanciesStore.getWithFilter({row: 80})
     vacancyList.value = vacancies
     loading.value = false
     
