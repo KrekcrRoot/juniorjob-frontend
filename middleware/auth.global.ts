@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware((to) => {
 
         const isRegisterPage = to.path.startsWith('/register/');
 
-        if(!access_token.value && to?.name === 'profile') {
+        if(!access_token.value && (to?.name === 'profile' || to?.name === 'settings')) {
             abortNavigation();
             return navigateTo('/login');
         }

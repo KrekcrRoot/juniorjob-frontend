@@ -45,7 +45,7 @@ const menu = [
   {
     title: "Настройки",
     icon: settingIcon,
-    link: "/",
+    link: "/settings",
   },
 ];
 
