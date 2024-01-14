@@ -16,6 +16,12 @@ export default (instance: AxiosInstance) => {
         new_password: new_password,
       });
     },
+    async changeEmail(email: string, password: string) {
+      return instance.post<UserDto>(`/users/changeEmail`, {
+        email: email,
+        password: password,
+      });
+    },
     async uploadImage(formData: FormData) {
       return instance.post("/users/uploadImage", formData, {
         headers: {

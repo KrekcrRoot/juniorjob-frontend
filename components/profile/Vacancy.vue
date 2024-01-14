@@ -3,6 +3,7 @@ import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 import { useUserStore } from "~/store/user";
 import { useVacanciesStore } from "~/store/vacancies";
 import { useRouter, useRoute } from "vue-router";
+import api from "~/api";
 const router = useRouter();
 const route = useRoute();
 const userStore = useUserStore();
@@ -16,13 +17,40 @@ const handleResize = () => {
   isScreenSmall.value = window.innerWidth <= 490;
 };
 
-const isInMyVacancies = ref(false)
+const isInMyVacancies = ref(false);
+
+const vacancyResponse = async (uuid) => {
+  const res = api.vacancies.createResponse({ uuid: uuid });
+  if (userStore.roles.current === "applicant") {
+    vacanciesStore.fetchApplicantResponses(userStore.user.uuid);
+  }
+  console.log(res);
+};
+
+const searchResponse = (id) => {
+  if (userStore.roles.current === "applicant") {
+    return !!vacanciesStore.vacanciesResponses.find((w) => {
+      return w.vacancy.uuid === id;
+    });
+  }
+};
+
 onMounted(async () => {
+  if (userStore.roles.current === "applicant") {
+    vacanciesStore.fetchApplicantResponses(userStore.user.uuid);
+  }
   window.addEventListener("resize", handleResize);
   vacancy.value = await vacanciesStore.getById(route?.params?.id);
-  if(userStore.access_token !== "" && userStore.user.role.current !== 'applicant') {
-    await vacanciesStore.getMyVacancies()
-    isInMyVacancies.value = vacanciesStore.vacanciesUser.find(v => v.uuid === vacancy.value.uuid)? true : false;
+  if (
+    userStore.access_token !== "" &&
+    userStore.user.role.current !== "applicant"
+  ) {
+    await vacanciesStore.getMyVacancies();
+    isInMyVacancies.value = vacanciesStore.vacanciesUser.find(
+      (v) => v.uuid === vacancy.value.uuid
+    )
+      ? true
+      : false;
   }
 });
 
@@ -37,8 +65,14 @@ onBeforeUnmount(() => {
       <!-- АВАТАР И ИМЯ НА МОБИЛКЕ -->
       <template v-if="isScreenSmall">
         <div class="profile-mobile-wrapper">
-          <div class="profile-mobile profile__image profile__image--vacancy">
-            <img :src="`${$config.public.baseURL}/storage/users/${vacancy.employer.image}`" alt="profile" />
+          <div
+            v-if="vacancy !== null"
+            class="profile-mobile profile__image profile__image--vacancy"
+          >
+            <img
+              :src="`${$config.public.baseURL}/storage/users/${vacancy.employer.image}`"
+              alt="profile"
+            />
           </div>
           <div>
             <p class="profile-mobile profile__name profile__name--vacancy">
@@ -150,10 +184,19 @@ onBeforeUnmount(() => {
         </p>
         <template v-if="userStore.access_token !== ''">
           <div
-            class="w-full flex flex-col mt-3 mb-3"
+            class="w-full flex items-center flex-col mt-3 mb-3"
             v-if="userStore.user.role.current === 'applicant'"
           >
-            <button class="btn">Откликнуться</button>
+            <p class="vacancy__check" v-if="searchResponse(vacancy?.uuid)">
+              Вы откликнулись на эту вакансию
+            </p>
+            <button
+              @click="vacancyResponse(vacancy?.uuid)"
+              v-else
+              class="btn vacancy__btn"
+            >
+              Откликнуться
+            </button>
             <button class="btn mt-2">Написать</button>
             <div class="items-center justify-center flex mt-3">
               <svg
@@ -232,8 +275,14 @@ onBeforeUnmount(() => {
       <template v-else>
         <div class="profile__left">
           <div class="flex gap-3">
-            <div class="profile__image profile__image--vacancy">
-              <img :src="`${$config.public.baseURL}/storage/users/${vacancy.employer.image}`" alt="profile" />
+            <div
+              class="profile__image profile__image--vacancy"
+              v-if="vacancy !== null"
+            >
+              <img
+                :src="`${$config.public.baseURL}/storage/users/${vacancy.employer.image}`"
+                alt="profile"
+              />
             </div>
             <div class="w-full">
               <!-- Имя -->
@@ -353,10 +402,19 @@ onBeforeUnmount(() => {
           </p>
           <template v-if="userStore.access_token !== ''">
             <div
-              class="w-full flex mt-3 mb-3 gap-4"
+              class="w-full flex items-center mt-3 mb-3 gap-4"
               v-if="userStore.user.role.current === 'applicant'"
             >
-              <button class="btn vacancy__btn">Откликнуться</button>
+              <p class="vacancy__check" v-if="searchResponse(vacancy?.uuid)">
+                Вы откликнулись на эту вакансию
+              </p>
+              <button
+                @click="vacancyResponse(vacancy?.uuid)"
+                v-else
+                class="btn vacancy__btn"
+              >
+                Откликнуться
+              </button>
               <button class="btn vacancy__btn">Написать</button>
               <div class="items-center justify-center flex items-center gap-2">
                 <svg
@@ -485,5 +543,11 @@ onBeforeUnmount(() => {
 
 .vacancy__btn {
   padding: 8px 25px;
+}
+
+.vacancy__check {
+  color: #604d9e;
+  font-weight: 600;
+  font-size: 18px;
 }
 </style>
