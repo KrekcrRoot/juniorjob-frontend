@@ -29,8 +29,14 @@ const deleteVacancy = (id) => {
   });
 };
 
+const responsesByMainVacancy = ref("");
+
 onMounted(async () => {
   vacanciesStore.getMyVacancies();
+  const res = await api.vacancies.getResponsesByVacancy(
+    actualVacancy.value.uuid
+  );
+  console.log(res);
 });
 </script>
 <template>

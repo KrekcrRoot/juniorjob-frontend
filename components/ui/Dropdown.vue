@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import api from "~/api";
 import { useUserStore } from "~/store/user";
+import translationService from "~/services/translationService";
 const userStore = useUserStore();
 
 const isEdit = ref(false);
@@ -105,14 +106,34 @@ const updateEmail = async () => {
       newEmail.value,
       passwordForChangeEmail.value
     );
+    userStore.user.email = res.email;
     emailMessageParams.value.show = true;
     emailMessageParams.value.content = "E-mail обновлен";
     emailMessageParams.value.type = "info";
   } catch (error) {
     emailMessageParams.value.show = true;
     emailMessageParams.value.type = "danger";
-    emailMessageParams.value.content =
-      "Ошибка обновления данных. Попробуйте ещё раз";
+    if (error.response && error.response.data && error.response.data.message) {
+      emailMessageParams.value.content = error.response.data.message;
+      if (Array.isArray(emailMessageParams.value.content)) {
+        emailMessageParams.value.content = emailMessageParams.value.content.map(
+          (error) => {
+            return translationService.translateError(error, "ru");
+          }
+        );
+      } else {
+        emailMessageParams.value.content = [
+          translationService.translateError(
+            emailMessageParams.value.content,
+            "ru"
+          ),
+        ];
+      }
+    } else {
+      emailMessageParams.value.content = [
+        "Ошибка обновления данных. Попробуйте ещё раз",
+      ];
+    }
   } finally {
     setTimeout(() => {
       emailMessageParams.value.show = false;
@@ -125,6 +146,7 @@ const formattedBirthday = ref("");
 onMounted(() => {
   if (userStore.user) {
     formData.value = userStore.user?.userData;
+    newEmail.value = userStore.user?.email;
     if (formData.value.birthday) {
       const birthday = new Date(formData.value.birthday);
       formattedBirthday.value = birthday.toISOString().split("T")[0];
@@ -135,7 +157,7 @@ onMounted(() => {
 watch(userStore.user, (oldValue, newValue) => {
   if (userStore.user) {
     formData.value = newValue?.userData;
-    newEmail.value = userStore.user.email;
+    newEmail.value = newValue?.email;
   }
 });
 </script>
@@ -196,7 +218,7 @@ watch(userStore.user, (oldValue, newValue) => {
           </div>
         </summary>
         <div class="accordion__content pb-4 text-secondary-500">
-          <details class="group accordion__field">
+          <details class="group1 accordion__field">
             <summary
               class="flex cursor-pointer list-none items-center justify-between py-4 accordion__subtitle"
             >
@@ -208,7 +230,7 @@ watch(userStore.user, (oldValue, newValue) => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="block h-5 w-5 transition-all duration-300 group-open:rotate-180"
+                  class="block h-5 w-5 transition-all duration-300 group1-open:rotate-180"
                 >
                   <path
                     stroke-linecap="round"
@@ -344,7 +366,7 @@ watch(userStore.user, (oldValue, newValue) => {
               </div>
             </div>
           </details>
-          <details class="group accordion__field">
+          <details class="group2 accordion__field">
             <summary
               class="flex cursor-pointer list-none items-center justify-between py-4 accordion__subtitle"
             >
@@ -356,7 +378,7 @@ watch(userStore.user, (oldValue, newValue) => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="block h-5 w-5 transition-all duration-300 group-open:rotate-180"
+                  class="block h-5 w-5 transition-all duration-300 group2-open:rotate-180"
                 >
                   <path
                     stroke-linecap="round"
@@ -394,14 +416,14 @@ watch(userStore.user, (oldValue, newValue) => {
                 <UiMessage
                   id="mail-message"
                   view="text"
-                  :content="emailMessageParams.content"
+                  :content="emailMessageParams.content[0]"
                   :type="emailMessageParams.type"
                   :show="emailMessageParams.show"
                 />
               </div>
             </div>
           </details>
-          <details class="group accordion__field">
+          <details class="group3 accordion__field">
             <summary
               class="flex cursor-pointer list-none items-center justify-between py-4 accordion__subtitle"
             >
@@ -413,7 +435,7 @@ watch(userStore.user, (oldValue, newValue) => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="block h-5 w-5 transition-all duration-300 group-open:rotate-180"
+                  class="block h-5 w-5 transition-all duration-300 group3-open:rotate-180"
                 >
                   <path
                     stroke-linecap="round"

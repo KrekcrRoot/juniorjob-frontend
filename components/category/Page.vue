@@ -107,7 +107,7 @@ const vacancyResponse = async (uuid) => {
 
 const searchResponse = (id) => {
   if (userStore.roles.current === "applicant") {
-    return !!vacanciesStore.vacanciesResponses.find((w) => {
+    return !!vacanciesStore?.vacanciesResponses.find((w) => {
       return w.vacancy.uuid === id;
     });
   }

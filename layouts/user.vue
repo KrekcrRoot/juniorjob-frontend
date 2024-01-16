@@ -11,10 +11,9 @@ import { useUserStore } from "~/store/user";
 
 let userStore;
 
-if(process.client) {
-    userStore = useUserStore();
+if (process.client) {
+  userStore = useUserStore();
 }
-
 
 const menu = [
   {
@@ -59,21 +58,19 @@ const checkScreenWidth = () => {
 };
 
 const isLoggedIn = computed(() => {
-  if(process.client) {
+  if (process.client) {
     const userStore = useUserStore();
-    return userStore.loggedId
+    return userStore.loggedId;
   }
-})
+});
 
 const logout = async () => {
-  if(process.client) {
-    
-    useUserStore().logout()
+  if (process.client) {
+    useUserStore().logout();
   }
 
-  navigateTo('/login')
-  
-}
+  navigateTo("/login");
+};
 
 onMounted(() => {
   if (typeof window !== "undefined") {
@@ -84,16 +81,38 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative user-layout">
     <header>
       <div class="header-wrapper xl:container mx-auto px-5">
         <div class="header">
-          <button
-            @click="isBurgerMenuVisible = true"
-            class="burger-menu mobile-show"
-          >
-            <img src="@/assets/images/icons/menu.svg" alt="" />
-          </button>
+          <div class="header__control-nav mobile-show flex items-center gap-1">
+            <button
+              @click="isBurgerMenuVisible = true"
+              class="burger-menu mobile-show mr-4"
+            >
+              <img src="@/assets/images/icons/menu.svg" alt="" />
+            </button>
+            <div class="flex items-center gap-3">
+              <button class="burger-menu burger-menu--mobile-icon mobile-show">
+                <img src="@/assets/images/icons/chat_bubble-white.svg" alt="" />
+              </button>
+              <button class="burger-menu burger-menu--mobile-icon mobile-show">
+                <img
+                  src="@/assets/images/icons/notifications-white.svg"
+                  alt=""
+                />
+              </button>
+              <NuxtLink
+                to="/login-welcome"
+                class="burger-menu burger-menu--mobile-icon mobile-show"
+              >
+                <img
+                  src="@/assets/images/icons/account_circle-white.svg"
+                  alt=""
+                />
+              </NuxtLink>
+            </div>
+          </div>
           <NuxtLink to="/" class="logo">
             <img
               v-if="isMobile"
@@ -134,69 +153,84 @@ onMounted(() => {
             {{ menuItem.title }}
           </RouterLink>
           <button v-if="isLoggedIn" @click="logout" class="main-menu__link">
-              Выход
+            Выход
           </button>
         </div>
       </div>
     </header>
+  </div>
+  <!-- main content -->
+  <div class="main-wrapper">
+    <slot />
+  </div>
+
+  <div class="relative">
+    <div
+      class="sidebar-backdrop"
+      @click="isBurgerMenuVisible = false"
+      v-if="isBurgerMenuVisible"
+    >
+      1
     </div>
-    <!-- main content -->
-    <div class="main-wrapper">
-      <slot />
-    </div>
-    
-      <div class="relative">
-        <div class="sidebar-backdrop" @click="isBurgerMenuVisible = false" v-if="isBurgerMenuVisible">1</div>
-        <transition name="slide">
-                <div v-if="isBurgerMenuVisible" @click.stop class="sidebar-panel burger-menu-content">
-          <div class="flex-col">
-            <div class="flex items-center gap-3">
-              <div class="burger-menu-content__icon">
-                <img
-                  src="@/assets/images/icons/account_circle.svg"
-                  alt="Профиль"
-                />
-              </div>
-              <div v-if="userStore.user && userStore.access_token">
-                <NuxtLink to="/profile" class="block bolder-title">
-                  <template v-if="userStore.user.role.current === 'legal_entity'">
-                    {{ userStore.user.userData.title }}
-                  </template>
-                  <template v-else>
-                    {{ userStore.user.userData.name }}
-                  </template>
-          </NuxtLink>
-              </div>
-              <div v-else>
-                <NuxtLink to="/register-welcome" class="block bolder-title mb-2">Регистрация</NuxtLink>
-                <NuxtLink to="/login" class="block bolder-title">Вход</NuxtLink>
-                
-              </div>
+    <transition name="slide">
+      <div
+        v-if="isBurgerMenuVisible"
+        @click.stop
+        class="sidebar-panel burger-menu-content"
+      >
+        <div class="flex-col">
+          <div class="flex items-center gap-3">
+            <div class="burger-menu-content__icon">
+              <img
+                src="@/assets/images/icons/account_circle.svg"
+                alt="Профиль"
+              />
             </div>
-            <div class="mt-6">
-              <RouterLink
-                v-for="(menuItem, index) in menu"
-                :to="menuItem.link"
-                :key="index"
-                class="main-menu__link my-3"
+            <div v-if="userStore.user && userStore.access_token">
+              <NuxtLink to="/profile" class="block bolder-title">
+                <template v-if="userStore.user.role.current === 'legal_entity'">
+                  {{ userStore.user.userData.title }}
+                </template>
+                <template v-else>
+                  {{ userStore.user.userData.name }}
+                </template>
+              </NuxtLink>
+            </div>
+            <div v-else>
+              <NuxtLink to="/register-welcome" class="block bolder-title mb-2"
+                >Регистрация</NuxtLink
               >
-                <span class="main-menu__link--icon">
-                  <img :src="menuItem.icon" />
-                </span>
-                {{ menuItem.title }}
-              </RouterLink>
+              <NuxtLink to="/login" class="block bolder-title">Вход</NuxtLink>
             </div>
-            <div class="welcome-card mt-4">
-              Добро пожаловать в Junior Job! Нужна помощь по использованию или
-              разберетесь сами?
-              <button class="btn mt-4">Помогите!</button>
-            </div>
-            <button v-if="isLoggedIn" @click="logout" class="burger-menu__logout-btn btn mt-4">
-              Выход
-          </button>
           </div>
+          <div class="mt-6">
+            <RouterLink
+              v-for="(menuItem, index) in menu"
+              :to="menuItem.link"
+              :key="index"
+              class="main-menu__link my-3"
+            >
+              <span class="main-menu__link--icon">
+                <img :src="menuItem.icon" />
+              </span>
+              {{ menuItem.title }}
+            </RouterLink>
+          </div>
+          <div class="welcome-card mt-4">
+            Добро пожаловать в Junior Job! Нужна помощь по использованию или
+            разберетесь сами?
+            <button class="btn mt-4">Помогите!</button>
+          </div>
+          <button
+            v-if="isLoggedIn"
+            @click="logout"
+            class="burger-menu__logout-btn btn mt-4"
+          >
+            Выход
+          </button>
         </div>
-        </transition>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -219,7 +253,7 @@ onMounted(() => {
     z-index: 1200;
   }
 }
-.header {
+.user-layout .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -286,7 +320,7 @@ onMounted(() => {
     height: 24px;
     @media (max-width: 390px) {
       width: 20px;
-    height: 20px;
+      height: 20px;
     }
     & img {
       width: 100%;
@@ -304,6 +338,11 @@ onMounted(() => {
   width: 32px;
   height: 32px;
   -webkit-tap-highlight-color: transparent;
+
+  &--mobile-icon {
+    width: 23px;
+    height: 23px;
+  }
 
   & img {
     width: 100%;
@@ -373,6 +412,9 @@ onMounted(() => {
 .logo {
   user-select: none;
   height: 50px;
+  @media screen and (max-width: 979px) {
+    height: 43px;
+  }
 }
 
 .logo img {
@@ -419,28 +461,28 @@ onMounted(() => {
   }
 }
 
-    .sidebar-backdrop {
-        background-color: rgba(0,0,0,.5);
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        opacity: 1;
-        transition: opacity 0.1s;
-        cursor: pointer;
-        z-index: 4999;
-    }
+.sidebar-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.1s;
+  cursor: pointer;
+  z-index: 4999;
+}
 
-    .sidebar-panel {
-      overflow-y: auto;
-      position: fixed;
-      left: 0px; /* Изначально сдвигаем меню за пределы экрана */
-      top: 0;
-      height: 100vh;
-      z-index: 5000;
-      padding: 3rem 20px 2rem 20px;
-      width: 300px;
-      transition: .25s; /* Добавляем анимацию сдвига меню */
-  }
+.sidebar-panel {
+  overflow-y: auto;
+  position: fixed;
+  left: 0px; /* Изначально сдвигаем меню за пределы экрана */
+  top: 0;
+  height: 100vh;
+  z-index: 5000;
+  padding: 3rem 20px 2rem 20px;
+  width: 300px;
+  transition: 0.25s; /* Добавляем анимацию сдвига меню */
+}
 </style>

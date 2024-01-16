@@ -1,4 +1,7 @@
 <script setup>
+definePageMeta({
+  layout: "default",
+});
 </script>
 
 <template>
@@ -21,5 +24,4 @@
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
