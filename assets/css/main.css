@@ -470,7 +470,24 @@ textarea.field {
 
 }
 /* //TAGS SECTION */
-
+/* TOGGLE BUTTON */
+.toggle-btn {
+    padding: 10px 20px;
+    border: 1px solid #604D9E;
+    border-radius: 10px;
+    color: #604D9E;
+    font-weight: 800;
+    transition: 0.4s;
+}
+.toggle-btn.active {
+    padding: 10px 20px;
+    border: 1px solid #604D9E;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #604D9E;
+    font-weight: 800;
+}
+/* //TOGGLE BUTTON */
 
 /* Media запрос для устройств с шириной экрана 1024px и больше (большие десктопы) */
 @media (min-width: 1024px) {}
