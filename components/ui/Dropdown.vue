@@ -140,17 +140,20 @@ const updateEmail = async () => {
     }, 3000);
   }
 };
-const currentRoleBtn = ref('')
+const currentRoleBtn = ref("");
 const formattedBirthday = ref("");
 
 const changeRole = async (role) => {
-  currentRoleBtn.value = role
-  await userStore.setRole(role)
-  const currentRole = userStore.payload.role
-  const updateResponse = await api.roles.get_data(currentRole, userStore.currentRoleId)
-  userStore.user.userData = updateResponse
+  currentRoleBtn.value = role;
+  await userStore.setRole(role);
+  const currentRole = userStore.payload.role;
+  const updateResponse = await api.roles.get_data(
+    currentRole,
+    userStore.currentRoleId
+  );
+  userStore.user.userData = updateResponse;
   formData.value = userStore.user?.userData;
-}
+};
 
 onMounted(() => {
   if (userStore.user) {
@@ -172,8 +175,7 @@ watch(userStore.user, (oldValue, newValue) => {
 });
 </script>
 <template>
-  <div class="accordion w-full max-w-3xl pl-5 mt-10">
-    
+  <div class="accordion w-full pl-5 mt-10">
     <div class="divide-y divide-gray-100">
       <!-- <details class="group">
           <summary
@@ -252,13 +254,29 @@ watch(userStore.user, (oldValue, newValue) => {
               </div>
             </summary>
             <div class="accordion__content pb-4 text-secondary-500">
-              <p class="accordion__subtitle-2 mb-[15px]">
-                  Роль на сайте:
-                </p>
-              <div class="flex items-center gap-3 mb-[25px]">
-                <button class="toggle-btn" :class="{'active': currentRoleBtn === 'applicant'}" @click="changeRole('applicant')">Соискатель</button>
-                <button class="toggle-btn" :class="{'active': currentRoleBtn === 'legal_entity'}" @click="changeRole('legal_entity')">Работодатель (юр. лицо)</button>
-                <button class="toggle-btn" :class="{'active': currentRoleBtn === 'individual'}" @click="changeRole('individual')">Работодатель (физ. лицо)</button>
+              <p class="accordion__subtitle-2 mb-[15px]">Роль на сайте:</p>
+              <div class="accordion__roles flex items-center gap-3 mb-[25px]">
+                <button
+                  class="toggle-btn"
+                  :class="{ active: currentRoleBtn === 'applicant' }"
+                  @click="changeRole('applicant')"
+                >
+                  Соискатель
+                </button>
+                <button
+                  class="toggle-btn"
+                  :class="{ active: currentRoleBtn === 'legal_entity' }"
+                  @click="changeRole('legal_entity')"
+                >
+                  Работодатель (юр. лицо)
+                </button>
+                <button
+                  class="toggle-btn"
+                  :class="{ active: currentRoleBtn === 'individual' }"
+                  @click="changeRole('individual')"
+                >
+                  Работодатель (физ. лицо)
+                </button>
               </div>
               <div
                 v-if="userStore.roles.current === 'legal_entity'"
@@ -531,6 +549,18 @@ watch(userStore.user, (oldValue, newValue) => {
 </template>
 <style lang="scss" scoped>
 .accordion {
+  max-width: 46rem;
+  @media screen and (max-width: 500px) {
+    max-width: 230px;
+  }
+  &__roles {
+    @media screen and (max-width: 520px) {
+      flex-direction: column;
+      button {
+        width: 100%;
+      }
+    }
+  }
   &__title {
     color: #2c1b47;
     font-family: "Marmelad";

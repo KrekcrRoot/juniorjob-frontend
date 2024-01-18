@@ -51,10 +51,8 @@ const menu = [
 const isMobile = ref(false);
 const isBurgerMenuVisible = ref(false);
 
-const checkScreenWidth = () => {
-  if (typeof window !== "undefined") {
-    isMobile.value = 1 < 979;
-  }
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 980;
 };
 
 const isLoggedIn = computed(() => {
@@ -73,9 +71,9 @@ const logout = async () => {
 };
 
 onMounted(() => {
-  if (typeof window !== "undefined") {
-    checkScreenWidth();
-    window.addEventListener("resize", checkScreenWidth);
+  if (process.client) {
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
   }
 });
 </script>
@@ -115,7 +113,7 @@ onMounted(() => {
           </div>
           <NuxtLink to="/" class="logo">
             <img
-              v-if="isMobile"
+              v-if="!isMobile"
               src="@/assets/images/logo.svg"
               alt="JuniorJob"
             />
