@@ -1,8 +1,6 @@
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
 import {useUserStore} from "~/store/user";
 import api from ".";
-import TokenDto from "~/api/auth/TokenDto";
-import {use} from "h3";
 
 const instance = axios.create({
     baseURL: 'https://api.junior-job.ru',
