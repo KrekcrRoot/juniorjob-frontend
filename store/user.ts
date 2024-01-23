@@ -75,7 +75,7 @@ export const useUserStore = defineStore("user", {
     },
     logout() {
       try {
-        api.auth.logout();
+        // не возвращай сюда логаут, забей на него жестко
         this.access_token = "";
         this.refresh_token = "";
         this.user = null;
