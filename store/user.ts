@@ -64,6 +64,14 @@ export const useUserStore = defineStore("user", {
         console.log(error);
       }
     },
+    async changeRole(role: string) {
+      try {
+        await api.roles.change({ role: role });
+        await this.fetchRoles();
+      } catch (error: any) {
+        console.log(error);
+      }
+    },
     async fetchRoles() {
       try {
         const response = await api.roles.my();
@@ -122,6 +130,14 @@ export const useUserStore = defineStore("user", {
       response.then((res) => {
         this.vacancies = res;
       });
+    },
+    async searchApplicant(data: any) {
+      try {
+        const res = await api.roles.searchApplicant(data);
+        return res;
+      } catch (error) {
+        return error;
+      }
     },
   },
   persist: true,

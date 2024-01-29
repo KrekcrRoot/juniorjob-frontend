@@ -55,6 +55,14 @@ export const useVacanciesStore = defineStore("vacancies", {
         return error;
       }
     },
+    async search(data: any) {
+      try {
+        const res = await api.vacancies.search(data);
+        return res;
+      } catch (error) {
+        return error;
+      }
+    },
   },
   persist: true,
 });

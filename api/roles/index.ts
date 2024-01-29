@@ -25,8 +25,14 @@ export default (instance: AxiosInstance) => {
             role = role.replace(/_/g, '-')
             return instance.get(`/roles/${role}/${id}`)
         },
+        async get_roles_data(id: string) {
+            return instance.get(`/roles/${id}`)
+        },
         async get_user_roles(userId: string) {
             return instance.get(`/roles/user/${userId}`)
+        },
+        async searchApplicant(params?: any) {
+            return instance.get<ApplicantDto>('/roles/applicant/search', { params })
         }
     }
 }

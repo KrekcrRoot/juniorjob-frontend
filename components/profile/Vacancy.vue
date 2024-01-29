@@ -10,6 +10,7 @@ const userStore = useUserStore();
 const vacanciesStore = useVacanciesStore();
 
 const vacancy = ref(null);
+const responsesByVacancy = ref("");
 
 const isScreenSmall = ref(window.innerWidth <= 490);
 
@@ -23,17 +24,29 @@ const vacancyResponse = async (uuid) => {
   const res = api.vacancies.createResponse({ uuid: uuid });
   if (userStore.roles.current === "applicant") {
     vacanciesStore.fetchApplicantResponses(userStore.user.uuid);
+    vacanciesStore.vacanciesResponses = [
+      ...vacanciesStore.vacanciesResponses,
+      res,
+    ];
   }
   console.log(res);
 };
 
-const searchResponse = (id) => {
-  if (userStore.roles.current === "applicant") {
+// const searchResponse = (id) => {
+//   if (userStore.roles.current === "applicant") {
+//     return !!vacanciesStore.vacanciesResponses.find((w) => {
+//       return w.vacancy.uuid === id;
+//     });
+//   }
+// };
+
+const searchResponse = computed(() => {
+  if(userStore.roles.current === 'applicant' && vacancy.value) {
     return !!vacanciesStore.vacanciesResponses.find((w) => {
-      return w.vacancy.uuid === id;
-    });
+      return w.vacancy.uuid === "6527fa16-c2d9-41ea-a984-0c18252537d5";
+    })
   }
-};
+})
 
 onMounted(async () => {
   if (userStore.roles.current === "applicant") {
@@ -46,8 +59,14 @@ onMounted(async () => {
     userStore.user.role.current !== "applicant"
   ) {
     await vacanciesStore.getMyVacancies();
+    let res = await api.vacancies.getCandidatsByVacancy(vacancy?.value?.uuid);
+    responsesByVacancy.value = res;
+    responsesByVacancy.value = await Promise.all(res.map(async (item) => {
+      const applicant = await api.roles.get_roles_data(item.applicant.role.uuid);
+      return {...item, ...applicant[applicant.current]}
+    }));
     isInMyVacancies.value = vacanciesStore.vacanciesUser.find(
-      (v) => v.uuid === vacancy.value.uuid
+      (v) => v.uuid === vacancy.value?.uuid
     )
       ? true
       : false;
@@ -217,44 +236,55 @@ onBeforeUnmount(() => {
           <div v-else>
             <div v-if="isInMyVacancies" class="profile__reviews-section">
               <h2 class="profile__reviews-section-title">Кандидаты</h2>
-              <div class="profile__reviews mt-3">
-                <div class="profile__reviews-item">
+              <p v-if="!responsesByVacancy">Пока нет откликов по вакансии</p>
+              <div v-else class="profile__reviews mt-3">
+                <div
+                  v-for="(candidat, index) in responsesByVacancy"
+                  :key="index"
+                  class="profile__reviews-item"
+                >
                   <a
                     class="profile__reviews-item-head profile-reviews-head-mobile"
                   >
                     <div class="flex items-center">
                       <div class="profile__reviews-item-avatar">
                         <img
-                          src="@/assets/images/profile/review-demo.png"
+                          v-if="candidat.applicant.image === 'image.png'"
+                          src="@/assets/images/profile/profile.svg"
+                          alt=""
+                        />
+                        <img
+                          v-else
+                          :src="`${$config.public.baseURL}/storage/users/${candidat.applicant.image}`"
                           alt=""
                         />
                       </div>
                       <div>
                         <p class="profile__reviews-item-name">
-                          Чернявский Иван
+                          {{ candidat.surname }} {{ candidat.name }}
                         </p>
-                        <div class="stars">
-                          <img
-                            src="@/assets/images/icons/star-color.svg"
-                            alt="star"
-                          />
-                          <img
-                            src="@/assets/images/icons/star-color.svg"
-                            alt="star"
-                          />
-                          <img
-                            src="@/assets/images/icons/star-color.svg"
-                            alt="star"
-                          />
-                          <img
-                            src="@/assets/images/icons/star-color.svg"
-                            alt="star"
-                          />
-                          <img
-                            src="@/assets/images/icons/star-color.svg"
-                            alt="star"
-                          />
-                        </div>
+                        <!-- <div class="stars">
+                        <img
+                          src="@/assets/images/icons/star-color.svg"
+                          alt="star"
+                        />
+                        <img
+                          src="@/assets/images/icons/star-color.svg"
+                          alt="star"
+                        />
+                        <img
+                          src="@/assets/images/icons/star-color.svg"
+                          alt="star"
+                        />
+                        <img
+                          src="@/assets/images/icons/star-color.svg"
+                          alt="star"
+                        />
+                        <img
+                          src="@/assets/images/icons/star-color.svg"
+                          alt="star"
+                        />
+                      </div> -->
                       </div>
                     </div>
 
@@ -262,9 +292,9 @@ onBeforeUnmount(() => {
                       Выбрать исполнителем
                     </button>
                   </a>
-                  <p class="profile__reviews-item-comment">
-                    Хочу помочь вам с вашими чудесными мохнатиками!
-                  </p>
+                  <!-- <p class="profile__reviews-item-comment">
+                  Хочу помочь вам с вашими чудесными мохнатиками!
+                </p> -->
                 </div>
               </div>
             </div>
@@ -436,54 +466,64 @@ onBeforeUnmount(() => {
               <div v-if="isInMyVacancies" class="profile__reviews-section">
                 <h2 class="profile__reviews-section-title">Кандидаты</h2>
                 <div class="profile__reviews mt-3">
-                  <div class="profile__reviews-item">
-                    <a
-                      class="profile__reviews-item-head profile-reviews-head-mobile"
-                    >
-                      <div class="flex items-center">
-                        <div class="profile__reviews-item-avatar">
-                          <img
-                            src="@/assets/images/profile/review-demo.png"
-                            alt=""
-                          />
-                        </div>
-                        <div>
-                          <p class="profile__reviews-item-name">
-                            Чернявский Иван
-                          </p>
-                          <div class="stars">
-                            <img
-                              src="@/assets/images/icons/star-color.svg"
-                              alt="star"
-                            />
-                            <img
-                              src="@/assets/images/icons/star-color.svg"
-                              alt="star"
-                            />
-                            <img
-                              src="@/assets/images/icons/star-color.svg"
-                              alt="star"
-                            />
-                            <img
-                              src="@/assets/images/icons/star-color.svg"
-                              alt="star"
-                            />
-                            <img
-                              src="@/assets/images/icons/star-color.svg"
-                              alt="star"
-                            />
-                          </div>
-                        </div>
+                  <div
+                  v-for="(candidat, index) in responsesByVacancy"
+                  :key="index"
+                  class="profile__reviews-item"
+                >
+                  <a
+                    class="profile__reviews-item-head profile-reviews-head-mobile"
+                  >
+                    <div class="flex items-center">
+                      <div class="profile__reviews-item-avatar">
+                        <img
+                          v-if="candidat.applicant.image === 'image.png'"
+                          src="@/assets/images/profile/profile.svg"
+                          alt=""
+                        />
+                        <img
+                          v-else
+                          :src="`${$config.public.baseURL}/storage/users/${candidat.applicant.image}`"
+                          alt=""
+                        />
                       </div>
+                      <div>
+                        <p class="profile__reviews-item-name">
+                          {{ candidat.surname }} {{ candidat.name }}
+                        </p>
+                        <!-- <div class="stars">
+                        <img
+                          src="@/assets/images/icons/star-color.svg"
+                          alt="star"
+                        />
+                        <img
+                          src="@/assets/images/icons/star-color.svg"
+                          alt="star"
+                        />
+                        <img
+                          src="@/assets/images/icons/star-color.svg"
+                          alt="star"
+                        />
+                        <img
+                          src="@/assets/images/icons/star-color.svg"
+                          alt="star"
+                        />
+                        <img
+                          src="@/assets/images/icons/star-color.svg"
+                          alt="star"
+                        />
+                      </div> -->
+                      </div>
+                    </div>
 
-                      <button class="btn btn--small ml-2">
-                        Выбрать исполнителем
-                      </button>
-                    </a>
-                    <p class="profile__reviews-item-comment">
-                      Хочу помочь вам с вашими чудесными мохнатиками!
-                    </p>
-                  </div>
+                    <button class="btn btn--small ml-2">
+                      Выбрать исполнителем
+                    </button>
+                  </a>
+                  <!-- <p class="profile__reviews-item-comment">
+                  Хочу помочь вам с вашими чудесными мохнатиками!
+                </p> -->
+                </div>
                 </div>
               </div>
             </div>

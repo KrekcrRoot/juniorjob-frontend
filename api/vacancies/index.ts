@@ -24,6 +24,9 @@ export default (instance: AxiosInstance) => {
     async all(params?: any) {
       return instance.get<VacancyDto>("/vacancies/all", { params });
     },
+    async search(params?: any) {
+      return instance.get<VacancyDto>("/vacancies/search", { params })
+    },
     async my() {
       return instance.get<VacancyDto>("/vacancies/my");
     },
@@ -41,7 +44,7 @@ export default (instance: AxiosInstance) => {
         `/vacancies/response/applicant/${uuid}`
       );
     },
-    async getResponsesByVacancy(uuid: string) {
+    async getCandidatsByVacancy(uuid: string) {
       return instance.get<VacancyResponseDto>(
         `/vacancies/response/vacancy/${uuid}`
       );

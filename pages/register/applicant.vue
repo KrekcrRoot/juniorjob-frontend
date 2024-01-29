@@ -16,7 +16,7 @@ loading.value = false
   <template v-if="loading">
     <UiLoader />
   </template>
-  <!-- Формы регистрации -->
+  <!-- Applicant -->
     <template v-else>
       <UserApplicantForm />
     </template>

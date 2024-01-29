@@ -33,9 +33,14 @@ const responsesByMainVacancy = ref("");
 
 onMounted(async () => {
   vacanciesStore.getMyVacancies();
-  const res = await api.vacancies.getResponsesByVacancy(
-    actualVacancy.value.uuid
+  let res = await api.vacancies.getCandidatsByVacancy(
+    actualVacancy?.value?.uuid
   );
+  responsesByMainVacancy.value = res;
+    responsesByMainVacancy.value = await Promise.all(res.map(async (item) => {
+    const applicant = await api.roles.get_roles_data(item.applicant.role.uuid);
+    return {...item, ...applicant[applicant.current]}
+  }));
   console.log(res);
 });
 </script>
@@ -206,21 +211,34 @@ onMounted(async () => {
           </p>
           <div class="profile__reviews-section">
             <h2 class="profile__reviews-section-title">Кандидаты</h2>
-            <div class="profile__reviews mt-3">
-              <div class="profile__reviews-item">
+            <p v-if="!responsesByMainVacancy">Пока нет откликов по вакансии</p>
+            <div v-else class="profile__reviews mt-3">
+              <div
+                v-for="(candidat, index) in responsesByMainVacancy"
+                :key="index"
+                class="profile__reviews-item"
+              >
                 <a
                   class="profile__reviews-item-head profile-reviews-head-mobile"
                 >
                   <div class="flex items-center">
                     <div class="profile__reviews-item-avatar">
                       <img
-                        src="@/assets/images/profile/review-demo.png"
+                        v-if="candidat.applicant.image === 'image.png'"
+                        src="@/assets/images/profile/profile.svg"
+                        alt=""
+                      />
+                      <img
+                        v-else
+                        :src="`${$config.public.baseURL}/storage/users/${candidat.applicant.image}`"
                         alt=""
                       />
                     </div>
                     <div>
-                      <p class="profile__reviews-item-name">Чернявский Иван</p>
-                      <div class="stars">
+                      <p class="profile__reviews-item-name">
+                        {{ candidat.surname }} {{ candidat.name }}
+                      </p>
+                      <!-- <div class="stars">
                         <img
                           src="@/assets/images/icons/star-color.svg"
                           alt="star"
@@ -241,7 +259,7 @@ onMounted(async () => {
                           src="@/assets/images/icons/star-color.svg"
                           alt="star"
                         />
-                      </div>
+                      </div> -->
                     </div>
                   </div>
 
@@ -249,9 +267,9 @@ onMounted(async () => {
                     Выбрать исполнителем
                   </button>
                 </a>
-                <p class="profile__reviews-item-comment">
+                <!-- <p class="profile__reviews-item-comment">
                   Хочу помочь вам с вашими чудесными мохнатиками!
-                </p>
+                </p> -->
               </div>
             </div>
           </div>
