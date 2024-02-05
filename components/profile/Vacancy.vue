@@ -32,21 +32,21 @@ const vacancyResponse = async (uuid) => {
   console.log(res);
 };
 
-// const searchResponse = (id) => {
-//   if (userStore.roles.current === "applicant") {
-//     return !!vacanciesStore.vacanciesResponses.find((w) => {
-//       return w.vacancy.uuid === id;
-//     });
-//   }
-// };
-
-const searchResponse = computed(() => {
-  if(userStore.roles.current === 'applicant' && vacancy.value) {
+const searchResponse = (id) => {
+  if (userStore.roles.current === "applicant") {
     return !!vacanciesStore.vacanciesResponses.find((w) => {
-      return w.vacancy.uuid === "6527fa16-c2d9-41ea-a984-0c18252537d5";
-    })
+      return w.vacancy.uuid === id;
+    });
   }
-})
+};
+
+// const searchResponse = computed(() => {
+//   if(userStore.roles.current === 'applicant' && vacancy.value) {
+//     return !!vacanciesStore.vacanciesResponses.find((w) => {
+//       return w.vacancy.uuid === "6527fa16-c2d9-41ea-a984-0c18252537d5";
+//     })
+//   }
+// })
 
 onMounted(async () => {
   if (userStore.roles.current === "applicant") {
@@ -299,6 +299,9 @@ onBeforeUnmount(() => {
               </div>
             </div>
           </div>
+          <div>
+            test111
+          </div>
         </template>
       </template>
       <!-- АВАТАР И ИМЯ НА ПК -->
@@ -527,6 +530,9 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
+            <div>
+            test111
+          </div>
           </template>
         </div>
       </template>
