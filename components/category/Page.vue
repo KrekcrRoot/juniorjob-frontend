@@ -3,50 +3,27 @@
     <h1 class="page-title mt-12 mb-7">Вакансии</h1>
     <div v-if="vacancies" class="vacancies-list">
       <template v-if="vacancies.length > 0">
-        <div
-          v-for="vacancy in vacancies"
-          :key="vacancy.uuid"
-          class="vacancies-list__item"
-        >
+        <div v-for="vacancy in vacancies" :key="vacancy.uuid" class="vacancies-list__item">
+
           <div class="flex items-center gap-2">
             <div class="vacancies-list__item-star">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <mask
-                  id="mask0_1050_1499"
-                  style="mask-type: alpha"
-                  maskUnits="userSpaceOnUse"
-                  x="0"
-                  y="0"
-                  width="24"
-                  height="24"
-                >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <mask id="mask0_1050_1499" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
+                  height="24">
                   <rect width="24" height="24" fill="#D9D9D9" />
                 </mask>
                 <g mask="url(#mask0_1050_1499)">
                   <path
                     d="M8.85 17.825L12 15.925L15.15 17.85L14.325 14.25L17.1 11.85L13.45 11.525L12 8.125L10.55 11.5L6.9 11.825L9.675 14.25L8.85 17.825ZM5.825 22L7.45 14.975L2 10.25L9.2 9.625L12 3L14.8 9.625L22 10.25L16.55 14.975L18.175 22L12 18.275L5.825 22Z"
-                    fill="#604D9E"
-                  />
+                    fill="#604D9E" />
                 </g>
               </svg>
             </div>
             <div class="vacancies-list__avatar" v-if="vacancy !== null">
-              <img
-                :src="`${$config.public.baseURL}/storage/users/${vacancy?.employer?.image}`"
-                alt=""
-              />
+              <img :src="`${$config.public.baseURL}/storage/users/${vacancy?.employer?.image}`" alt="" />
             </div>
             <div>
-              <NuxtLink
-                :to="{ name: 'vacancies-id', params: { id: vacancy.uuid } }"
-                class="vacancies-list__title"
-              >
+              <NuxtLink :to="{ name: 'vacancies-id', params: { id: vacancy.uuid } }" class="vacancies-list__title">
                 {{ vacancy?.title }}
               </NuxtLink>
               <p class="vacancies-list__text">
@@ -62,20 +39,34 @@
               <p class="vacancy__check" v-if="searchResponse(vacancy.uuid)">
                 Вы откликнулись на эту вакансию
               </p>
-              <button
-                @click="vacancyResponse(vacancy.uuid)"
-                v-else
-                class="vacancies-list__btn btn-outline"
-              >
-                Откликнуться
+              <template v-else>
+                <template v-if="activeVacancyComment === vacancy.uuid">
+                <button @click="toggleVacancyComment('')" class="vacancies-list__btn btn-outline">
+                 Отмена
               </button>
+              </template>
+              
+              <button @click="toggleVacancyComment(vacancy.uuid)" v-else class="vacancies-list__btn btn-outline">
+                 Откликнуться
+              </button>
+              </template>
+
+              <div v-if="activeVacancyComment === vacancy.uuid" class="vacancies-list__item-review">
+                <h3>Напишите немного о себе (можете прикрепить ссылки на портфолио)</h3>
+                <textarea v-model="message" class="field vacancies-list__item-review--field"></textarea>
+                <button @click="vacancyResponse({uuid: vacancy.uuid, message: message})" class="vacancies-list__btn btn-outline mt-3">
+                  Откликнуться
+                </button>
+              </div>
             </template>
           </template>
+
         </div>
       </template>
       <template v-else>
         <h1 class="color-purple">Нет вакансий по этой категории</h1>
       </template>
+
     </div>
     <UiLoader v-else />
   </div>
@@ -95,10 +86,19 @@ const userStore = useUserStore();
 
 const vacancies = ref([]);
 
+const activeVacancyComment = ref(null);
+const message = ref("");
+
 const route = useRoute();
 
-const vacancyResponse = async (uuid) => {
-  const res = api.vacancies.createResponse({ uuid: uuid });
+const vacancyResponse = async (data) => {
+  try {
+    const res = await api.vacancies.createResponse(data);
+    activeVacancyComment.value = ""
+  } catch(err) {
+    console.log(err)
+  }
+
   if (userStore.roles.current === "applicant") {
     vacanciesStore.fetchApplicantResponses(userStore.user.uuid);
   }
@@ -112,6 +112,11 @@ const searchResponse = (id) => {
     });
   }
 };
+
+const toggleVacancyComment = (id) => {
+  message.value = ""
+  activeVacancyComment.value = id
+}
 
 onMounted(async () => {
   await vacanciesStore.fetchVacancies();
@@ -161,6 +166,7 @@ watch(vacanciesStore.vacancies, (oldValue, newValue) => {
 
   &__item {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     padding: 20px;
@@ -168,6 +174,19 @@ watch(vacanciesStore.vacancies, (oldValue, newValue) => {
 
     &:hover {
       background: #f6f4ff;
+    }
+
+    &-review {
+      margin-top: 25px;
+      margin-bottom: 20px;
+      width: 100%;
+
+
+      &--field {
+        min-width: 50%;
+        min-height: 70px;
+        margin-top: 15px;
+      }
     }
   }
 
@@ -203,6 +222,7 @@ watch(vacanciesStore.vacancies, (oldValue, newValue) => {
     line-height: normal;
   }
 }
+
 .vacancy__check {
   color: #604d9e;
   font-weight: 600;

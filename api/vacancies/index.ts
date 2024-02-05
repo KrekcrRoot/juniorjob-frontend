@@ -2,6 +2,7 @@ import { AxiosInstance } from "axios";
 import VacancyDto from "./dto/VacancyDto";
 import VacancyRequestDto from "./dto/VacancyRequestDto";
 import VacancyUuidDto from "./dto/VacancyUuidDto";
+import VacancyResponseMessageDto from "./dto/VacancyResponseMessageDto";
 import type VacancyResponseDto from "./dto/VacancyResponseDto";
 
 export default (instance: AxiosInstance) => {
@@ -33,7 +34,7 @@ export default (instance: AxiosInstance) => {
     async getById(id: string) {
       return instance.get<VacancyDto>(`/vacancies/${id}`);
     },
-    async createResponse(data: VacancyUuidDto) {
+    async createResponse(data: VacancyResponseMessageDto) {
       return instance.post<VacancyResponseDto>(
         `/vacancies/response/create`,
         data
