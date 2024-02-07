@@ -263,7 +263,7 @@ onMounted(async () => {
                     </div>
                   </div>
 
-                  <button class="btn btn--small ml-2">
+                  <button @click="selectResponse(candidat.uuid)" class="btn btn--small ml-2">
                     Выбрать исполнителем
                   </button>
                 </a>

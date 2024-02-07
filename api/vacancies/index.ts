@@ -50,5 +50,10 @@ export default (instance: AxiosInstance) => {
         `/vacancies/response/vacancy/${uuid}`
       );
     },
+    async selectResponse(uuid: string) {
+      return instance.get<any>(
+        '/vacancies/selectResponse'
+      )
+    }
   };
 };

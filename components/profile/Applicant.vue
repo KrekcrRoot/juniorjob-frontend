@@ -197,7 +197,7 @@ const age = computed(() => {
                         {{ competition.label }}
                     </div>
                 </div>
-                <div class="profile__reviews-section mt-3">
+                <!-- <div class="profile__reviews-section mt-3">
                     <h2 class="profile__reviews-section-title">
                         Отзывы
                     </h2>
@@ -224,7 +224,7 @@ const age = computed(() => {
 
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
