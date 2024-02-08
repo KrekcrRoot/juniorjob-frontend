@@ -29,6 +29,14 @@ const deleteVacancy = (id) => {
   });
 };
 
+const selectResponse = async (uuid) => {
+  try {
+    const res = await api.vacancies.selectResponse(uuid);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const responsesByMainVacancy = ref("");
 
 onMounted(async () => {
@@ -37,10 +45,15 @@ onMounted(async () => {
     actualVacancy?.value?.uuid
   );
   responsesByMainVacancy.value = res;
-    responsesByMainVacancy.value = await Promise.all(res.map(async (item) => {
-    const applicant = await api.roles.get_roles_data(item.applicant.role.uuid);
-    return {...item, ...applicant[applicant.current]}
-  }));
+  responsesByMainVacancy.value = await Promise.all(
+    res.map(async (item) => {
+      const applicant = await api.roles.get_roles_data(
+        item.applicant.role.uuid
+      );
+      Object.assign(item.applicant, applicant[applicant.current]);
+      return { ...item };
+    })
+  );
   console.log(res);
 });
 </script>
@@ -236,40 +249,53 @@ onMounted(async () => {
                     </div>
                     <div>
                       <p class="profile__reviews-item-name">
-                        {{ candidat.surname }} {{ candidat.name }}
+                        {{ candidat.applicant.surname }}
+                        {{ candidat.applicant.name }}
                       </p>
                       <!-- <div class="stars">
-                        <img
-                          src="@/assets/images/icons/star-color.svg"
-                          alt="star"
-                        />
-                        <img
-                          src="@/assets/images/icons/star-color.svg"
-                          alt="star"
-                        />
-                        <img
-                          src="@/assets/images/icons/star-color.svg"
-                          alt="star"
-                        />
-                        <img
-                          src="@/assets/images/icons/star-color.svg"
-                          alt="star"
-                        />
-                        <img
-                          src="@/assets/images/icons/star-color.svg"
-                          alt="star"
-                        />
-                      </div> -->
+                          <img
+                            src="@/assets/images/icons/star-color.svg"
+                            alt="star"
+                          />
+                          <img
+                            src="@/assets/images/icons/star-color.svg"
+                            alt="star"
+                          />
+                          <img
+                            src="@/assets/images/icons/star-color.svg"
+                            alt="star"
+                          />
+                          <img
+                            src="@/assets/images/icons/star-color.svg"
+                            alt="star"
+                          />
+                          <img
+                            src="@/assets/images/icons/star-color.svg"
+                            alt="star"
+                          />
+                        </div> -->
                     </div>
                   </div>
-
-                  <button @click="selectResponse(candidat.uuid)" class="btn btn--small ml-2">
+                  <p
+                    v-if="
+                      actualVacancy.responseSelected !== null &&
+                      actualVacancy.responseSelected !== '' &&
+                      actualVacancy.responseSelected === candidat.uuid
+                    "
+                  >
+                    Выбран исполнителем
+                  </p>
+                  <button
+                    v-else
+                    @click="selectResponse(candidat.uuid)"
+                    class="btn btn--small ml-2"
+                  >
                     Выбрать исполнителем
                   </button>
                 </a>
                 <!-- <p class="profile__reviews-item-comment">
-                  Хочу помочь вам с вашими чудесными мохнатиками!
-                </p> -->
+                    Хочу помочь вам с вашими чудесными мохнатиками!
+                  </p> -->
               </div>
             </div>
           </div>
