@@ -1,7 +1,3 @@
-
-import type { CategoryItem } from '#build/components';
-
-import type SelectCategoryVue from '../form/SelectCategory.vue';
 <template>
     <div class="relative">
         <div v-if="categories" class="categories__container">
