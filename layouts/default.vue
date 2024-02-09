@@ -10,7 +10,7 @@ import { useRouter } from "vue-router";
 import { useUserStore } from "~/store/user";
 
 let userStore;
-
+const router = useRouter();
 if (process.client) {
   userStore = useUserStore();
 }
@@ -50,6 +50,7 @@ const menu = [
 
 const isMobile = ref(false);
 const isBurgerMenuVisible = ref(false);
+const searchQuery = ref("");
 
 const checkMobile = () => {
   isMobile.value = window.innerWidth < 980;
@@ -57,6 +58,10 @@ const checkMobile = () => {
 
 const closeMenu = () => {
   isBurgerMenuVisible.value = false;
+};
+
+const search = () => {
+  router.push(`/search/${searchQuery.value}`);
 };
 
 const isLoggedIn = computed(() => {
@@ -73,6 +78,13 @@ const logout = async () => {
 
   navigateTo("/login");
 };
+
+const currentRole = computed(() => {
+  if (process.client) {
+    const userStore = useUserStore();
+    return userStore.roles.current;
+  }
+});
 
 onMounted(() => {
   if (process.client) {
@@ -162,11 +174,23 @@ onMounted(() => {
         <div
           class="header-search-wrapper grid xl:grid-cols-12 md:grid-cols-1 gap-4"
         >
-          <input
-            type="text"
-            class="header__search col-start-1 col-span-8"
-            placeholder="Поиск вакансий"
-          />
+          <div class="header__search-wrapper col-start-1 col-span-8">
+            <!-- кнопка поиска -->
+            <button @click="search" class="header__search-button">
+              <img src="@/assets/images/icons/search.svg" alt="" />
+            </button>
+            <!-- //кнопка поиска -->
+            <input
+              type="text"
+              class="header__search col-start-1 col-span-8"
+              :placeholder="
+                currentRole === 'applicant'
+                  ? 'Поиск вакансий'
+                  : 'Поиск соискателей'
+              "
+              v-model="searchQuery"
+            />
+          </div>
           <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2">
             <button class="filter-btn">
               <div class="filter-btn__icon">
@@ -324,6 +348,17 @@ onMounted(() => {
       font-size: 18px;
       font-weight: 300;
     }
+  }
+  &__search-wrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  &__search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
   }
 
   @media (max-width: 979px) {
