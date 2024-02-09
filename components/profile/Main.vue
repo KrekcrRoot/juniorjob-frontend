@@ -17,7 +17,7 @@ onMounted(async () => {
   if (route?.params?.id) {
     const response = await api.users.getById(route?.params?.id);
     user.value = response;
-    const uDataRes = await api.roles.get_user_roles(user.value.uuid)
+    const uDataRes = await api.roles.get_data(response.role.current, response.uuid)
     user.value["userData"] = uDataRes[uDataRes.current]
     // response.then(async(res) => {
     //   user.value = res;

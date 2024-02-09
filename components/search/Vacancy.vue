@@ -3,14 +3,14 @@
 <div class="flex items-center gap-2">
 
   <div class="vacancies-list__avatar">
-    <img alt="" />
+    <img :src="`${$config.public.baseURL}/storage/users/${item.employer.image}`" alt="" />
   </div>
   <div>
-    <NuxtLink class="vacancies-list__title">
+    <NuxtLink :to="{ name: 'vacancies-id', params: { id: item.uuid } }" class="vacancies-list__title">
       {{ item.title }}
     </NuxtLink>
     <p class="vacancies-list__text">
-      {{ item.place }}
+      <img src="@/assets/images/icons/location_on.svg" alt=""> {{ item.place }}
     </p>
     <p class="vacancies-list__text">
       {{ item.time }}
@@ -90,6 +90,9 @@ const props = defineProps({
   }
 
   &__text {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     color: #604d9e;
     font-family: "Source Sans Pro";
     font-size: 20px;
