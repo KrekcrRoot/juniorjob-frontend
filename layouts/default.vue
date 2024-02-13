@@ -79,10 +79,24 @@ const currentRole = computed(() => {
   }
 });
 
+const searchPlaceholder = ref("Поиск")
+
 onMounted(() => {
   if (process.client) {
     checkMobile();
     window.addEventListener("resize", checkMobile);
+
+    const userStore = useUserStore();
+    if(userStore) {
+      if(userStore.roles.current === 'individual' || userStore.roles.current === 'legal_entity') {
+        searchPlaceholder.value = "Поиск соискателей"
+  } else {
+    searchPlaceholder.value = "Поиск вакансий"
+  }
+    } else {
+      searchPlaceholder.value = "Поиск"
+    }
+    
   }
 });
 </script>
@@ -176,11 +190,7 @@ onMounted(() => {
             <input
               type="text"
               class="header__search col-start-1 col-span-8"
-              :placeholder="
-                currentRole === 'applicant'
-                  ? 'Поиск вакансий'
-                  : 'Поиск соискателей'
-              "
+              :placeholder="searchPlaceholder"
               v-model="searchQuery"
             />
           </div>
