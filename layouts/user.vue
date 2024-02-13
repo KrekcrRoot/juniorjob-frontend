@@ -27,16 +27,6 @@ const menu = [
     link: "/",
   },
   {
-    title: "Кошелек",
-    icon: cardIcon,
-    link: "/",
-  },
-  {
-    title: "Избранное",
-    icon: starIcon,
-    link: "/",
-  },
-  {
     title: "Статьи",
     icon: noteIcon,
     link: "/",

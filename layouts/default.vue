@@ -27,16 +27,6 @@ const menu = [
     link: "/",
   },
   {
-    title: "Кошелек",
-    icon: cardIcon,
-    link: "/",
-  },
-  {
-    title: "Избранное",
-    icon: starIcon,
-    link: "/",
-  },
-  {
     title: "Статьи",
     icon: noteIcon,
     link: "/",
@@ -82,7 +72,10 @@ const logout = async () => {
 const currentRole = computed(() => {
   if (process.client) {
     const userStore = useUserStore();
-    return userStore.roles.current;
+    if (userStore.roles !== null) {
+      return userStore.roles.current;
+    }
+    return "guest";
   }
 });
 
@@ -192,18 +185,18 @@ onMounted(() => {
             />
           </div>
           <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2">
-            <button class="filter-btn">
+            <!-- <button class="filter-btn">
               <div class="filter-btn__icon">
                 <img src="@/assets/images/icons/filter_alt.svg" alt="" />
               </div>
               <span> Фильтры </span>
-            </button>
-            <button class="filter-btn">
+            </button> -->
+            <!-- <button class="filter-btn">
               <div class="filter-btn__icon">
                 <img src="@/assets/images/icons/sync_alt.svg" alt="" />
               </div>
               <span> Сортировка </span>
-            </button>
+            </button> -->
           </div>
         </div>
       </div>

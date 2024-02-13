@@ -1,27 +1,21 @@
 <script setup>
-import vacancyLogo from "@/assets/images/vacancy/temp_vacancy.svg";
+import vacancyLogo from "@/assets/images/profile/review-demo.png";
+import vacancyLogo2 from "@/assets/images/profile/profile.svg";
 const professionList = [
   {
     id: 1,
-    title: "ООО «Демидовский огурец»",
+    title: "Кванториум",
     logo: vacancyLogo,
-    time: "Ежедневно с 11:00 до 14:00",
-    short_text: "Квалифицированные огурцы научат вашего ребенка быть....",
+    time: "12 марта 2024",
+    short_text: "Мастер-класс по программированию",
   },
   {
     id: 2,
-    title: "ООО «Демидовский огурец2»",
-    logo: vacancyLogo,
-    time: "Ежедневно с 11:00 до 14:00",
-    short_text: "Квалифицированные огурцы научат вашего ребенка быть....",
+    title: "СГИИ - урок народного искусства",
+    logo: vacancyLogo2,
+    time: "23 марта 2024",
+    short_text: "Открытый урок по творческим профессиям",
   },
-  {
-    id: 3,
-    title: "ООО «Демидовский огурец3»",
-    logo: vacancyLogo,
-    time: "Ежедневно с 11:00 до 14:00",
-    short_text: "Квалифицированные огурцы научат вашего ребенка быть....",
-  }
 ];
 </script>
 
@@ -29,10 +23,13 @@ const professionList = [
   <div>
     <h1 class="main-title">Профессиональные пробы</h1>
     <div class="xl:mt-7 mt-3">
-        <ProfessionItem v-for="professionItem in professionList" :profession="professionItem" :key="professionItem.icon" />
+      <ProfessionItem
+        v-for="professionItem in professionList"
+        :profession="professionItem"
+        :key="professionItem.icon"
+      />
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
