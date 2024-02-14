@@ -24,7 +24,7 @@ const menu = [
   {
     title: "Профессиональные пробы",
     icon: badgeIcon,
-    link: "/",
+    link: "/professional",
   },
   {
     title: "Статьи",

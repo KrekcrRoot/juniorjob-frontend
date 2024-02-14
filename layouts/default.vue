@@ -24,7 +24,7 @@ const menu = [
   {
     title: "Профессиональные пробы",
     icon: badgeIcon,
-    link: "/",
+    link: "/professional",
   },
   {
     title: "Статьи",
@@ -79,7 +79,7 @@ const currentRole = computed(() => {
   }
 });
 
-const searchPlaceholder = ref("Поиск")
+const searchPlaceholder = ref("Поиск");
 
 onMounted(() => {
   if (process.client) {
@@ -87,16 +87,18 @@ onMounted(() => {
     window.addEventListener("resize", checkMobile);
 
     const userStore = useUserStore();
-    if(userStore) {
-      if(userStore.roles.current === 'individual' || userStore.roles.current === 'legal_entity') {
-        searchPlaceholder.value = "Поиск соискателей"
-  } else {
-    searchPlaceholder.value = "Поиск вакансий"
-  }
+    if (userStore) {
+      if (
+        userStore.roles.current === "individual" ||
+        userStore.roles.current === "legal_entity"
+      ) {
+        searchPlaceholder.value = "Поиск соискателей";
+      } else {
+        searchPlaceholder.value = "Поиск вакансий";
+      }
     } else {
-      searchPlaceholder.value = "Поиск"
+      searchPlaceholder.value = "Поиск";
     }
-    
   }
 });
 </script>
