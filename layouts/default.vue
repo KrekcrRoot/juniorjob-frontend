@@ -29,7 +29,7 @@ const menu = [
   {
     title: "Статьи",
     icon: noteIcon,
-    link: "/",
+    link: "/articles",
   },
   {
     title: "Настройки",

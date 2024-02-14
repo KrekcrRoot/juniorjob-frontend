@@ -13,34 +13,34 @@
           </p>
           <div class="flex flex-col mt-2">
             <div class="flex items-center gap-2">
-              пр. Гагарина, 56, каб. 403 (4 этаж)
+              Смоленск, ул. 25 Сентября, 28А
             </div>
-            <div class="flex items-center gap-2">28.02.2024, 12:00</div>
+            <div class="flex items-center gap-2">12 марта 2024 12:00</div>
           </div>
           <div class="flex flex-col professional__item-buttons">
-            <button class="btn-outline professional__item-button">123</button>
-            <button class="btn professional__item-button">123</button>
+            <button class="btn-outline professional__item-button">Подробнее</button>
+            <button class="btn professional__item-button">Записаться</button>
           </div>
         </div>
       </div>
       <div class="professional__item">
         <div class="professional__item-image">
-          <img src="@/assets/images/professional/demo1.jpeg" alt="" />
+          <img src="@/assets/images/professional/demo2.jpeg" alt="" />
         </div>
         <div class="professional__item-content">
-          <span class="professional__item-tag">IT-Технологии</span>
+          <span class="professional__item-tag">Творчество</span>
           <p class="professional__item-title">
-            Мастер-класс по программированию
+            Открытый урок по творческим профессиям
           </p>
           <div class="flex flex-col mt-2">
             <div class="flex items-center gap-2">
-              пр. Гагарина, 56, каб. 403 (4 этаж)
+              Смоленск, ул. Румянцева, 8
             </div>
-            <div class="flex items-center gap-2">28.02.2024, 12:00</div>
+            <div class="flex items-center gap-2">23 марта 2024 в 16:00</div>
           </div>
           <div class="flex flex-col professional__item-buttons">
-            <button class="btn-outline professional__item-button">123</button>
-            <button class="btn professional__item-button">123</button>
+            <button class="btn-outline professional__item-button">Подробнее</button>
+            <button class="btn professional__item-button">Записаться</button>
           </div>
         </div>
       </div>
