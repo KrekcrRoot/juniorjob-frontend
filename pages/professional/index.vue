@@ -4,7 +4,7 @@
     <div class="professional__list">
       <div class="professional__item">
         <div class="professional__item-image">
-          <img src="@/assets/images/articles/articles-demo.jpg" alt="" />
+          <img src="@/assets/images/professional/demo1.jpeg" alt="" />
         </div>
         <div class="professional__item-content">
           <span class="professional__item-tag">IT-Технологии</span>
@@ -59,6 +59,11 @@
     line-height: 67%;
     color: #2c1b47;
     margin-bottom: 28px;
+    @media screen and (max-width: 678px) {
+      font-size: 20px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
   &__list {
     margin-top: 40px;
@@ -66,6 +71,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    @media screen and (max-width: 678px) {
+      flex-direction: column;
+    }
   }
   &__item {
     max-width: calc(33% - 10px);
@@ -73,6 +81,11 @@
     box-shadow: 0 4px 21px 0 rgba(47, 32, 70, 0.2);
     overflow: hidden;
     border-radius: 16px;
+    @media screen and (max-width: 678px) {
+      max-width: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
     &-image {
       width: 100%;
       height: 230px;

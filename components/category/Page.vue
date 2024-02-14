@@ -99,14 +99,14 @@ const vacancyResponse = async (data) => {
     console.log(err)
   }
 
-  if (userStore.roles.current === "applicant") {
+  if (userStore.roles !== null && userStore.roles.current === "applicant") {
     vacanciesStore.fetchApplicantResponses(userStore.user.uuid);
   }
   console.log(res);
 };
 
 const searchResponse = (id) => {
-  if (userStore.roles.current === "applicant") {
+  if (userStore.roles !== null && userStore.roles.current === "applicant") {
     return !!vacanciesStore?.vacanciesResponses.find((w) => {
       return w.vacancy.uuid === id;
     });
@@ -120,7 +120,7 @@ const toggleVacancyComment = (id) => {
 
 onMounted(async () => {
   await vacanciesStore.fetchVacancies();
-  if (userStore.roles.current === "applicant") {
+  if (userStore.roles !== null && userStore.roles.current === "applicant") {
     vacanciesStore.fetchApplicantResponses(userStore.user.uuid);
   }
   if (categoriesStore.categories.length === 0) {

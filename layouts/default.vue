@@ -87,7 +87,7 @@ onMounted(() => {
     window.addEventListener("resize", checkMobile);
 
     const userStore = useUserStore();
-    if (userStore) {
+    if (userStore && userStore.roles !== null) {
       if (
         userStore.roles.current === "individual" ||
         userStore.roles.current === "legal_entity"
