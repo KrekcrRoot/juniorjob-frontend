@@ -32,7 +32,9 @@
 }
 
 body {
+  position: relative;
   font-family: "Source Sans Pro", sans-serif;
+  min-height: calc(100vh - 0px);
   margin: 0;
   padding: 0;
 }

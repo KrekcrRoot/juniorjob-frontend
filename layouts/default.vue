@@ -219,7 +219,7 @@ onMounted(() => {
     <slot />
   </div>
 
-  <div class="relative">
+  <div class="relative h-full h-100">
     <div
       class="sidebar-backdrop"
       @click="isBurgerMenuVisible = false"
@@ -289,6 +289,47 @@ onMounted(() => {
       </div>
     </transition>
   </div>
+  <footer class="footer">
+    <div class="container mx-auto footer__container">
+      <NuxtLink to="/" class="logo footer__logo">
+        <img src="@/assets/images/logo-white.svg" alt="JuniorJob" />
+      </NuxtLink>
+
+      <div class="flex gap-[30px]">
+        <a
+          target="_blank"
+          href="https://vk.com/ivanthe93"
+          class="footer__text flex items-center justify-center"
+        >
+          Руководитель проекта <br />
+          Чернявский Иван Дмитриевич: vk.com/ivanthe93
+        </a>
+        <div>
+          <a
+            target="_blank"
+            style="cursor: pointer"
+            href="https://vk.com/junijob"
+            class="flex items-center gap-2 mb-1"
+          >
+            <div class="footer__icon">
+              <img src="@/assets/images/icons/VKLogo.svg" alt="" />
+            </div>
+            <p class="footer__text">Сообщество Вконтакте</p>
+          </a>
+          <a
+            style="cursor: pointer"
+            href="mailto:ivanplaying7@gmail.com"
+            class="flex items-center gap-2"
+          >
+            <div class="footer__icon">
+              <img src="@/assets/images/icons/mail.svg" alt="" />
+            </div>
+            <p class="footer__text">ivanplaying7@gmail.com</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <style lang="scss">
@@ -496,6 +537,7 @@ onMounted(() => {
 }
 
 .main-wrapper {
+  padding-bottom: 170px;
   @media (max-width: 979px) {
     position: relative;
     margin-top: -25px;
@@ -556,5 +598,49 @@ onMounted(() => {
   padding: 3rem 20px 2rem 20px;
   width: 300px;
   transition: 0.25s; /* Добавляем анимацию сдвига меню */
+}
+.footer {
+  &__container {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    width: 120px;
+    display: block;
+    height: 60px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  &__icon {
+    width: 24px;
+    height: 24px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  &__text {
+    color: #3d337e;
+    font-size: 16px;
+    font-weight: 600;
+    &:hover {
+      color: #9820dd;
+    }
+  }
+  margin-top: 120px;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background: #d8d4f1;
 }
 </style>
