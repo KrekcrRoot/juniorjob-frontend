@@ -104,6 +104,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <div>
   <div class="relative">
     <header>
       <div class="header-wrapper xl:container mx-auto px-5">
@@ -218,7 +219,47 @@ onMounted(() => {
   <div class="main-wrapper">
     <slot />
   </div>
+  <footer class="footer">
+    <div class="container mx-auto footer__container">
+      <NuxtLink to="/" class="logo footer__logo">
+        <img src="@/assets/images/logo-white.svg" alt="JuniorJob" />
+      </NuxtLink>
 
+      <div class="footer__contacts">
+        <a
+          target="_blank"
+          href="https://vk.com/ivanthe93"
+          class="footer__text flex items-center justify-center"
+        >
+          Руководитель проекта <br />
+          Чернявский Иван Дмитриевич: vk.com/ivanthe93
+        </a>
+        <div>
+          <a
+            target="_blank"
+            style="cursor: pointer"
+            href="https://vk.com/junijob"
+            class="flex items-center gap-2 mb-1"
+          >
+            <div class="footer__icon">
+              <img src="@/assets/images/icons/VKLogo.svg" alt="" />
+            </div>
+            <p class="footer__text">Сообщество Вконтакте</p>
+          </a>
+          <a
+            style="cursor: pointer"
+            href="mailto:ivanplaying7@gmail.com"
+            class="flex items-center gap-2"
+          >
+            <div class="footer__icon">
+              <img src="@/assets/images/icons/mail.svg" alt="" />
+            </div>
+            <p class="footer__text">ivanplaying7@gmail.com</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
   <div class="relative h-full h-100">
     <div
       class="sidebar-backdrop"
@@ -289,47 +330,7 @@ onMounted(() => {
       </div>
     </transition>
   </div>
-  <footer class="footer">
-    <div class="container mx-auto footer__container">
-      <NuxtLink to="/" class="logo footer__logo">
-        <img src="@/assets/images/logo-white.svg" alt="JuniorJob" />
-      </NuxtLink>
-
-      <div class="footer__contacts">
-        <a
-          target="_blank"
-          href="https://vk.com/ivanthe93"
-          class="footer__text flex items-center justify-center"
-        >
-          Руководитель проекта <br />
-          Чернявский Иван Дмитриевич: vk.com/ivanthe93
-        </a>
-        <div>
-          <a
-            target="_blank"
-            style="cursor: pointer"
-            href="https://vk.com/junijob"
-            class="flex items-center gap-2 mb-1"
-          >
-            <div class="footer__icon">
-              <img src="@/assets/images/icons/VKLogo.svg" alt="" />
-            </div>
-            <p class="footer__text">Сообщество Вконтакте</p>
-          </a>
-          <a
-            style="cursor: pointer"
-            href="mailto:ivanplaying7@gmail.com"
-            class="flex items-center gap-2"
-          >
-            <div class="footer__icon">
-              <img src="@/assets/images/icons/mail.svg" alt="" />
-            </div>
-            <p class="footer__text">ivanplaying7@gmail.com</p>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  </div>
 </template>
 
 <style lang="scss">
@@ -539,6 +540,7 @@ onMounted(() => {
 .main-wrapper {
   padding-bottom: 170px;
   @media (max-width: 979px) {
+    min-height: calc(100vh - 300px);
     position: relative;
     margin-top: -25px;
     padding-top: 100px;
@@ -659,13 +661,14 @@ onMounted(() => {
   }
   margin-top: 120px;
   position: absolute;
+  z-index: 3000;
   width: 100%;
   left: 0;
   bottom: 0;
   background: #d8d4f1;
   @media screen and (max-width: 1265px) {
-    margin-top: 60px;
-    position: relative;
+    margin-top: 10px;
+    // position: relative;
   }
 }
 </style>

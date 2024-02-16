@@ -152,7 +152,7 @@ onMounted(() => {
     <slot />
   </div>
 
-  <div class="relative">
+  <div class="relative relative h-full h-100">
     <div
       class="sidebar-backdrop"
       @click="isBurgerMenuVisible = false"
@@ -219,7 +219,9 @@ onMounted(() => {
         </div>
       </div>
     </transition>
-    <footer class="footer">
+
+  </div>
+  <footer class="footer">
       <div class="container mx-auto footer__container">
         <NuxtLink to="/" class="logo footer__logo">
           <img src="@/assets/images/logo-white.svg" alt="JuniorJob" />
@@ -260,7 +262,6 @@ onMounted(() => {
         </div>
       </div>
     </footer>
-  </div>
 </template>
 
 <style lang="scss">
@@ -454,10 +455,8 @@ onMounted(() => {
 
 .main-wrapper {
   padding-bottom: 170px;
-  @media screen and (max-width: 1265px) {
-    padding-bottom: 70px;
-  }
   @media (max-width: 979px) {
+    min-height: calc(100vh - 300px);
     position: relative;
     margin-top: -25px;
     padding-top: 100px;
@@ -467,7 +466,9 @@ onMounted(() => {
     box-shadow: 0px -10px 15px 0px rgba(44, 27, 71, 0.08);
     z-index: 1000;
   }
-  
+  @media screen and (max-width: 1265px) {
+    padding-bottom: 70px;
+  }
 }
 
 .welcome-card {
@@ -577,14 +578,14 @@ onMounted(() => {
   }
   margin-top: 120px;
   position: absolute;
+  z-index: 3000;
   width: 100%;
   left: 0;
   bottom: 0;
   background: #d8d4f1;
   @media screen and (max-width: 1265px) {
-    margin-top: 60px;
-    position: relative;
+    margin-top: 10px;
+    // position: relative;
   }
-
 }
 </style>
