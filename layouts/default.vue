@@ -295,7 +295,7 @@ onMounted(() => {
         <img src="@/assets/images/logo-white.svg" alt="JuniorJob" />
       </NuxtLink>
 
-      <div class="flex gap-[30px]">
+      <div class="footer__contacts">
         <a
           target="_blank"
           href="https://vk.com/ivanthe93"
@@ -548,6 +548,9 @@ onMounted(() => {
     box-shadow: 0px -10px 15px 0px rgba(44, 27, 71, 0.08);
     z-index: 1000;
   }
+  @media screen and (max-width: 1265px) {
+    padding-bottom: 70px;
+  }
 }
 
 .welcome-card {
@@ -607,6 +610,9 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media screen and (max-width: 806px) {
+    flex-direction: column;
+  }
   }
 
   &__logo {
@@ -636,11 +642,30 @@ onMounted(() => {
       color: #9820dd;
     }
   }
+  &__contacts {
+    display: flex;
+    gap: 30px;
+    @media screen and (max-width: 806px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  & .footer__text {
+    @media screen and (max-width: 806px) {
+  
+    text-align: center;
+  }
+  }
+  }
   margin-top: 120px;
   position: absolute;
   width: 100%;
   left: 0;
   bottom: 0;
   background: #d8d4f1;
+  @media screen and (max-width: 1265px) {
+    margin-top: 60px;
+    position: relative;
+  }
 }
 </style>
