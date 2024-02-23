@@ -23,18 +23,20 @@ const activeVacancyComment = ref(null);
 const message = ref("");
 
 const vacancyResponse = async (data) => {
-  try {
-    const res = await api.vacancies.createResponse(data);
-    activeVacancyComment.value = "";
-  } catch (err) {
-    console.log(err);
-  }
   if (userStore.roles && userStore.roles.current === "applicant") {
-    vacanciesStore.fetchApplicantResponses(userStore.user.uuid);
-    // vacanciesStore.vacanciesResponses = [
-    //   ...vacanciesStore.vacanciesResponses,
-    //   res,
-    // ];
+    try {
+      const res = await api.vacancies.createResponse(data);
+      activeVacancyComment.value = "";
+    } catch (err) {
+      console.log(err);
+    }
+    if (userStore.roles && userStore.roles.current === "applicant") {
+      vacanciesStore.fetchApplicantResponses(userStore.user.uuid);
+      // vacanciesStore.vacanciesResponses = [
+      //   ...vacanciesStore.vacanciesResponses,
+      //   res,
+      // ];
+    }
   }
 };
 
@@ -60,7 +62,7 @@ const toggleVacancyComment = (id) => {
 // })
 
 onMounted(async () => {
-  if (userStore.roles && userStore.roles.current === "applicant") {
+  if (userStore.roles.current === "applicant") {
     vacanciesStore.fetchApplicantResponses(userStore.user.uuid);
   }
   window.addEventListener("resize", handleResize);
@@ -255,6 +257,7 @@ onBeforeUnmount(() => {
                   class="field vacancies-list__item-review--field"
                 ></textarea>
                 <button
+                  v-if="userStore.roles.current === 'applicant'"
                   @click="
                     vacancyResponse({ uuid: vacancy.uuid, message: message })
                   "
@@ -623,6 +626,7 @@ onBeforeUnmount(() => {
                   class="field vacancies-list__item-review--field"
                 ></textarea>
                 <button
+                  v-if="userStore.roles.current === 'applicant'"
                   @click="
                     vacancyResponse({ uuid: vacancy.uuid, message: message })
                   "

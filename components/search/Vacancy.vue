@@ -1,25 +1,29 @@
 <template>
-        <div class="vacancies-list__item">
-<div class="flex items-center gap-2">
-
-  <div class="vacancies-list__avatar">
-    <img :src="`${$config.public.baseURL}/storage/users/${item.employer.image}`" alt="" />
+  <div class="vacancies-list__item">
+    <div class="flex items-center gap-2">
+      <div class="vacancies-list__avatar">
+        <img
+          :src="`${$config.public.baseURL}/storage/users/${item.employer.image}`"
+          alt=""
+        />
+      </div>
+      <div>
+        <NuxtLink
+          :to="{ name: 'vacancies-id', params: { id: item?.uuid } }"
+          class="vacancies-list__title"
+        >
+          {{ item.title }}
+        </NuxtLink>
+        <p class="vacancies-list__text">
+          <img src="@/assets/images/icons/location_on.svg" alt="" />
+          {{ item.place }}
+        </p>
+        <p class="vacancies-list__text">
+          {{ item.time }}
+        </p>
+      </div>
+    </div>
   </div>
-  <div>
-    <NuxtLink :to="{ name: 'vacancies-id', params: { id: item.uuid } }" class="vacancies-list__title">
-      {{ item.title }}
-    </NuxtLink>
-    <p class="vacancies-list__text">
-      <img src="@/assets/images/icons/location_on.svg" alt=""> {{ item.place }}
-    </p>
-    <p class="vacancies-list__text">
-      {{ item.time }}
-    </p>
-  </div>
-</div>
-
-
-</div>
 </template>
 <script setup>
 const props = defineProps({
@@ -56,7 +60,6 @@ const props = defineProps({
       margin-top: 25px;
       margin-bottom: 20px;
       width: 100%;
-
 
       &--field {
         min-width: 50%;

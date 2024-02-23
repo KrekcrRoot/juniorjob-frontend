@@ -219,49 +219,48 @@ onMounted(() => {
         </div>
       </div>
     </transition>
-
   </div>
   <footer class="footer">
-      <div class="container mx-auto footer__container">
-        <NuxtLink to="/" class="logo footer__logo">
-          <img src="@/assets/images/logo-white.svg" alt="JuniorJob" />
-        </NuxtLink>
+    <div class="container mx-auto footer__container">
+      <NuxtLink to="/" class="logo footer__logo">
+        <img src="@/assets/images/logo-white.svg" alt="JuniorJob" />
+      </NuxtLink>
 
-        <div class="footer__contacts">
+      <div class="footer__contacts">
+        <a
+          target="_blank"
+          href="https://vk.com/ivanthe93"
+          class="footer__text flex items-center justify-center"
+        >
+          Руководитель проекта <br />
+          Чернявский Иван Дмитриевич: vk.com/ivanthe93
+        </a>
+        <div>
           <a
             target="_blank"
-            href="https://vk.com/ivanthe93"
-            class="footer__text flex items-center justify-center"
+            style="cursor: pointer"
+            href="https://vk.com/junijob"
+            class="flex items-center gap-2 mb-1"
           >
-            Руководитель проекта <br />
-            Чернявский Иван Дмитриевич: vk.com/ivanthe93
+            <div class="footer__icon">
+              <img src="@/assets/images/icons/VKLogo.svg" alt="" />
+            </div>
+            <p class="footer__text">Сообщество Вконтакте</p>
           </a>
-          <div>
-            <a
-              target="_blank"
-              style="cursor: pointer"
-              href="https://vk.com/junijob"
-              class="flex items-center gap-2 mb-1"
-            >
-              <div class="footer__icon">
-                <img src="@/assets/images/icons/VKLogo.svg" alt="" />
-              </div>
-              <p class="footer__text">Сообщество Вконтакте</p>
-            </a>
-            <a
-              style="cursor: pointer"
-              href="mailto:ivanplaying7@gmail.com"
-              class="flex items-center gap-2"
-            >
-              <div class="footer__icon">
-                <img src="@/assets/images/icons/mail.svg" alt="" />
-              </div>
-              <p class="footer__text">ivanplaying7@gmail.com</p>
-            </a>
-          </div>
+          <a
+            style="cursor: pointer"
+            href="mailto:ivanplaying7@gmail.com"
+            class="flex items-center gap-2"
+          >
+            <div class="footer__icon">
+              <img src="@/assets/images/icons/mail.svg" alt="" />
+            </div>
+            <p class="footer__text">ivanplaying7@gmail.com</p>
+          </a>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
 </template>
 
 <style lang="scss">
@@ -530,12 +529,12 @@ onMounted(() => {
     align-items: center;
     justify-content: space-between;
     @media screen and (max-width: 806px) {
-    flex-direction: column;
-  }
+      flex-direction: column;
+    }
   }
 
   &__logo {
-    width: 120px;
+    width: 183px;
     display: block;
     height: 60px;
     img {
@@ -565,16 +564,15 @@ onMounted(() => {
     display: flex;
     gap: 30px;
     @media screen and (max-width: 806px) {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  & .footer__text {
-    @media screen and (max-width: 806px) {
-  
-    text-align: center;
-  }
-  }
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    & .footer__text {
+      @media screen and (max-width: 806px) {
+        text-align: center;
+      }
+    }
   }
   margin-top: 120px;
   position: absolute;
@@ -586,6 +584,9 @@ onMounted(() => {
   @media screen and (max-width: 1265px) {
     margin-top: 10px;
     // position: relative;
+  }
+  @media screen and (max-width: 768px) {
+    position: relative;
   }
 }
 </style>

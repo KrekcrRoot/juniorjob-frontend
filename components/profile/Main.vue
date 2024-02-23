@@ -9,16 +9,16 @@ const userStore = useUserStore();
 
 const user = ref({
   role: {
-    current: ''
-  }
+    current: "",
+  },
 });
 
 onMounted(async () => {
   if (route?.params?.id) {
     const response = await api.users.getById(route?.params?.id);
     user.value = response;
-    const uDataRes = await api.roles.get_data(response.role.current, response.uuid)
-    user.value["userData"] = uDataRes[uDataRes.current]
+    const uDataRes = await api.roles.get_roles_data(response.role.uuid);
+    user.value["userData"] = uDataRes[uDataRes.current];
     // response.then(async(res) => {
     //   user.value = res;
     //   const uDataRes = await api.roles.get_user_roles(user.value.uuid)
@@ -32,9 +32,11 @@ onMounted(async () => {
 </script>
 
 <template>
-    <ProfileApplicantExternal :user="user" v-if="user.role.current === 'applicant'" />
-    <ProfileEmployerExternal :user="user" v-else />
+  <ProfileApplicantExternal
+    :user="user"
+    v-if="user.role.current === 'applicant'"
+  />
+  <ProfileEmployerExternal :user="user" v-else />
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -104,232 +104,247 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-  <div class="relative">
-    <header>
-      <div class="header-wrapper xl:container mx-auto px-5">
-        <div class="header">
-          <div class="header__control-nav mobile-show flex items-center gap-1">
-            <button
-              @click="isBurgerMenuVisible = true"
-              class="burger-menu mobile-show mr-4"
+  <div class="main-container">
+    <div class="relative">
+      <header>
+        <div class="header-wrapper xl:container mx-auto px-5">
+          <div class="header">
+            <div
+              class="header__control-nav mobile-show flex items-center gap-1"
             >
-              <img src="@/assets/images/icons/menu.svg" alt="" />
-            </button>
-            <div class="flex items-center gap-3">
-              <button class="burger-menu burger-menu--mobile-icon mobile-show">
-                <img src="@/assets/images/icons/chat_bubble-white.svg" alt="" />
-              </button>
-              <button class="burger-menu burger-menu--mobile-icon mobile-show">
-                <img
-                  src="@/assets/images/icons/notifications-white.svg"
-                  alt=""
-                />
-              </button>
-              <NuxtLink
-                to="/login-welcome"
-                class="burger-menu burger-menu--mobile-icon mobile-show"
+              <button
+                @click="isBurgerMenuVisible = true"
+                class="burger-menu mobile-show mr-4"
               >
-                <img
-                  src="@/assets/images/icons/account_circle-white.svg"
-                  alt=""
-                />
-              </NuxtLink>
+                <img src="@/assets/images/icons/menu.svg" alt="" />
+              </button>
+              <div class="flex items-center gap-3">
+                <button
+                  class="burger-menu burger-menu--mobile-icon mobile-show"
+                >
+                  <img
+                    src="@/assets/images/icons/chat_bubble-white.svg"
+                    alt=""
+                  />
+                </button>
+                <button
+                  class="burger-menu burger-menu--mobile-icon mobile-show"
+                >
+                  <img
+                    src="@/assets/images/icons/notifications-white.svg"
+                    alt=""
+                  />
+                </button>
+                <NuxtLink
+                  to="/login-welcome"
+                  class="burger-menu burger-menu--mobile-icon mobile-show"
+                >
+                  <img
+                    src="@/assets/images/icons/account_circle-white.svg"
+                    alt=""
+                  />
+                </NuxtLink>
+              </div>
             </div>
-          </div>
 
-          <NuxtLink to="/" class="logo">
-            <img
-              v-if="!isMobile"
-              src="@/assets/images/logo.svg"
-              alt="JuniorJob"
-            />
-            <img v-else src="@/assets/images/logo-white.svg" alt="JuniorJob" />
-          </NuxtLink>
-          <div class="mobile-hide flex items-center gap-5">
-            <div class="header__icon">
-              <img src="@/assets/images/icons/chat_bubble.svg" alt="Чат" />
-            </div>
-            <div class="header__icon">
+            <NuxtLink to="/" class="logo">
               <img
-                src="@/assets/images/icons/notifications.svg"
-                alt="Уведомления"
+                v-if="!isMobile"
+                src="@/assets/images/logo.svg"
+                alt="JuniorJob"
               />
-            </div>
-            <NuxtLink to="/login-welcome" class="header__icon">
               <img
-                src="@/assets/images/icons/account_circle.svg"
-                alt="Профиль"
+                v-else
+                src="@/assets/images/logo-white.svg"
+                alt="JuniorJob"
               />
             </NuxtLink>
-          </div>
-        </div>
-
-        <div class="mobile-hide main-menu flex justify-between my-4">
-          <RouterLink
-            v-for="(menuItem, index) in menu"
-            :to="menuItem.link"
-            :key="index"
-            class="main-menu__link"
-          >
-            <span class="main-menu__link--icon">
-              <img :src="menuItem.icon" />
-            </span>
-            {{ menuItem.title }}
-          </RouterLink>
-          <button v-if="isLoggedIn" @click="logout" class="main-menu__link">
-            Выход
-          </button>
-        </div>
-        <div
-          class="header-search-wrapper grid xl:grid-cols-12 md:grid-cols-1 gap-4"
-        >
-          <div class="header__search-wrapper col-start-1 col-span-8">
-            <!-- кнопка поиска -->
-            <button @click="search" class="header__search-button">
-              <img src="@/assets/images/icons/search.svg" alt="" />
-            </button>
-            <!-- //кнопка поиска -->
-            <input
-              type="text"
-              class="header__search col-start-1 col-span-8"
-              :placeholder="searchPlaceholder"
-              v-model="searchQuery"
-            />
-          </div>
-          <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2">
-            <!-- <button class="filter-btn">
-              <div class="filter-btn__icon">
-                <img src="@/assets/images/icons/filter_alt.svg" alt="" />
+            <div class="mobile-hide flex items-center gap-5">
+              <div class="header__icon">
+                <img src="@/assets/images/icons/chat_bubble.svg" alt="Чат" />
               </div>
-              <span> Фильтры </span>
-            </button> -->
-            <!-- <button class="filter-btn">
-              <div class="filter-btn__icon">
-                <img src="@/assets/images/icons/sync_alt.svg" alt="" />
+              <div class="header__icon">
+                <img
+                  src="@/assets/images/icons/notifications.svg"
+                  alt="Уведомления"
+                />
               </div>
-              <span> Сортировка </span>
-            </button> -->
-          </div>
-        </div>
-      </div>
-    </header>
-  </div>
-  <!-- main content -->
-  <div class="main-wrapper">
-    <slot />
-  </div>
-  <footer class="footer">
-    <div class="container mx-auto footer__container">
-      <NuxtLink to="/" class="logo footer__logo">
-        <img src="@/assets/images/logo-white.svg" alt="JuniorJob" />
-      </NuxtLink>
-
-      <div class="footer__contacts">
-        <a
-          target="_blank"
-          href="https://vk.com/ivanthe93"
-          class="footer__text flex items-center justify-center"
-        >
-          Руководитель проекта <br />
-          Чернявский Иван Дмитриевич: vk.com/ivanthe93
-        </a>
-        <div>
-          <a
-            target="_blank"
-            style="cursor: pointer"
-            href="https://vk.com/junijob"
-            class="flex items-center gap-2 mb-1"
-          >
-            <div class="footer__icon">
-              <img src="@/assets/images/icons/VKLogo.svg" alt="" />
-            </div>
-            <p class="footer__text">Сообщество Вконтакте</p>
-          </a>
-          <a
-            style="cursor: pointer"
-            href="mailto:ivanplaying7@gmail.com"
-            class="flex items-center gap-2"
-          >
-            <div class="footer__icon">
-              <img src="@/assets/images/icons/mail.svg" alt="" />
-            </div>
-            <p class="footer__text">ivanplaying7@gmail.com</p>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <div class="relative h-full h-100">
-    <div
-      class="sidebar-backdrop"
-      @click="isBurgerMenuVisible = false"
-      v-if="isBurgerMenuVisible"
-    >
-      1
-    </div>
-    <transition name="slide">
-      <div
-        v-if="isBurgerMenuVisible"
-        @click.stop
-        class="sidebar-panel burger-menu-content"
-      >
-        <div class="flex-col">
-          <div class="flex items-center gap-3">
-            <div class="burger-menu-content__icon">
-              <img
-                src="@/assets/images/icons/account_circle.svg"
-                alt="Профиль"
-              />
-            </div>
-            <div v-if="userStore.user && userStore.access_token">
-              <NuxtLink to="/profile" class="block bolder-title mb-2">
-                <template v-if="userStore.user.role.current === 'legal_entity'">
-                  {{ userStore.user.userData.title }}
-                </template>
-                <template v-else>
-                  {{ userStore.user.userData.name }}
-                </template>
+              <NuxtLink to="/login-welcome" class="header__icon">
+                <img
+                  src="@/assets/images/icons/account_circle.svg"
+                  alt="Профиль"
+                />
               </NuxtLink>
             </div>
-            <div v-else>
-              <NuxtLink to="/register-welcome" class="block bolder-title mb-2"
-                >Регистрация</NuxtLink
-              >
-              <NuxtLink to="/login" class="block bolder-title">Вход</NuxtLink>
-            </div>
           </div>
-          <div class="mt-6">
+
+          <div class="mobile-hide main-menu flex justify-between my-4">
             <RouterLink
-              @click="closeMenu"
               v-for="(menuItem, index) in menu"
               :to="menuItem.link"
               :key="index"
-              class="main-menu__link my-3"
+              class="main-menu__link"
             >
               <span class="main-menu__link--icon">
                 <img :src="menuItem.icon" />
               </span>
               {{ menuItem.title }}
             </RouterLink>
+            <button v-if="isLoggedIn" @click="logout" class="main-menu__link">
+              Выход
+            </button>
           </div>
-          <div class="welcome-card mt-4">
-            Добро пожаловать в Junior Job! Нужна помощь по использованию или
-            разберетесь сами?
-            <button class="btn mt-4">Помогите!</button>
-          </div>
-
-          <button
-            v-if="isLoggedIn"
-            @click="logout"
-            class="burger-menu__logout-btn btn mt-4 w-full"
+          <div
+            class="header-search-wrapper grid xl:grid-cols-12 md:grid-cols-1 gap-4"
           >
-            Выход
-          </button>
+            <div class="header__search-wrapper col-start-1 col-span-8">
+              <!-- кнопка поиска -->
+              <button @click="search" class="header__search-button">
+                <img src="@/assets/images/icons/search.svg" alt="" />
+              </button>
+              <!-- //кнопка поиска -->
+              <input
+                type="text"
+                class="header__search col-start-1 col-span-8"
+                :placeholder="searchPlaceholder"
+                v-model="searchQuery"
+              />
+            </div>
+            <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2">
+              <!-- <button class="filter-btn">
+              <div class="filter-btn__icon">
+                <img src="@/assets/images/icons/filter_alt.svg" alt="" />
+              </div>
+              <span> Фильтры </span>
+            </button> -->
+              <!-- <button class="filter-btn">
+              <div class="filter-btn__icon">
+                <img src="@/assets/images/icons/sync_alt.svg" alt="" />
+              </div>
+              <span> Сортировка </span>
+            </button> -->
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+    <!-- main content -->
+    <div class="main-wrapper">
+      <slot />
+    </div>
+    <footer class="footer">
+      <div class="container mx-auto footer__container">
+        <NuxtLink to="/" class="logo footer__logo">
+          <img src="@/assets/images/logo-white.svg" alt="JuniorJob" />
+        </NuxtLink>
+
+        <div class="footer__contacts">
+          <a
+            target="_blank"
+            href="https://vk.com/ivanthe93"
+            class="footer__text flex items-center justify-center"
+          >
+            Руководитель проекта <br />
+            Чернявский Иван Дмитриевич: vk.com/ivanthe93
+          </a>
+          <div>
+            <a
+              target="_blank"
+              style="cursor: pointer"
+              href="https://vk.com/junijob"
+              class="flex items-center gap-2 mb-1"
+            >
+              <div class="footer__icon">
+                <img src="@/assets/images/icons/VKLogo.svg" alt="" />
+              </div>
+              <p class="footer__text">Сообщество Вконтакте</p>
+            </a>
+            <a
+              style="cursor: pointer"
+              href="mailto:ivanplaying7@gmail.com"
+              class="flex items-center gap-2"
+            >
+              <div class="footer__icon">
+                <img src="@/assets/images/icons/mail.svg" alt="" />
+              </div>
+              <p class="footer__text">ivanplaying7@gmail.com</p>
+            </a>
+          </div>
         </div>
       </div>
-    </transition>
-  </div>
+    </footer>
+    <div class="relative h-full h-100">
+      <div
+        class="sidebar-backdrop"
+        @click="isBurgerMenuVisible = false"
+        v-if="isBurgerMenuVisible"
+      >
+        1
+      </div>
+      <transition name="slide">
+        <div
+          v-if="isBurgerMenuVisible"
+          @click.stop
+          class="sidebar-panel burger-menu-content"
+        >
+          <div class="flex-col">
+            <div class="flex items-center gap-3">
+              <div class="burger-menu-content__icon">
+                <img
+                  src="@/assets/images/icons/account_circle.svg"
+                  alt="Профиль"
+                />
+              </div>
+              <div v-if="userStore.user && userStore.access_token">
+                <NuxtLink to="/profile" class="block bolder-title mb-2">
+                  <template
+                    v-if="userStore.user.role.current === 'legal_entity'"
+                  >
+                    {{ userStore.user.userData.title }}
+                  </template>
+                  <template v-else>
+                    {{ userStore.user.userData.name }}
+                  </template>
+                </NuxtLink>
+              </div>
+              <div v-else>
+                <NuxtLink to="/register-welcome" class="block bolder-title mb-2"
+                  >Регистрация</NuxtLink
+                >
+                <NuxtLink to="/login" class="block bolder-title">Вход</NuxtLink>
+              </div>
+            </div>
+            <div class="mt-6">
+              <RouterLink
+                @click="closeMenu"
+                v-for="(menuItem, index) in menu"
+                :to="menuItem.link"
+                :key="index"
+                class="main-menu__link my-3"
+              >
+                <span class="main-menu__link--icon">
+                  <img :src="menuItem.icon" />
+                </span>
+                {{ menuItem.title }}
+              </RouterLink>
+            </div>
+            <div class="welcome-card mt-4">
+              Добро пожаловать в Junior Job! Нужна помощь по использованию или
+              разберетесь сами?
+              <button class="btn mt-4">Помогите!</button>
+            </div>
+
+            <button
+              v-if="isLoggedIn"
+              @click="logout"
+              class="burger-menu__logout-btn btn mt-4 w-full"
+            >
+              Выход
+            </button>
+          </div>
+        </div>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -613,12 +628,12 @@ onMounted(() => {
     align-items: center;
     justify-content: space-between;
     @media screen and (max-width: 806px) {
-    flex-direction: column;
-  }
+      flex-direction: column;
+    }
   }
 
   &__logo {
-    width: 120px;
+    width: 183px;
     display: block;
     height: 60px;
     img {
@@ -648,16 +663,15 @@ onMounted(() => {
     display: flex;
     gap: 30px;
     @media screen and (max-width: 806px) {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  & .footer__text {
-    @media screen and (max-width: 806px) {
-  
-    text-align: center;
-  }
-  }
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    & .footer__text {
+      @media screen and (max-width: 806px) {
+        text-align: center;
+      }
+    }
   }
   margin-top: 120px;
   position: absolute;
@@ -670,5 +684,16 @@ onMounted(() => {
     margin-top: 10px;
     // position: relative;
   }
+
+  @media screen and (max-width: 460px) {
+    position: relative;
+  }
+}
+
+.main-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>
