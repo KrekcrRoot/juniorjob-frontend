@@ -32,6 +32,7 @@ const deleteVacancy = (id) => {
 const selectResponse = async (uuid) => {
   try {
     const res = await api.vacancies.selectResponse(uuid);
+    actualVacancy.value.responseSelected = uuid;
   } catch (err) {
     console.log(err);
   }
@@ -293,9 +294,9 @@ onMounted(async () => {
                     Выбрать исполнителем
                   </button>
                 </a>
-                <!-- <p class="profile__reviews-item-comment">
-                    Хочу помочь вам с вашими чудесными мохнатиками!
-                  </p> -->
+                <p class="profile__reviews-item-comment">
+                  {{ candidat.message }}
+                </p>
               </div>
             </div>
           </div>

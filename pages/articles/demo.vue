@@ -10,7 +10,7 @@
       расскажем, куда кликать и в какую сторону идти (спойлер: к успеху). Добро
       пожаловать в Junior Job!
     </p>
-    <h2 class="articles__postitle mt-3 mb-2">Главная страница</h2>
+    <h2 class="articles__postitle mt-4 mb-2">Главная страница</h2>
     <p class="articles__text">
       Начнем наше путешествие с главной страницы. Ну не все же путешествия
       должны начинаться весело. Не все функции доступны без регистрации — вы не
@@ -24,7 +24,7 @@
       приятное нам, команде Junior Job. Вернуться на главную страницу можно
       нажав на логотип.
     </p>
-    <h2 class="articles__postitle mt-3 mb-2">Регистрация</h2>
+    <h2 class="articles__postitle mt-4 mb-2">Регистрация</h2>
     <p class="articles__text">
       Наконец-то вы приняли самое правильное решение и нажали кнопку
       «Зарегистрироваться». Соискатели (те, кто ищет работу) и работодатели (те,
@@ -52,7 +52,8 @@
         alt=""
       />
     </div>
-    <h2 class="articles__postitle mt-3 mb-2">Меню</h2>
+    <h2 class="articles__postitle mt-4 mb-2">Меню</h2>
+
     <p class="articles__text">
       В мобильной версии сервиса меню можно открыть, нажав на значок с тремя
       горизонтальными полосками в левом верхнем углу экрана. Неавторизированные
@@ -63,7 +64,11 @@
       от откликах и найме или возвращаться к избранным статьям и вакансиям.
       Также из меню можно перейти в свой профиль.
     </p>
-    <h2 class="articles__postitle mt-3 mb-2">Профиль</h2>
+    <div class="articles__images-grid">
+      <img src="@/assets/images/articles/welcome/block2-menu1.png" alt="" />
+      <img src="@/assets/images/articles/welcome/block2-menu2.png" alt="" />
+    </div>
+    <h2 class="articles__postitle mt-4 mb-2">Профиль</h2>
     <p class="articles__text">
       Информация, которую вы указали в анкете, претерпев некоторые визуальные
       изменения, попадает в ваш профиль. Изменить ее можно, нажав на значок
@@ -73,7 +78,11 @@
       соискателя ниже этой информации располагаются отзывы, которые оставили
       предыдущие работодатели.
     </p>
-    <h2 class="articles__postitle mt-3 mb-2">Отзывы</h2>
+    <div class="articles__images-grid">
+      <img src="@/assets/images/articles/welcome/block3-profile1.png" alt="" />
+      <img src="@/assets/images/articles/welcome/block3-profile2.png" alt="" />
+    </div>
+    <h2 class="articles__postitle mt-4 mb-2">Отзывы</h2>
     <p class="articles__text">
       После того, как вы выберете исполнителя, вам придет уведомление с
       предложением оставить отзыв. Когда исполнитель закончит работу, вы сможете
@@ -85,7 +94,11 @@
       помогаете другим потенциальным работодателям более точно выбрать
       соискателя, а самому соискателю даете обратную связь.
     </p>
-    <h2 class="articles__postitle mt-3 mb-2">Вакансии</h2>
+    <div class="articles__images-grid">
+      <img src="@/assets/images/articles/welcome/block4-reviews1.png" alt="" />
+      <img src="@/assets/images/articles/welcome/block4-reviews2.png" alt="" />
+    </div>
+    <h2 class="articles__postitle mt-4 mb-2">Вакансии</h2>
     <p class="articles__text">
       Соискатели могут пропустить этот блок, а могут остаться, чтобы заглянуть в
       будущее, где они, с теплом вспоминая свои юные годы, ищут молодого
@@ -96,10 +109,30 @@
       информацию из анкеты, а также критерии, отмеченные галочкой. Позже на
       странице вакансии вы сможете увидеть откликнувшихся соискателей и выбрать
       одного из них исполнителем. <br /><br />
+    </p>
+    <div class="articles__images-grid">
+      <img
+        src="@/assets/images/articles/welcome/block5-vacancies1.png"
+        alt=""
+      />
+      <img
+        src="@/assets/images/articles/welcome/block5-vacancies2.png"
+        alt=""
+      />
+      <img
+        src="@/assets/images/articles/welcome/block5-vacancies2.png"
+        alt=""
+      />
+    </div>
+    <h2 class="articles__postitle mt-4 mb-2"></h2>
+    <p class="articles__text">
       Фух, теперь вы готовы к поискам. Если останутся вопросы, вы помните, куда
       идти. «Настройки» — имя, email, описание проблемы — «Отправить». Всегда
       будем рады помочь вам или получить обратную связь. <br /><br />
       Желаем удачи! С любовью, ваша команда разработки.
+    </p>
+    <p class="articles__footer flex justify-center text-center">
+      <img src="@/assets/images/articles/welcome/1.jpg" alt="" />
     </p>
   </div>
 </template>
@@ -127,10 +160,10 @@
   }
   &__postitle {
     text-align: center;
-    font-size: 25px;
+    font-size: 35px;
     color: #09051d;
     font-weight: 600;
-    margin-top: 25px;
+    margin-top: 65px;
     margin-bottom: 25px;
   }
   &__text {
@@ -152,6 +185,13 @@
     img {
       height: 100%;
     }
+    @media screen and (max-width: 590px) {
+      flex-direction: column;
+    }
+  }
+  &__footer {
+    margin-top: 30px;
+    margin-bottom: 120px;
   }
 }
 </style>

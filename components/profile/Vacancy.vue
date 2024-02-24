@@ -18,6 +18,15 @@ const handleResize = () => {
   isScreenSmall.value = window.innerWidth <= 490;
 };
 
+const selectResponse = async (uuid) => {
+  try {
+    vacancy.value.responseSelected = uuid;
+    const res = await api.vacancies.selectResponse(uuid);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const isInMyVacancies = ref(false);
 const activeVacancyComment = ref(null);
 const message = ref("");
@@ -349,7 +358,11 @@ onBeforeUnmount(() => {
                     >
                       Выбран исполнителем
                     </p>
-                    <button v-else class="btn btn--small ml-2">
+                    <button
+                      @click="selectResponse(candidat.uuid)"
+                      v-else
+                      class="btn btn--small ml-2"
+                    >
                       Выбрать исполнителем
                     </button>
                   </a>
@@ -601,13 +614,17 @@ onBeforeUnmount(() => {
                       >
                         Выбран исполнителем
                       </p>
-                      <button v-else class="btn btn--small ml-2">
+                      <button
+                        @click="selectResponse(candidat.uuid)"
+                        v-else
+                        class="btn btn--small ml-2"
+                      >
                         Выбрать исполнителем
                       </button>
                     </a>
-                    <!-- <p class="profile__reviews-item-comment">
-                  Хочу помочь вам с вашими чудесными мохнатиками!
-                </p> -->
+                    <p class="profile__reviews-item-comment">
+                      {{ candidat.message }}
+                    </p>
                   </div>
                 </div>
               </div>

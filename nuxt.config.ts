@@ -5,15 +5,12 @@ export default defineNuxtConfig({
       baseURL: process.env.API_BASE_URL,
     },
   },
-  modules: [
-    '@nuxtjs/tailwindcss',
-  ],
+  modules: ["@nuxtjs/tailwindcss", "@nuxt/ui"],
   app: {
-    head: {
-    }
+    head: {},
   },
   css: [
-    '~/assets/css/main.css',
+    "~/assets/css/main.css",
     // Другие ваши стили
   ],
-})
+});

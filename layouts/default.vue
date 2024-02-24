@@ -662,13 +662,13 @@ onMounted(() => {
   &__contacts {
     display: flex;
     gap: 30px;
-    @media screen and (max-width: 806px) {
+    @media screen and (max-width: 820px) {
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
     & .footer__text {
-      @media screen and (max-width: 806px) {
+      @media screen and (max-width: 820px) {
         text-align: center;
       }
     }
@@ -685,7 +685,7 @@ onMounted(() => {
     // position: relative;
   }
 
-  @media screen and (max-width: 460px) {
+  @media screen and (max-width: 820px) {
     position: relative;
   }
 }
