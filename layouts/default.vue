@@ -239,14 +239,18 @@ onMounted(() => {
         </NuxtLink>
 
         <div class="footer__contacts">
-          <a
-            target="_blank"
-            href="https://vk.com/ivanthe93"
-            class="footer__text flex items-center justify-center"
-          >
-            Руководитель проекта <br />
-            Чернявский Иван Дмитриевич: vk.com/ivanthe93
-          </a>
+          <div class="flex justify-center flex-col">
+            <a
+              target="_blank"
+              href="https://vk.com/ivanthe93"
+              class="footer__text"
+            >
+              Руководитель проекта <br />
+              Чернявский Иван Дмитриевич: vk.com/ivanthe93
+            </a>
+            <p>АНО Центр развития молодёжного предпринимательства "Вектор"</p>
+          </div>
+
           <div>
             <a
               target="_blank"
