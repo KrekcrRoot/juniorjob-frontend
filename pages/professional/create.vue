@@ -2,7 +2,7 @@
   <div>
     <div class="container-centered m-auto">
       <h1 class="user-title mb-5">Создать проф пробу</h1>
-      {{}}
+      {{ avatar }}
       <div class="relative">
         <form @submit.prevent="submit" class="user-form mt-5">
           <FormUploadImage @change="uploadImage" />
@@ -36,10 +36,10 @@
         </form>
       </div>
     </div>
-    <div :show="isOpen" class="fixed inset-0 flex items-center justify-center">
+    
     
   
-  <TransitionRoot appear  as="template">
+  <TransitionRoot appear :show="isOpen" as="template">
     <Dialog as="div" @close="closeModal" class="modal relative z-10">
       <TransitionChild
         as="template"
@@ -103,7 +103,7 @@
       </div>
     </Dialog>
   </TransitionRoot>
-  </div>
+  
   </div>
 </template>
 
@@ -123,6 +123,8 @@ const isOpen = ref(false)
 definePageMeta({
   layout: "empty",
 });
+
+const formData = new FormData();
 const avatar = ref(null);
 
 const form = ref({
@@ -139,22 +141,23 @@ const submit = async () => {
   form.value.time = ""
   form.value.place = ""
   form.value.category_uuid = ""
-  if (avatar.value) {
-    const formData = new FormData();
-    formData.append("image", avatar.value);
-    formData.append("professional_trial_uuid", res2.uuid);
-    const res = await api.profession.uploadImage(formData);
+  // if (avatar.value) {
+  //     const formData = new FormData();
+  //     formData.append("image", avatar.value);
+  //     const res = await api.profession.uploadImage(formData);
+
+  //   }
     openModal()
-  }
 };
 const uploadImage = (e) => {
   avatar.value = e.target.files[0];
 };
+
+const handleImageUpload = () => {
+  console.log("Файл был загружен успешно");
+};
 const categories = ref([]);
 onMounted(async () => {
-  // await api.profession.createCategory({ title: "Программирование" });
-  // await api.profession.allCategories();
-
   const res = await api.profession.allCategories();
   categories.value = res;
 });

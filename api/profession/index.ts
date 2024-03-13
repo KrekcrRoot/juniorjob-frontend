@@ -7,13 +7,18 @@ import ProfessionImageRequestDto from "./dto/ProfessionImageResponseDto";
 
 export default (instance: AxiosInstance) => {
   return {
+    async all() {
+      return instance.get(
+        "/professional-trials/all",
+      );
+    },
     async create(data: ProfessionRequestDto) {
       return instance.post<ProfessionResponseDto>(
         "/professional-trials/store",
         data
       );
     },
-    async uploadImage(data: ProfessionImageRequestDto) {
+    async uploadImage(data: any) {
       return instance.post("/professional-trials/uploadImage", data);
     },
     async allCategories() {

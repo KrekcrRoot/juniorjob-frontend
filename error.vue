@@ -43,11 +43,16 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import logo from "@/assets/images/logo.svg";
 definePageMeta({
   layout: "empty",
 });
-defineProps(["error"]);
+const props = defineProps(["error"]);
+
+onMounted(() => {
+  console.log(props)
+})
 </script>
 
 <style lang="scss" scoped>

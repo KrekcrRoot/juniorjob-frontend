@@ -8,20 +8,20 @@
     <h1 class="professional__title">Профессиональные пробы</h1>
 
     <div class="professional__list">
-      <div class="professional__item">
+      <div v-for="prof in profs" :key="prof.uuid" class="professional__item">
         <div class="professional__item-image">
           <img src="@/assets/images/professional/demo1.jpeg" alt="" />
         </div>
         <div class="professional__item-content">
           <span class="professional__item-tag">IT-Технологии</span>
           <p class="professional__item-title">
-            Мастер-класс по программированию
+            {{ prof.title }}
           </p>
           <div class="flex flex-col mt-2">
             <div class="flex items-center gap-2">
-              Смоленск, ул. 25 Сентября, 28А
+              {{ prof.place }}
             </div>
-            <div class="flex items-center gap-2">12 марта 2024 12:00</div>
+            <div class="flex items-center gap-2">{{ formatDateService.formatDate(prof.date) }} &nbsp;&nbsp; {{ prof.time }}</div>
           </div>
           <div class="flex flex-col professional__item-buttons">
             <button class="btn-outline professional__item-button">
@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-      <div class="professional__item">
+      <!-- <div class="professional__item">
         <div class="professional__item-image">
           <img src="@/assets/images/professional/demo2.jpeg" alt="" />
         </div>
@@ -53,22 +53,26 @@
             <button class="btn professional__item-button">Записаться</button>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
+import api from "~/api";
+import formatDateService from "~/services/formatDateService";
 import { useUserStore } from "~/store/user";
+const profs = ref([])
 let userStore = ref({
   roles: {
     current: "guest",
   },
 });
-onMounted(() => {
+onMounted(async() => {
   if (process.client) {
     userStore.value = useUserStore();
+    profs.value = await api.profession.all()
   }
 });
 </script>
@@ -76,6 +80,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .professional {
   padding-top: 60px;
+  padding-bottom: 140px;
   &__title {
     font-weight: 600;
     font-size: 30px;
