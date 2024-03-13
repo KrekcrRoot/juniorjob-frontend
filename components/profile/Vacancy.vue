@@ -71,7 +71,7 @@ const toggleVacancyComment = (id) => {
 // })
 
 onMounted(async () => {
-  if (userStore.roles.current === "applicant") {
+  if (userStore.roles && userStore.roles.current === "applicant") {
     vacanciesStore.fetchApplicantResponses(userStore.user.uuid);
   }
   window.addEventListener("resize", handleResize);
