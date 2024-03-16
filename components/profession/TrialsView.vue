@@ -9,6 +9,122 @@
 
     <div class="professional__list">
       <div v-for="prof in profs" :key="prof.uuid" class="professional__item">
+        <TransitionRoot appear :show="isOpen2" as="template">
+          <Dialog as="div" @close="closeModal2" class="modal relative z-10">
+            <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0"
+              enter-to="opacity-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100"
+              leave-to="opacity-0"
+            >
+              <div class="fixed inset-0 bg-black/25" />
+            </TransitionChild>
+
+            <div class="fixed inset-0 overflow-y-auto">
+              <div
+                class="flex min-h-full items-center justify-center p-4 text-center"
+              >
+                <TransitionChild
+                  as="template"
+                  enter="duration-300 ease-out"
+                  enter-from="opacity-0 scale-95"
+                  enter-to="opacity-100 scale-100"
+                  leave="duration-200 ease-in"
+                  leave-from="opacity-100 scale-100"
+                  leave-to="opacity-0 scale-95"
+                >
+                  <DialogPanel
+                    class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                  >
+                    <DialogTitle
+                      as="h3"
+                      class="modal__title text-lg font-medium leading-6 text-gray-900"
+                    >
+                      Запись
+                    </DialogTitle>
+                    <div class="mt-2">
+                      <h1>Вы успешно записаны</h1>
+                    </div>
+
+                    <div class="mt-4 flex gap-1">
+                      <div
+                        type="button"
+                        class="flex-auto cursor-pointer modal__button inline-flex justify-center bg-purple-300 rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        @click="closeModal2"
+                      >
+                        Закрыть
+                      </div>
+                    </div>
+                  </DialogPanel>
+                </TransitionChild>
+              </div>
+            </div>
+          </Dialog>
+        </TransitionRoot>
+        <TransitionRoot appear :show="isOpen" as="template">
+          <Dialog as="div" @close="closeModal" class="modal relative z-10">
+            <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0"
+              enter-to="opacity-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100"
+              leave-to="opacity-0"
+            >
+              <div class="fixed inset-0 bg-black/25" />
+            </TransitionChild>
+
+            <div class="fixed inset-0 overflow-y-auto">
+              <div
+                class="flex min-h-full items-center justify-center p-4 text-center"
+              >
+                <TransitionChild
+                  as="template"
+                  enter="duration-300 ease-out"
+                  enter-from="opacity-0 scale-95"
+                  enter-to="opacity-100 scale-100"
+                  leave="duration-200 ease-in"
+                  leave-from="opacity-100 scale-100"
+                  leave-to="opacity-0 scale-95"
+                >
+                  <DialogPanel
+                    class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                  >
+                    <DialogTitle
+                      as="h3"
+                      class="modal__title text-lg font-medium leading-6 text-gray-900"
+                    >
+                      Информация
+                    </DialogTitle>
+                    <div class="mt-2">
+                      <h1>{{ prof.title }}</h1>
+                      <p class="modal__text text-sm text-black">
+                        <b>Адрес: </b>{{ prof.place }} <br />
+                        <b>Время: </b>{{ prof.time }} <br />
+                        <b>Дата: </b
+                        >{{ formatDateService.formatDate(prof.date) }} <br />
+                      </p>
+                    </div>
+
+                    <div class="mt-4 flex gap-1">
+                      <div
+                        type="button"
+                        class="flex-auto cursor-pointer modal__button inline-flex justify-center bg-purple-300 rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        @click="closeModal"
+                      >
+                        Закрыть
+                      </div>
+                    </div>
+                  </DialogPanel>
+                </TransitionChild>
+              </div>
+            </div>
+          </Dialog>
+        </TransitionRoot>
         <div class="professional__item-image">
           <img
             :src="`${$config.public.baseURL}/storage/professionalTrial/${prof.image}`"
@@ -32,7 +148,10 @@
             v-if="userStore.roles && userStore.roles.current === 'moderator'"
           >
             <div class="flex flex-row gap-1 items-center">
-              <button class="btn-outline professional__item-button">
+              <button
+                @click="openModal"
+                class="btn-outline professional__item-button"
+              >
                 Подробнее
               </button>
               <div class="professional__delete" @click="deleteProf(prof.uuid)">
@@ -42,10 +161,15 @@
           </template>
           <template v-else>
             <div class="flex flex-col professional__item-buttons">
-              <button class="btn-outline professional__item-button">
+              <button
+                @click="openModal"
+                class="btn-outline professional__item-button"
+              >
                 Подробнее
               </button>
-              <button class="btn professional__item-button">Записаться</button>
+              <button @click="openModal2" class="btn professional__item-button">
+                Записаться
+              </button>
             </div>
           </template>
         </div>
@@ -78,6 +202,15 @@
 </template>
 
 <script lang="ts" setup>
+import {
+  TransitionRoot,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/vue";
+const isOpen = ref(false);
+const isOpen2 = ref(false);
 import { ref, onMounted } from "vue";
 import api from "~/api";
 import formatDateService from "~/services/formatDateService";
@@ -100,6 +233,18 @@ onMounted(async () => {
     profs.value = await api.profession.all();
   }
 });
+function closeModal() {
+  isOpen.value = false;
+}
+function openModal() {
+  isOpen.value = true;
+}
+function closeModal2() {
+  isOpen2.value = false;
+}
+function openModal2() {
+  isOpen2.value = true;
+}
 </script>
 
 <style scoped lang="scss">
