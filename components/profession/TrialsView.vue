@@ -10,10 +10,12 @@
     <div class="professional__list">
       <div v-for="prof in profs" :key="prof.uuid" class="professional__item">
         <div class="professional__item-image">
-          <img src="@/assets/images/professional/demo1.jpeg" alt="" />
+          <img
+            :src="`${$config.public.baseURL}/storage/professionalTrial/${prof.image}`"
+          />
         </div>
         <div class="professional__item-content">
-          <span class="professional__item-tag">IT-Технологии</span>
+          <span class="professional__item-tag">{{ prof.category.title }}</span>
           <p class="professional__item-title">
             {{ prof.title }}
           </p>
@@ -21,14 +23,31 @@
             <div class="flex items-center gap-2">
               {{ prof.place }}
             </div>
-            <div class="flex items-center gap-2">{{ formatDateService.formatDate(prof.date) }} &nbsp;&nbsp; {{ prof.time }}</div>
+            <div class="flex items-center gap-2">
+              {{ formatDateService.formatDate(prof.date) }} &nbsp;&nbsp;
+              {{ prof.time }}
+            </div>
           </div>
-          <div class="flex flex-col professional__item-buttons">
-            <button class="btn-outline professional__item-button">
-              Подробнее
-            </button>
-            <button class="btn professional__item-button">Записаться</button>
-          </div>
+          <template
+            v-if="userStore.roles && userStore.roles.current === 'moderator'"
+          >
+            <div class="flex flex-row gap-1 items-center">
+              <button class="btn-outline professional__item-button">
+                Подробнее
+              </button>
+              <div class="professional__delete">
+                <img src="@/assets/images/icons/trash.svg" />
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <div class="flex flex-col professional__item-buttons">
+              <button class="btn-outline professional__item-button">
+                Подробнее
+              </button>
+              <button class="btn professional__item-button">Записаться</button>
+            </div>
+          </template>
         </div>
       </div>
       <!-- <div class="professional__item">
@@ -63,16 +82,16 @@ import { ref, onMounted } from "vue";
 import api from "~/api";
 import formatDateService from "~/services/formatDateService";
 import { useUserStore } from "~/store/user";
-const profs = ref([])
+const profs = ref([]);
 let userStore = ref({
   roles: {
     current: "guest",
   },
 });
-onMounted(async() => {
+onMounted(async () => {
   if (process.client) {
     userStore.value = useUserStore();
-    profs.value = await api.profession.all()
+    profs.value = await api.profession.all();
   }
 });
 </script>
@@ -92,6 +111,10 @@ onMounted(async() => {
       padding-left: 10px;
       padding-right: 10px;
     }
+  }
+  &__delete {
+    width: 51px;
+    height: 51px;
   }
   &__list {
     margin-top: 40px;

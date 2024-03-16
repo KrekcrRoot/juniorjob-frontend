@@ -8,9 +8,7 @@ import ProfessionImageRequestDto from "./dto/ProfessionImageResponseDto";
 export default (instance: AxiosInstance) => {
   return {
     async all() {
-      return instance.get(
-        "/professional-trials/all",
-      );
+      return instance.get("/professional-trials/all");
     },
     async create(data: ProfessionRequestDto) {
       return instance.post<ProfessionResponseDto>(
@@ -18,8 +16,13 @@ export default (instance: AxiosInstance) => {
         data
       );
     },
-    async uploadImage(data: any) {
-      return instance.post("/professional-trials/uploadImage", data);
+    async uploadImage(formData: FormData) {
+      return instance.post("/professional-trials/uploadImage", formData, {
+        headers: {
+          ...instance.defaults.headers, // сохраняем текущие заголовки
+          "Content-Type": "multipart/form-data",
+        },
+      });
     },
     async allCategories() {
       return instance.get("/professional-trial-categories/all");
