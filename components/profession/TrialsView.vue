@@ -35,7 +35,7 @@
               <button class="btn-outline professional__item-button">
                 Подробнее
               </button>
-              <div class="professional__delete">
+              <div class="professional__delete" @click="deleteProf(prof.uuid)">
                 <img src="@/assets/images/icons/trash.svg" />
               </div>
             </div>
@@ -88,6 +88,12 @@ let userStore = ref({
     current: "guest",
   },
 });
+const deleteProf = async (uuid: string) => {
+  await api.profession.delete({
+    professional_trial_uuid: uuid,
+  });
+  profs.value = await api.profession.all();
+};
 onMounted(async () => {
   if (process.client) {
     userStore.value = useUserStore();
@@ -127,7 +133,7 @@ onMounted(async () => {
     }
   }
   &__item {
-    max-width: calc(33% - 10px);
+    min-width: 300px;
     background: #f9f9ff;
     box-shadow: 0 4px 21px 0 rgba(47, 32, 70, 0.2);
     overflow: hidden;

@@ -10,6 +10,9 @@ export default (instance: AxiosInstance) => {
     async all() {
       return instance.get("/professional-trials/all");
     },
+    async delete(data: ProfessionCategoryRequestDto) {
+      return instance.delete("/professional-trials", { data: data });
+    },
     async create(data: ProfessionRequestDto) {
       return instance.post<ProfessionResponseDto>(
         "/professional-trials/store",
