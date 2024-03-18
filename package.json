@@ -24,6 +24,7 @@
     "axios": "^1.6.2",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.0",
+    "socket.io-client": "^4.7.5",
     "vue3-spinners": "^1.2.2"
   }
 }
