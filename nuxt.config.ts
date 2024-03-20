@@ -5,7 +5,6 @@ export default defineNuxtConfig({
       baseURL: process.env.API_BASE_URL,
     },
   },
-  plugins: [{ src: "@/plugins/socket.io", ssr: false }],
   modules: ["@nuxtjs/tailwindcss", "@nuxt/ui"],
   app: {
     head: {},

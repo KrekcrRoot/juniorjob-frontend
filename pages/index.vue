@@ -1,7 +1,25 @@
 <script setup>
+import { io } from 'socket.io-client';
+
 definePageMeta({
   layout: "default",
 });
+
+const socket = io("wss://socket.junior-job.ru", {
+  query: {
+    "user_uuid": "dfdee640-9dc8-4d81-99d6-00a9e23fbcaa"
+  },
+  extraHeaders: {
+    "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNTQ1NzMyYTktZTkyNC00MTc3LWExNGUtN2M2ZWJlZjI1OGYzIiwiZW1haWwiOiJtb2RlckBiay5ydSIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3MTA4Njg2NTcsImV4cCI6MTcxMDg2OTI1N30.KABl2UF-nWqDKpTKHtljM9GR9a-bpLnpD4M7-u6F4Gg"
+  },
+  transports: ["websocket"]
+});
+
+const onClick = () => {
+  socket.emit("message", JSON.stringify({
+    "body": "message"
+  }))
+}
 </script>
 
 <template>
