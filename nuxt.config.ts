@@ -7,8 +7,19 @@ export default defineNuxtConfig({
   },
   modules: ["@nuxtjs/tailwindcss", "@nuxt/ui"],
   app: {
-    head: {},
+    head: {
+      script: [
+        {
+          src: "https://cdn.socket.io/4.7.5/socket.io.min.js",
+          type: "text/javascript",
+          integrity:
+            "sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO",
+          crossorigin: "anonymous",
+        },
+      ],
+    },
   },
+  plugins: ["~/plugins/socket.js"],
   css: [
     "~/assets/css/main.css",
     // Другие ваши стили

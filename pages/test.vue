@@ -1,65 +1,59 @@
 <template>
   <div>
-    <button @click="openModal">Open Modal</button>
-    <UiModal
-      :is-open="modalOpen"
-      @close="modalOpen = false"
-      title="Custom Modal Title"
-    >
-      <p>Here goes your custom content!</p>
-      <button @click="customAction">Custom Action</button>
-    </UiModal>
+    <!-- Ваш компонент -->
+    <button @click="button">button</button>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
-// import { io } from 'socket.io-client';
-
-
 export default {
-
-  setup() {
-    const modalOpen = ref(false);
-    // const userUuid = '8d477c7a-34be-4da3-933f-2c0d8aa53dd9';
-    // const socketUrl = "wss://socket.junior-job.ru";
-
-    // let socket = io(socketUrl, {
-    //     query: {
-    //       "user_uuid": userUuid
-    //     },
-    //     extraHeaders: {
-    //       "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZTNmZmNkMzYtODA3Mi00M2JjLTg2M2EtZGY3YmJlY2RlYzUzIiwiZW1haWwiOiJ0ZXN0dGVzdEBtYWlsLnJ1Iiwicm9sZSI6ImxlZ2FsX2VudGl0eSIsImlhdCI6MTcxMDkyMzkyMSwiZXhwIjoxNzEwOTI0NTIxfQ._FKTpNNTLXUITIn5BBRpEsF6U7aZ4s2Z5f3RfyQ8B6Y"
-    //     },
-    //     "transports": ['websocket'],
-    //   });
-
-    // socket.on('incoming', (data) => {
-    //   console.log('Incoming data:', data);
-    // });
-
-    // socket.on('debug', (data) => {
-    //   console.log('Debug:', data);
-    // });
-
-    const openModal = () => {
-      modalOpen.value = true;
+  data() {
+    return {
+      socket: null,
     };
-
-    const customAction = () => {
-      console.log('Performing custom action...');
-    };
-
-    // const sendMessage = () => {
-    //   const message = {
-    //     body: 'text from app'
-    //   };
-    //   socket.emit('message', JSON.stringify(message));
-    // };
-
-    return { modalOpen, openModal, customAction, sendMessage };
   },
   mounted() {
-  }
+    if (process.client) {
+      this.initializeSocket();
+    }
+  },
+  methods: {
+    initializeSocket() {
+      // Инициализируйте соединение с сервером socket.io
+      this.socket = io("wss://socket.junior-job.ru", {
+        query: {
+          user_uuid: "78dce235-cc1a-48ca-89d7-0faf47e7d867",
+        },
+        extraHeaders: {
+          authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiYjNjMDI5YjktZTFiMy00OWFiLWFhZGEtOTM1NWQwZjU2NzdjIiwiZW1haWwiOiJtb2RlckBiay5ydSIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3MTExMzI0OTIsImV4cCI6MTcxMTEzMzM5Mn0.v8Ume8IsBdFP_HX9a25VGfBPhkr34VsQNU7lIi8njko",
+        },
+      });
+
+      this.socket.on("connect", () => {
+        console.log("Connected to socket.io server");
+        // Вы можете здесь отправить сообщение или подписаться на события
+      });
+
+      this.socket.on("message", (data) => {
+        console.log("Message received: ", data);
+        // Обработка входящих сообщений
+      });
+
+      this.socket.on("disconnect", (reason) => {
+        console.log(`Disconnected: ${reason}`);
+      });
+
+      // Обработчики других событий...
+    },
+    button() {
+      this.socket.emit("message", JSON.stringify({ body: "m7878" }));
+    },
+  },
+  beforeDestroy() {
+    if (this.socket) {
+      this.socket.disconnect();
+    }
+  },
 };
 </script>
