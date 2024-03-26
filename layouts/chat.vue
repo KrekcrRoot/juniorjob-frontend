@@ -4,9 +4,11 @@ import { useRoute } from "vue-router";
 import api from "~/api";
 const user = ref([]);
 const route = useRoute();
-onMounted(async () => {
-  user.value = await api.users.getById(route.params.id);
-});
+// onMounted(async () => {
+//   if (route.params.id) {
+//     user.value = await api.users.getById(route.params.id);
+//   }
+// });
 </script>
 
 <template>

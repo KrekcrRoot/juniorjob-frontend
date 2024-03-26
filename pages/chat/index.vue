@@ -17,9 +17,9 @@
         </div>
         <div class="chat__chats-item-content">
           <p class="chat__chats-item-title">{{ chat.user.email }}</p>
-          <!-- <p class="chat__chats-item-text">
+          <p class="chat__chats-item-text">
             Вы: <span>Расскажите про свой опыт</span>
-          </p> -->
+          </p>
         </div>
       </NuxtLink>
     </div>
@@ -56,13 +56,14 @@ async function fetchUsersAndUpdateChats() {
       chatsData.value[i].second_user,
     ];
 
-    let findUser = arrUser.splice(arrUser.indexOf(useUserStore().user.uuid), 1);
-    const user = await api.users.getById(chatsData.value[i].second_user);
+    arrUser.splice(arrUser.indexOf(useUserStore().user.uuid), 1);
+    let remainingUser = arrUser[0];
+    const user = await api.users.getById(remainingUser);
 
     // Теперь добавим ключ 'test' к каждому объекту в chatsData
     chats.value[i] = {
       ...chatsData.value[i],
-      user: findUser,
+      user: user,
       test: { test: 123, test2: 456 },
     };
   }
