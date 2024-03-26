@@ -19,7 +19,6 @@ export default defineNuxtConfig({
       ],
     },
   },
-  plugins: ["~/plugins/socket.js"],
   css: [
     "~/assets/css/main.css",
     // Другие ваши стили

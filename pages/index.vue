@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted } from "vue";
-import socket from "~/plugins/socket";
 // import { io } from "socket.io-client";
 
 definePageMeta({

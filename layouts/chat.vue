@@ -1,5 +1,12 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import api from "~/api";
+const user = ref([]);
+const route = useRoute();
+onMounted(async () => {
+  user.value = await api.users.getById(route.params.id);
+});
 </script>
 
 <template>
@@ -8,11 +15,11 @@ import { ref, onMounted } from "vue";
       <div class="xl:container mx-auto">
         <NuxtLink to="/chat" class="flex items-center chat__back">
           <img src="@/assets/images/icons/arrow_white-left.svg" alt="" />
-          <div class="chat__user">
+          <div v-if="user" class="chat__user">
             <div class="chat__user-avatar">
               <img src="@/assets/images/profile/review-demo.png" alt="" />
             </div>
-            <p class="chat__user-name">Елена</p>
+            <p class="chat__user-name">{{ user?.email }}</p>
           </div>
         </NuxtLink>
       </div>

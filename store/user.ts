@@ -8,6 +8,8 @@ export const useUserStore = defineStore("user", {
       user: {
         userData: {},
       },
+      socketConnect: false,
+      messages: "",
       payload: "",
       roles: {},
       access_token: "",

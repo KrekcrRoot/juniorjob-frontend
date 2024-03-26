@@ -1,147 +1,110 @@
 <template>
-  <div class="chat-message__messages" ref="chatContainer">
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. At ratione quidem
-    atque molestias architecto perspiciatis odio dolorum fuga, magni nesciunt
-    temporibus impedit, earum nulla culpa, illo illum voluptatem consequuntur.
-    Est! Molestiae vitae fugiat laudantium nostrum minima doloribus obcaecati
-    neque, natus eveniet quod repudiandae laborum debitis eligendi quaerat saepe
-    nemo quos? Tempora dolore esse animi laudantium officiis. Tempora, aut
-    veniam. Incidunt! Nihil labore aliquam quos optio corporis distinctio
-    adipisci amet. Repellendus ullam velit ratione deleniti ad pariatur placeat
-    adipisci, maiores ipsa saepe maxime alias magnam distinctio dolorem vel,
-    voluptatum exercitationem sit. Eligendi numquam totam reiciendis facilis
-    ullam harum eos delectus, dolorem unde sed vero atque ex dolor explicabo
-    illo debitis rerum aliquam aspernatur doloribus, earum facere fugiat dolore?
-    Adipisci, reiciendis quos! Mollitia eveniet earum expedita at et, quaerat
-    impedit a iste quasi asperiores incidunt corrupti vero eum illum atque
-    debitis neque alias ratione adipisci laboriosam natus cupiditate
-    consequuntur est similique? Ut? Lorem, ipsum dolor sit amet consectetur
-    adipisicing elit. At ratione quidem atque molestias architecto perspiciatis
-    odio dolorum fuga, magni nesciunt temporibus impedit, earum nulla culpa,
-    illo illum voluptatem consequuntur. Est! Molestiae vitae fugiat laudantium
-    nostrum minima doloribus obcaecati neque, natus eveniet quod repudiandae
-    laborum debitis eligendi quaerat saepe nemo quos? Tempora dolore esse animi
-    laudantium officiis. Tempora, aut veniam. Incidunt! Nihil labore aliquam
-    quos optio corporis distinctio adipisci amet. Repellendus ullam velit
-    ratione deleniti ad pariatur placeat adipisci, maiores ipsa saepe maxime
-    alias magnam distinctio dolorem vel, voluptatum exercitationem sit. Eligendi
-    numquam totam reiciendis facilis ullam harum eos delectus, dolorem unde sed
-    vero atque ex dolor explicabo illo debitis rerum aliquam aspernatur
-    doloribus, earum facere fugiat dolore? Adipisci, reiciendis quos! Mollitia
-    eveniet earum expedita at et, quaerat impedit a iste quasi asperiores
-    incidunt corrupti vero eum illum atque debitis neque alias ratione adipisci
-    laboriosam natus cupiditate consequuntur est similique? Ut? Lorem, ipsum
-    dolor sit amet consectetur adipisicing elit. At ratione quidem atque
-    molestias architecto perspiciatis odio dolorum fuga, magni nesciunt
-    temporibus impedit, earum nulla culpa, illo illum voluptatem consequuntur.
-    Est! Molestiae vitae fugiat laudantium nostrum minima doloribus obcaecati
-    neque, natus eveniet quod repudiandae laborum debitis eligendi quaerat saepe
-    nemo quos? Tempora dolore esse animi laudantium officiis. Tempora, aut
-    veniam. Incidunt! Nihil labore aliquam quos optio corporis distinctio
-    adipisci amet. Repellendus ullam velit ratione deleniti ad pariatur placeat
-    adipisci, maiores ipsa saepe maxime alias magnam distinctio dolorem vel,
-    voluptatum exercitationem sit. Eligendi numquam totam reiciendis facilis
-    ullam harum eos delectus, dolorem unde sed vero atque ex dolor explicabo
-    illo debitis rerum aliquam aspernatur doloribus, earum facere fugiat dolore?
-    Adipisci, reiciendis quos! Mollitia eveniet earum expedita at et, quaerat
-    impedit a iste quasi asperiores incidunt corrupti vero eum illum atque
-    debitis neque alias ratione adipisci laboriosam natus cupiditate
-    consequuntur est similique? Ut? Lorem, ipsum dolor sit amet consectetur
-    adipisicing elit. At ratione quidem atque molestias architecto perspiciatis
-    odio dolorum fuga, magni nesciunt temporibus impedit, earum nulla culpa,
-    illo illum voluptatem consequuntur. Est! Molestiae vitae fugiat laudantium
-    nostrum minima doloribus obcaecati neque, natus eveniet quod repudiandae
-    laborum debitis eligendi quaerat saepe nemo quos? Tempora dolore esse animi
-    laudantium officiis. Tempora, aut veniam. Incidunt! Nihil labore aliquam
-    quos optio corporis distinctio adipisci amet. Repellendus ullam velit
-    ratione deleniti ad pariatur placeat adipisci, maiores ipsa saepe maxime
-    alias magnam distinctio dolorem vel, voluptatum exercitationem sit. Eligendi
-    numquam totam reiciendis facilis ullam harum eos delectus, dolorem unde sed
-    vero atque ex dolor explicabo illo debitis rerum aliquam aspernatur
-    doloribus, earum facere fugiat dolore? Adipisci, reiciendis quos! Mollitia
-    eveniet earum expedita at et, quaerat impedit a iste quasi asperiores
-    incidunt corrupti vero eum illum atque debitis neque alias ratione adipisci
-    laboriosam natus cupiditate consequuntur est similique? Ut? Lorem, ipsum
-    dolor sit amet consectetur adipisicing elit. At ratione quidem atque
-    molestias architecto perspiciatis odio dolorum fuga, magni nesciunt
-    temporibus impedit, earum nulla culpa, illo illum voluptatem consequuntur.
-    Est! Molestiae vitae fugiat laudantium nostrum minima doloribus obcaecati
-    neque, natus eveniet quod repudiandae laborum debitis eligendi quaerat saepe
-    nemo quos? Tempora dolore esse animi laudantium officiis. Tempora, aut
-    veniam. Incidunt! Nihil labore aliquam quos optio corporis distinctio
-    adipisci amet. Repellendus ullam velit ratione deleniti ad pariatur placeat
-    adipisci, maiores ipsa saepe maxime alias magnam distinctio dolorem vel,
-    voluptatum exercitationem sit. Eligendi numquam totam reiciendis facilis
-    ullam harum eos delectus, dolorem unde sed vero atque ex dolor explicabo
-    illo debitis rerum aliquam aspernatur doloribus, earum facere fugiat dolore?
-    Adipisci, reiciendis quos! Mollitia eveniet earum expedita at et, quaerat
-    impedit a iste quasi asperiores incidunt corrupti vero eum illum atque
-    debitis neque alias ratione adipisci laboriosam natus cupiditate
-    consequuntur est similique? Ut? Lorem, ipsum dolor sit amet consectetur
-    adipisicing elit. At ratione quidem atque molestias architecto perspiciatis
-    odio dolorum fuga, magni nesciunt temporibus impedit, earum nulla culpa,
-    illo illum voluptatem consequuntur. Est! Molestiae vitae fugiat laudantium
-    nostrum minima doloribus obcaecati neque, natus eveniet quod repudiandae
-    laborum debitis eligendi quaerat saepe nemo quos? Tempora dolore esse animi
-    laudantium officiis. Tempora, aut veniam. Incidunt! Nihil labore aliquam
-    quos optio corporis distinctio adipisci amet. Repellendus ullam velit
-    ratione deleniti ad pariatur placeat adipisci, maiores ipsa saepe maxime
-    alias magnam distinctio dolorem vel, voluptatum exercitationem sit. Eligendi
-    numquam totam reiciendis facilis ullam harum eos delectus, dolorem unde sed
-    vero atque ex dolor explicabo illo debitis rerum aliquam aspernatur
-    doloribus, earum facere fugiat dolore? Adipisci, reiciendis quos! Mollitia
-    eveniet earum expedita at et, quaerat impedit a iste quasi asperiores
-    incidunt corrupti vero eum illum atque debitis neque alias ratione adipisci
-    laboriosam natus cupiditate consequuntur est similique? Ut? Lorem, ipsum
-    dolor sit amet consectetur adipisicing elit. At ratione quidem atque
-    molestias architecto perspiciatis odio dolorum fuga, magni nesciunt
-    temporibus impedit, earum nulla culpa, illo illum voluptatem consequuntur.
-    Est! Molestiae vitae fugiat laudantium nostrum minima doloribus obcaecati
-    neque, natus eveniet quod repudiandae laborum debitis eligendi quaerat saepe
-    nemo quos? Tempora dolore esse animi laudantium officiis. Tempora, aut
-    veniam. Incidunt! Nihil labore aliquam quos optio corporis distinctio
-    adipisci amet. Repellendus ullam velit ratione deleniti ad pariatur placeat
-    adipisci, maiores ipsa saepe maxime alias magnam distinctio dolorem vel,
-    voluptatum exercitationem sit. Eligendi numquam totam reiciendis facilis
-    ullam harum eos delectus, dolorem unde sed vero atque ex dolor explicabo
-    illo debitis rerum aliquam aspernatur doloribus, earum facere fugiat dolore?
-    Adipisci, reiciendis quos! Mollitia eveniet earum expedita at et, quaerat
-    impedit a iste quasi asperiores incidunt corrupti vero eum illum atque
-    debitis neque alias ratione adipisci laboriosam natus cupiditate
-    consequuntur est similique? Ut? Lorem, ipsum dolor sit amet consectetur
-    adipisicing elit. At ratione quidem atque molestias architecto perspiciatis
-    odio dolorum fuga, magni nesciunt temporibus impedit, earum nulla culpa,
-    illo illum voluptatem consequuntur. Est! Molestiae vitae fugiat laudantium
-    nostrum minima doloribus obcaecati neque, natus eveniet quod repudiandae
-    laborum debitis eligendi quaerat saepe nemo quos? Tempora dolore esse animi
-    laudantium officiis. Tempora, aut veniam. Incidunt! Nihil labore aliquam
-    quos optio corporis distinctio adipisci amet. Repellendus ullam velit
-    ratione deleniti ad pariatur placeat adipisci, maiores ipsa saepe maxime
-    alias magnam distinctio dolorem vel, voluptatum exercitationem sit. Eligendi
-    numquam totam reiciendis facilis ullam harum eos delectus, dolorem unde sed
-    vero atque ex dolor explicabo illo debitis rerum aliquam aspernatur
-    doloribus, earum facere fugiat dolore? Adipisci, reiciendis quos! Mollitia
-    eveniet earum expedita at et, quaerat impedit a iste quasi asperiores
-    incidunt corrupti vero eum illum atque debitis neque alias ratione adipisci
-    laboriosam natus cupiditate consequuntur est similique? Ut?
+  <div class="chat-message__messages">
+    <div
+      v-for="message in messages"
+      :key="message.uuid"
+      class="message"
+      :class="{
+        'my-message': message.user === user.user.uuid,
+        'other-message': message.user !== user.user.uuid,
+      }"
+    >
+      <div class="message-content">
+        {{ message.content }}
+      </div>
+    </div>
   </div>
-  <div class="chat-message__chat">chat</div>
+  <div class="chat-message__chat">
+    <input v-model="message" type="text" class="field w-full" />
+    <button @click="sendMessage" class="btn">Отправить</button>
+  </div>
 </template>
 
-<script setup>
-import { ref, onMounted, watch } from "vue";
+<script>
+import { ref } from "vue";
+import api from "~/api";
+import { useUserStore } from "~/store/user";
 definePageMeta({
   layout: "chat",
 });
-const chatContainer = ref(null);
-const scrollToBottom = () => {
-  chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+
+// const userStore = useUserStore();
+export default {
+  data() {
+    return {
+      socket: null,
+      message: "",
+      messages: [],
+      user: "",
+    };
+  },
+  async mounted() {
+    if (process.client) {
+      this.user = useUserStore();
+      useUserStore().socketConnect = false;
+      this.initializeSocket();
+      this.messages = await api.chat.get_chat_messages(this.$route.query.chat);
+    }
+  },
+  methods: {
+    initializeSocket() {
+      const token = useUserStore().access_token;
+      if (
+        token &&
+        this.$route.params.id &&
+        useUserStore().socketConnect === false
+      ) {
+        // Инициализируйте соединение с сервером socket.io
+        this.socket = io("wss://socket.junior-job.ru", {
+          query: {
+            user_uuid: this.$route.params.id,
+          },
+          extraHeaders: {
+            authorization: token,
+          },
+        });
+        useUserStore().socketConnect = true;
+      }
+
+      this.socket.on("connect", () => {
+        console.log("Connected to socket.io server");
+        // Вы можете здесь отправить сообщение или подписаться на события
+      });
+
+      this.socket.on("incoming", (data) => {
+        // alert("Получено сообщение: ", data);
+        const { body, ...otherProps } = data;
+        const incomingMessage = { content: body, ...otherProps };
+        // Вам, возможно, придется настроить структуру incomingMessage, чтобы соответствовать вашему массиву сообщений
+        this.messages.push(incomingMessage);
+      });
+
+      this.socket.on("disconnect", (reason) => {
+        console.log(`Disconnected: ${reason}`);
+      });
+
+      // Обработчики других событий...
+    },
+    async sendMessage() {
+      const newMessage = { body: this.message };
+      this.socket.emit("message", JSON.stringify(newMessage));
+      this.messages.push({
+        uuid: new Date().getTime(), // Временный уникальный ID, настройте согласно вашим требованиям
+        content: this.message,
+        user: this.user.user.uuid, // Настройте при необходимости, чтобы соответствовать вашей структуре данных
+      });
+      this.message = "";
+    },
+    async getMessage() {
+      this.messages = await api.chat.get_chat_messages(this.$route.query.chat);
+    },
+  },
+  beforeDestroy() {
+    if (this.socket) {
+      this.socket.disconnect();
+    }
+  },
 };
-onMounted(() => {
-  // Прокрутка при инициализации
-  scrollToBottom();
-  chatContainer.value.scrollIntoView();
-});
 </script>
 
 <style lang="scss" scoped>
@@ -157,14 +120,36 @@ onMounted(() => {
   height: 100%;
   &__messages {
     flex: 1;
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 50px;
+    width: 100%;
   }
   &__chat {
     position: sticky;
     bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     height: 30px;
-    background: red;
     height: 30px;
   }
+}
+.message {
+  padding: 15px 35px;
+  border-radius: 15px;
+  border: 1px solid #aaa2d8;
+  margin: 10px 0;
+}
+.my-message {
+  display: inline-flex;
+  align-self: flex-end;
+}
+.other-message {
+  display: inline-flex;
+  align-self: flex-start;
+  background: #e2ddf8;
 }
 </style>

@@ -26,7 +26,7 @@ export default {
         },
         extraHeaders: {
           authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiYjNjMDI5YjktZTFiMy00OWFiLWFhZGEtOTM1NWQwZjU2NzdjIiwiZW1haWwiOiJtb2RlckBiay5ydSIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3MTExMzI0OTIsImV4cCI6MTcxMTEzMzM5Mn0.v8Ume8IsBdFP_HX9a25VGfBPhkr34VsQNU7lIi8njko",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiYjNjMDI5YjktZTFiMy00OWFiLWFhZGEtOTM1NWQwZjU2NzdjIiwiZW1haWwiOiJtb2RlckBiay5ydSIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3MTEyNjM4MDUsImV4cCI6MTcxMTI2NDcwNX0.KZ0IOhvCBhBk3C4JijWyMv0p-TwY1fKel63v7hfYSIw",
         },
       });
 
