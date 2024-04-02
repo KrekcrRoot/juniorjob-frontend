@@ -110,9 +110,9 @@ onMounted(() => {
             <img v-else src="@/assets/images/logo-white.svg" alt="JuniorJob" />
           </NuxtLink>
           <div class="mobile-hide flex items-center gap-5">
-            <div class="header__icon">
+            <NuxtLink to="/chat" class="header__icon">
               <img src="@/assets/images/icons/chat_bubble.svg" alt="Чат" />
-            </div>
+            </NuxtLink>
             <div class="header__icon">
               <img
                 src="@/assets/images/icons/notifications.svg"

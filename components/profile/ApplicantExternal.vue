@@ -247,6 +247,12 @@ onBeforeUnmount(() => {
             {{ competition.label }}
           </div>
         </div>
+        <NuxtLink
+          :to="`/chat/user/${props.user.uuid}`"
+          class="profile__btn-msg btn mt-3"
+        >
+          Написать сообщение</NuxtLink
+        >
         <!-- <div class="profile__reviews-section mt-3">
                     <h2 class="profile__reviews-section-title">
                         Отзывы
@@ -315,5 +321,8 @@ onBeforeUnmount(() => {
     padding-left: 20px;
     padding-right: 20px;
   }
+}
+.profile__btn-msg {
+  display: inline-flex;
 }
 </style>

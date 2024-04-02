@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import api from "~/api";
 import base64url from "base64url";
+import { io } from "socket.io-client";
 
 export const useUserStore = defineStore("user", {
   state() {
@@ -15,6 +16,8 @@ export const useUserStore = defineStore("user", {
       access_token: "",
       refresh_token: "",
       vacancies: {},
+      chats: [],
+      socket: null,
     };
   },
   actions: {
@@ -140,6 +143,22 @@ export const useUserStore = defineStore("user", {
       } catch (error) {
         return error;
       }
+    },
+    initializeSocket(chatmateId) {
+      const token = this.access_token;
+      if (token) {
+        // Инициализируйте соединение с сервером socket.io
+        this.socket = io("wss://socket.junior-job.ru", {
+          query: {
+            user_uuid: chatmateId,
+          },
+          extraHeaders: {
+            authorization: token,
+          },
+        });
+      }
+
+      // Обработчики других событий...
     },
   },
   persist: true,
