@@ -7,8 +7,11 @@ import ProfessionImageRequestDto from "./dto/ProfessionImageResponseDto";
 
 export default (instance: AxiosInstance) => {
   return {
-    async all() {
-      return instance.get("/professional-trials/all");
+    async all(params?: any) {
+      return instance.get("/professional-trials/all", { params });
+    },
+    async my() {
+      return instance.get("/professional-trials/my");
     },
     async delete(data: ProfessionCategoryRequestDto) {
       return instance.delete("/professional-trials", { data: data });
@@ -18,6 +21,16 @@ export default (instance: AxiosInstance) => {
         "/professional-trials/store",
         data
       );
+    },
+    async respond(prof_uuid: string) {
+      return instance.post("/professional-trials/respond", {
+        professional_trial_uuid: prof_uuid,
+      });
+    },
+    async unregister(data: any) {
+      return instance.delete("/professional-trials/respond", {
+        data,
+      });
     },
     async uploadImage(formData: FormData) {
       return instance.post("/professional-trials/uploadImage", formData, {

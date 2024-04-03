@@ -28,25 +28,42 @@
           />
         </div>
         <div class="chat__chats-item-content">
-          <p
-            v-if="
-              chat.user.userData.name === '' &&
-              chat.user.userData.surname === ''
-            "
-            class="chat__chats-item-title"
-          >
-            Пользователь
-          </p>
-          <div class="flex items-center gap-2">
-            <p class="chat__chats-item-title">
-              {{ chat.user.email }}
+          <template v-if="chat.user.role.current === 'legal_entity'">
+            <p
+              v-if="chat.user.userData.title === ''"
+              class="chat__chats-item-title"
+            >
+              Пользователь
             </p>
-            <p class="chat__chats-item-text" v-html="chat.lastMsg"></p>
-            <div class="chat__new" v-if="chat.unreadMessages"></div>
-          </div>
+            <div v-else class="flex items-center gap-2">
+              <p class="chat__chats-item-title">
+                {{ chat.user.userData.title }}
+              </p>
+            </div>
+          </template>
+          <template v-else>
+            <p
+              v-if="
+                chat.user.userData.name === '' &&
+                chat.user.userData.surname === ''
+              "
+              class="chat__chats-item-title"
+            >
+              Пользователь
+            </p>
+            <div v-else class="flex items-center gap-2">
+              <p class="chat__chats-item-title">
+                {{ chat.user.userData.name }} {{ chat.user.userData.surname }}
+              </p>
+            </div>
+          </template>
+
+          <p class="chat__chats-item-text" v-html="chat.lastMsg"></p>
+          <div class="chat__new" v-if="chat.unreadMessages"></div>
         </div>
       </NuxtLink>
     </div>
+    <p v-else>У вас нет чатов</p>
   </div>
 </template>
 
@@ -66,7 +83,7 @@ const chats = ref([]);
 const showlastMsg = async (chatId, chatmateName) => {
   const msgs = await api.chat.get_chat_messages(chatId);
   if (msgs.length > 0) {
-    const lastMsg = msgs[msgs.length - 1];
+    const lastMsg = msgs[0];
     const user = lastMsg.user;
     let isMe = user === useUserStore().user.uuid ? true : false;
     if (isMe) {
@@ -99,12 +116,11 @@ async function fetchUsersAndUpdateChats() {
     arrUser.splice(arrUser.indexOf(useUserStore().user.uuid), 1);
     let remainingUser = arrUser[0];
     const user = await api.users.getById(remainingUser);
-    // const userData = await api.roles.get_user_roles(user.uuid);
+    const userData = await api.roles.get_user_roles(user.uuid);
     // Теперь добавим ключ 'test' к каждому объекту в chatsData
     chats.value[i] = {
       ...chatsData.value[i],
-      // user: { ...user, userData: userData[user.role.current] },
-      user: { ...user },
+      user: { ...user, userData: userData[user.role.current] },
     };
   }
 }
@@ -115,7 +131,10 @@ onMounted(async () => {
   useUserStore().chats = chats.value;
   for (let chat of useUserStore().chats) {
     useUserStore().initializeSocket(chat.user.uuid);
-    chat.lastMsg = await showlastMsg(chat.uuid, chat.user.userData.name);
+    chat.lastMsg = await showlastMsg(
+      chat.uuid,
+      chat.user.userData.name || chat.user.userData.title
+    );
   }
   // useUserStore().chats.forEach((chat) => {
   //   chat.unreadMessages = false;
@@ -123,7 +142,10 @@ onMounted(async () => {
 
   useUserStore().socket.on("incoming", async (data) => {
     for (let chat of useUserStore().chats) {
-      chat.lastMsg = await showlastMsg(chat.uuid, chat.user.userData.name);
+      chat.lastMsg = await showlastMsg(
+        chat.uuid,
+        chat.user.userData.name || chat.user.userData.title
+      );
       chat.unreadMessages = true;
     }
   });
@@ -169,6 +191,7 @@ onMounted(async () => {
         img {
           width: 100%;
           height: 100%;
+          object-fit: cover;
         }
       }
       &-title {

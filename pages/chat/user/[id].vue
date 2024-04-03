@@ -53,6 +53,7 @@ export default {
       message: "",
       messages: [],
       user: "",
+      chatmateData: [],
       showScrollButton: false,
     };
   },
@@ -61,7 +62,9 @@ export default {
       this.user = useUserStore();
       useUserStore().socketConnect = false;
       this.initializeSocket();
-      this.messages = await api.chat.get_chat_messages(this.$route.query.chat);
+      this.messages = (
+        await api.chat.get_chat_messages(this.$route.query.chat)
+      ).reverse();
       // Добавляем nextTick, чтобы убедиться, что DOM обновлён
       this.$nextTick(() => {
         // Используйте this.$refs для доступа к элементу
@@ -102,7 +105,7 @@ export default {
         const { body, ...otherProps } = data;
         const incomingMessage = { content: body, ...otherProps };
         // Вам, возможно, придется настроить структуру incomingMessage, чтобы соответствовать вашему массиву сообщений
-        this.messages.push(incomingMessage);
+        this.messages.unshift(incomingMessage);
         this.$nextTick(() => {
           this.scrollToBottom();
         });
@@ -117,7 +120,7 @@ export default {
     },
     async sendMessage() {
       const newMessage = { body: this.message };
-      this.socket.emit("message", JSON.stringify(newMessage));
+      this.socket.emit("message", newMessage);
       this.messages.push({
         uuid: new Date().getTime(), // Временный уникальный ID, настройте согласно вашим требованиям
         content: this.message,

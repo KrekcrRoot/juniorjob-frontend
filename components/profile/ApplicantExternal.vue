@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineProps } from "vue";
+import { ref, defineProps, onMounted } from "vue";
 import api from "~/api";
 import { useUserStore } from "~/store/user";
 import { useRouter } from "vue-router";
@@ -53,7 +53,35 @@ const handleResize = () => {
   isScreenSmall.value = window.innerWidth <= 490;
 };
 
+const chats = ref([]);
+const chatsData = ref([]);
+const findChatUuid = (employerUuid) => {
+  const chat = chats.value.find((c) => c.user.uuid === employerUuid);
+  return chat ? chat.uuid : null;
+};
+async function fetchUsersAndUpdateChats() {
+  for (let i = 0; i < chatsData.value.length; i++) {
+    let arrUser = [
+      chatsData.value[i].first_user,
+      chatsData.value[i].second_user,
+    ];
+
+    arrUser.splice(arrUser.indexOf(useUserStore().user.uuid), 1);
+    let remainingUser = arrUser[0];
+    const user = await api.users.getById(remainingUser);
+    const userData = await api.roles.get_user_roles(user.uuid);
+    // Теперь добавим ключ 'test' к каждому объекту в chatsData
+    chats.value[i] = {
+      ...chatsData.value[i],
+      user: { ...user, userData: userData[user.role.current] },
+    };
+  }
+}
+
 onMounted(async () => {
+  chatsData.value = await api.chat.get_my_chats();
+  await fetchUsersAndUpdateChats();
+  useUserStore().chats = chats.value;
   if (props.user) {
     const roles = await api.roles.get_roles_data(props.user.roles.uuid);
     console.log(roles);
@@ -147,7 +175,15 @@ onBeforeUnmount(() => {
             <span>Есть рекомендации из школы</span>
           </p>
         </div>
-        <button class="btn">Написать сообщение</button>
+        <NuxtLink
+          class="btn vacamcies-list__btn"
+          :to="{
+            name: 'chat-user-id',
+            params: { id: props.user.uuid },
+            query: { chat: findChatUuid(props?.user?.uuid) },
+          }"
+          >Написать сообщение</NuxtLink
+        >
         <p class="text-purple">Добавить в избранное</p>
       </template>
       <!-- АВАТАР И ИМЯ СОИСКАТЕЛЯ НА ПК -->
@@ -248,10 +284,13 @@ onBeforeUnmount(() => {
           </div>
         </div>
         <NuxtLink
-          :to="`/chat/user/${props.user.uuid}`"
-          class="profile__btn-msg btn mt-3"
-        >
-          Написать сообщение</NuxtLink
+          class="btn vacamcies-list__btn"
+          :to="{
+            name: 'chat-user-id',
+            params: { id: props.user.uuid },
+            query: { chat: findChatUuid(props.user.uuid) },
+          }"
+          >Написать сообщение</NuxtLink
         >
         <!-- <div class="profile__reviews-section mt-3">
                     <h2 class="profile__reviews-section-title">

@@ -277,7 +277,14 @@ onBeforeUnmount(() => {
               </div>
             </template>
 
-            <button class="btn mt-2">Написать</button>
+            <NuxtLink
+              class="btn"
+              :to="{
+                name: 'chat-user-id',
+                params: { id: vacancy?.employer?.uuid },
+              }"
+              >Написать</NuxtLink
+            >
             <div class="items-center justify-center flex mt-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -529,7 +536,14 @@ onBeforeUnmount(() => {
                   Откликнуться
                 </button>
               </template>
-              <button class="btn vacancy__btn">Написать</button>
+              <NuxtLink
+                class="btn"
+                :to="{
+                  name: 'chat-user-id',
+                  params: { id: vacancy?.employer?.uuid },
+                }"
+                >Написать</NuxtLink
+              >
               <div class="items-center justify-center flex items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

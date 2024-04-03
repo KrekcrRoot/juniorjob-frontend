@@ -16,6 +16,14 @@ export const useProfessionStore = defineStore("professionals", {
       await this.fetchCategories();
       return this.professionalsCategories;
     },
+    async getWithFilter(data: any) {
+      try {
+        const res = await api.profession.all(data);
+        return res;
+      } catch (error) {
+        return error;
+      }
+    },
   },
   persist: true,
 });

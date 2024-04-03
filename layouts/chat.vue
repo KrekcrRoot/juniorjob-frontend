@@ -4,11 +4,15 @@ import { useRoute } from "vue-router";
 import api from "~/api";
 const user = ref([]);
 const route = useRoute();
-// onMounted(async () => {
-//   if (route.params.id) {
-//     user.value = await api.users.getById(route.params.id);
-//   }
-// });
+onMounted(async () => {
+  if (route.params.id) {
+    user.value = await api.users.getById(route.params.id);
+
+    const userQuery = await api.users.getById(route.params.id);
+    const userData = await api.roles.get_user_roles(userQuery.uuid);
+    user.value = { ...userQuery, ...userData[userQuery.role.current] };
+  }
+});
 </script>
 
 <template>
@@ -19,9 +23,12 @@ const route = useRoute();
           <img src="@/assets/images/icons/arrow_white-left.svg" alt="" />
           <div v-if="user" class="chat__user">
             <div class="chat__user-avatar">
-              <img src="@/assets/images/profile/review-demo.png" alt="" />
+              <img
+                :src="`${$config.public.baseURL}/storage/users/${user.image}`"
+                alt=""
+              />
             </div>
-            <p class="chat__user-name">{{ user?.email }}</p>
+            <p class="chat__user-name">{{ user?.name }}</p>
           </div>
         </NuxtLink>
       </div>
@@ -67,6 +74,16 @@ const route = useRoute();
       font-weight: 400;
       font-size: 25px;
       color: #000;
+    }
+    &-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
   &__footer {
