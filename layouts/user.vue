@@ -81,9 +81,12 @@ onMounted(() => {
               <img src="@/assets/images/icons/menu.svg" alt="" />
             </button>
             <div class="flex items-center gap-3">
-              <button class="burger-menu burger-menu--mobile-icon mobile-show">
+              <NuxtLink
+                class="burger-menu burger-menu--mobile-icon mobile-show"
+                to="/chat"
+              >
                 <img src="@/assets/images/icons/chat_bubble-white.svg" alt="" />
-              </button>
+              </NuxtLink>
               <button class="burger-menu burger-menu--mobile-icon mobile-show">
                 <img
                   src="@/assets/images/icons/notifications-white.svg"
@@ -371,11 +374,6 @@ onMounted(() => {
   height: 32px;
   -webkit-tap-highlight-color: transparent;
 
-  &--mobile-icon {
-    width: 23px;
-    height: 23px;
-  }
-
   & img {
     width: 100%;
     height: 100%;
@@ -417,6 +415,11 @@ onMounted(() => {
 
   &__logout-btn {
     width: 100%;
+  }
+
+  &--mobile-icon {
+    width: 23px;
+    height: 23px;
   }
 }
 
@@ -466,7 +469,6 @@ onMounted(() => {
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
     box-shadow: 0px -10px 15px 0px rgba(44, 27, 71, 0.08);
-    z-index: 1000;
   }
   @media screen and (max-width: 1265px) {
     padding-bottom: 70px;

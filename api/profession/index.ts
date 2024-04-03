@@ -13,6 +13,9 @@ export default (instance: AxiosInstance) => {
     async my() {
       return instance.get("/professional-trials/my");
     },
+    async getMyResponded(uuid: string) {
+      return instance.get(`/professional-trials/users/${uuid}`);
+    },
     async delete(data: ProfessionCategoryRequestDto) {
       return instance.delete("/professional-trials", { data: data });
     },
