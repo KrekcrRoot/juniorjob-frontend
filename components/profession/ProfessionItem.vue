@@ -1,6 +1,7 @@
 <script setup>
 import api from "~/api";
 import formatDateService from "~/services/formatDateService";
+import { useUserStore } from "~/store/user";
 import {
   TransitionRoot,
   TransitionChild,
@@ -20,6 +21,7 @@ const myProfs = ref([]);
 const isOpen = ref(false);
 const isOpen2 = ref(false);
 const isOpen3 = ref(false);
+const isOpen4 = ref(false);
 function closeModal() {
   isOpen.value = false;
 }
@@ -29,10 +31,17 @@ function openModal() {
 function closeModal2() {
   isOpen2.value = false;
 }
+function closeModal4() {
+  isOpen4.value = false;
+}
 async function openModal2(uuid) {
-  const res = await api.profession.respond(uuid);
-  isOpen2.value = true;
-  myProfs.value = await api.profession.my();
+  if (useUserStore().access_token && useUserStore().access_token !== "") {
+    const res = await api.profession.respond(uuid);
+    isOpen2.value = true;
+    myProfs.value = await api.profession.my();
+  } else {
+    isOpen4.value = true;
+  }
 }
 function closeModal3() {
   isOpen3.value = false;
@@ -96,6 +105,63 @@ onMounted(async () => {
         </div>
       </div>
     </div>
+    <TransitionRoot appear :show="isOpen4" as="template">
+      <Dialog as="div" @close="closeModal4" class="modal relative z-10">
+        <TransitionChild
+          as="template"
+          enter="duration-300 ease-out"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="duration-200 ease-in"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
+        >
+          <div class="fixed inset-0 bg-black/25" />
+        </TransitionChild>
+
+        <div class="fixed inset-0 overflow-y-auto">
+          <div
+            class="flex min-h-full items-center justify-center p-4 text-center"
+          >
+            <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0 scale-95"
+              enter-to="opacity-100 scale-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100 scale-100"
+              leave-to="opacity-0 scale-95"
+            >
+              <DialogPanel
+                class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+              >
+                <DialogTitle
+                  as="h3"
+                  class="modal__title text-lg font-medium leading-6 text-gray-900"
+                >
+                  Войдите или зарегистрируйтесь
+                </DialogTitle>
+                <div class="mt-2">
+                  <h1>
+                    Войдите или зарегистрируйтесь на сайте, чтобы записаться
+                  </h1>
+                </div>
+
+                <div class="mt-4 flex gap-1">
+                  <div
+                    type="button"
+                    class="flex-auto cursor-pointer modal__button inline-flex justify-center bg-purple-300 rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    @click="closeModal4"
+                  >
+                    Закрыть
+                  </div>
+                </div>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
+        </div>
+      </Dialog>
+    </TransitionRoot>
     <TransitionRoot appear :show="isOpen3" as="template">
       <Dialog as="div" @close="closeModal3" class="modal relative z-10">
         <TransitionChild

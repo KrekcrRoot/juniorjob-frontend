@@ -29,13 +29,24 @@ onMounted(async () => {
 
 <template>
   <div class="container mx-auto xl:mt-14 px-5">
-    <template v-if="role === 'employer'">
-      <SearchApplicant v-for="(item, key) in items" :item="item" :key="key" />
+    <template v-if="items && items.length > 0">
+      <template v-if="role === 'employer'">
+        <SearchApplicant v-for="(item, key) in items" :item="item" :key="key" />
+      </template>
+      <template v-else>
+        <SearchVacancy v-for="(item, key) in items" :item="item" :key="key" />
+      </template>
     </template>
     <template v-else>
-      <SearchVacancy v-for="(item, key) in items" :item="item" :key="key" />
+      <p class="not-found-text">По вашему запросу ничего не найдено</p>
     </template>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.not-found-text {
+  color: #604d9e;
+  font-size: 20px;
+  margin-top: 20px;
+}
+</style>

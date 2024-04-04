@@ -282,7 +282,7 @@ textarea.field {
 .profile {
   display: flex;
   align-items: flex-start;
-  gap: 150px;
+  gap: 50px;
   justify-content: space-between;
 }
 
@@ -318,10 +318,17 @@ textarea.field {
 
 .profile__left {
   flex: 1 0 30%;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(43, 42, 44, 0.096);
+  border: 1px solid #dedce7;
 }
 
 .profile__right {
   flex: 1 1 70%;
+  padding: 20px;
+  padding-bottom: 50px;
+  box-shadow: 0 0 10px rgba(43, 42, 44, 0.096);
+  border: 1px solid #dedce7;
 }
 
 .profile__image {
@@ -350,7 +357,13 @@ textarea.field {
   font-weight: 400;
   line-height: normal;
   margin-top: 15px;
-  max-width: 160px;
+  max-width: unset;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__name {
+    max-width: 160px;
+  }
 }
 
 .profile__name--vacancy {
@@ -532,7 +545,20 @@ textarea.field {
   font-weight: 800;
 }
 /* //TOGGLE BUTTON */
-
+/* OFFER BLOCK */
+.offer-block {
+  width: 100%;
+  display: flex;
+  /* flex-direction: column; */
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #e8e4ff;
+  box-shadow: 0 0 10px #2c1b4715;
+}
+.offer-block__title {
+  font-size: 20px;
+}
+/* //OFFER BLOCK */
 /* Media запрос для устройств с шириной экрана 1024px и больше (большие десктопы) */
 @media (min-width: 1024px) {
 }

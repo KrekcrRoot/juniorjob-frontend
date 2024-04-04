@@ -118,10 +118,10 @@ const submit = async (form) => {
     <h1 class="user-title mb-5">Регистрация</h1>
     <div class="relative">
       <UiSwitcher :selectedValue="selectedRole" @update="switchRole" />
-      <div class="textblock" v-if="selectedRole === 'corporate'">
+      <!-- <div class="textblock" v-if="selectedRole === 'corporate'">
         Оставьте заявку на регистрацию, мы рассмотрим ее в ручном режиме и
         поможем настроить работу индивидуально
-      </div>
+      </div> -->
       <template v-if="selectedRole === 'corporate'">
         <form @submit.prevent="submit(formCorporate)" class="mt-5">
           <FormUploadImage @change="uploadImage" />

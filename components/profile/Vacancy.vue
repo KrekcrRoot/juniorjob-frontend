@@ -57,6 +57,31 @@ const searchResponse = (id) => {
   }
 };
 
+const titleName = computed(() => {
+  if (
+    vacancy.value?.employer?.role[vacancy?.value?.employer?.role?.current].title
+  ) {
+    return vacancy?.value?.employer?.role[
+      vacancy?.value?.employer?.role?.current
+    ].title;
+  }
+  if (
+    vacancy?.value?.employer?.role[vacancy?.value?.employer?.role?.current]
+      ?.name &&
+    vacancy?.value?.employer?.role[vacancy?.value?.employer?.role?.current]
+      ?.surname
+  ) {
+    return `${
+      vacancy?.value?.employer?.role[vacancy?.value?.employer?.role?.current]
+        ?.surname
+    } ${
+      vacancy?.value?.employer?.role[vacancy?.value?.employer?.role?.current]
+        ?.name
+    }`;
+  }
+  return vacancy?.value?.title;
+});
+
 const toggleVacancyComment = (id) => {
   message.value = "";
   activeVacancyComment.value = id;
@@ -76,6 +101,9 @@ onMounted(async () => {
   }
   window.addEventListener("resize", handleResize);
   vacancy.value = await vacanciesStore.getById(route?.params?.id);
+  vacancy.value.employer["data"] = await api.roles.get_user_roles(
+    vacancy.value.employer.uuid
+  );
   if (
     userStore.access_token !== "" &&
     userStore.user.role.current !== "applicant"
@@ -381,6 +409,15 @@ onBeforeUnmount(() => {
             </div>
           </div>
         </template>
+        <template v-else>
+          <div class="offer-block">
+            <p class="main-title">
+              Войдите или зарегистрируйтесь, чтобы откликнуться на вакансию или
+              написать работодателю
+            </p>
+            <NuxtLink class="btn" to="/login"> Войти </NuxtLink>
+          </div>
+        </template>
       </template>
       <!-- АВАТАР И ИМЯ НА ПК -->
       <template v-else>
@@ -400,7 +437,7 @@ onBeforeUnmount(() => {
               <div class="w-full flex justify-between">
                 <div>
                   <p class="profile__name profile__name--vacancy">
-                    {{ vacancy?.title }}
+                    {{ titleName }}
                   </p>
                   <p class="profile__name profile__name--vacancy color-purple">
                     {{ vacancy?.employer?.email }}
@@ -508,6 +545,9 @@ onBeforeUnmount(() => {
           <!-- //НЕОБХОДИМ ОПЫТ РАБОТЫ -->
         </div>
         <div class="profile__right">
+          <p class="profile__name profile__name--vacancy">
+            {{ vacancy?.title }}
+          </p>
           <p class="profile__about mt-3">
             {{ vacancy?.time }}. {{ vacancy?.description }}
           </p>
@@ -666,6 +706,15 @@ onBeforeUnmount(() => {
                   Откликнуться
                 </button>
               </div>
+            </div>
+          </template>
+          <template v-else>
+            <div class="offer-block mt-5">
+              <p class="main-title offer-block__title">
+                Войдите или зарегистрируйтесь, чтобы откликнуться на вакансию
+                или написать работодателю
+              </p>
+              <NuxtLink class="btn" to="/login"> Войти </NuxtLink>
             </div>
           </template>
         </div>
