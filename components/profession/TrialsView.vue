@@ -418,6 +418,9 @@ async function unregister(uuid) {
       padding-right: 10px;
     }
   }
+  @media screen and (max-width: 678px) {
+    padding-bottom: 40px;
+  }
   &__delete {
     width: 51px;
     height: 51px;
