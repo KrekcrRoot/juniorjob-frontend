@@ -1,5 +1,5 @@
 <template>
-  <div class="xl:container mx-auto">
+  <div class="xl:container mx-auto chat-page">
     <h1 class="chat__title">Сообщения</h1>
     <div v-if="chats && chats.length > 0" class="chat__chats">
       <NuxtLink
@@ -210,5 +210,9 @@ onMounted(async () => {
       }
     }
   }
+}
+.chat-page {
+  padding-left: 30px;
+  padding-right: 30px;
 }
 </style>

@@ -24,7 +24,7 @@ if (process.client) {
     <template v-if="loading">
       <UiLoader />
     </template>
-    <div v-else class="xl:mt-7 mt-3">
+    <div v-else class="xl:mt-3 mt-2">
       <ProfessionItem
         v-for="professionItem in professionList"
         :profession="professionItem"

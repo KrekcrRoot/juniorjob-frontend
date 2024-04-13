@@ -160,6 +160,24 @@ onMounted(() => {
                 alt="JuniorJob"
               />
             </NuxtLink>
+            <div
+              class="mobile-hide main-menu flex justify-between my-4 gap-[60px]"
+            >
+              <RouterLink
+                v-for="(menuItem, index) in menu"
+                :to="menuItem.link"
+                :key="index"
+                class="main-menu__link"
+              >
+                <span class="main-menu__link--icon">
+                  <img :src="menuItem.icon" />
+                </span>
+                {{ menuItem.title }}
+              </RouterLink>
+              <button v-if="isLoggedIn" @click="logout" class="main-menu__link">
+                Выход
+              </button>
+            </div>
             <div class="mobile-hide flex items-center gap-5">
               <NuxtLink to="/chat" class="header__icon">
                 <img src="@/assets/images/icons/chat_bubble.svg" alt="Чат" />
@@ -179,7 +197,7 @@ onMounted(() => {
             </div>
           </div>
 
-          <div class="mobile-hide main-menu flex justify-between my-4">
+          <!-- <div class="mobile-hide main-menu flex justify-between my-4">
             <RouterLink
               v-for="(menuItem, index) in menu"
               :to="menuItem.link"
@@ -194,37 +212,43 @@ onMounted(() => {
             <button v-if="isLoggedIn" @click="logout" class="main-menu__link">
               Выход
             </button>
-          </div>
+          </div> -->
           <div
-            class="header-search-wrapper grid xl:grid-cols-12 md:grid-cols-1 gap-4"
+            class="header-search-wrapper mt-[40px] grid xl:grid-cols-12 md:grid-cols-1 gap-4"
           >
             <div class="header__search-wrapper col-start-1 col-span-8">
               <!-- кнопка поиска -->
-              <button @click="search" class="header__search-button">
+              <!-- <button @click="search" class="header__search-button">
                 <img src="@/assets/images/icons/search.svg" alt="" />
-              </button>
+              </button> -->
               <!-- //кнопка поиска -->
               <input
                 type="text"
-                class="header__search col-start-1 col-span-8"
+                class="header__search col-start-1 col-span-5"
                 :placeholder="searchPlaceholder"
                 v-model="searchQuery"
               />
             </div>
-            <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2">
-              <!-- <button class="filter-btn">
+            <button
+              @click="search"
+              class="btn header__search-button-static col-start-9 col-span-2"
+            >
+              Найти
+            </button>
+            <!-- <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2"> -->
+            <!-- <button class="filter-btn">
               <div class="filter-btn__icon">
                 <img src="@/assets/images/icons/filter_alt.svg" alt="" />
               </div>
               <span> Фильтры </span>
             </button> -->
-              <!-- <button class="filter-btn">
+            <!-- <button class="filter-btn">
               <div class="filter-btn__icon">
                 <img src="@/assets/images/icons/sync_alt.svg" alt="" />
               </div>
               <span> Сортировка </span>
             </button> -->
-            </div>
+            <!-- </div> -->
           </div>
         </div>
       </header>
@@ -404,11 +428,10 @@ onMounted(() => {
     outline: none;
     width: 100%;
     display: block;
-    border-radius: 30px;
-    border: 2px solid #604d9e;
+    border-radius: 10px;
+
     background: #f5f5fb;
-    padding-top: 7px;
-    padding-bottom: 7px;
+    padding: 17px 21px;
     padding-left: 22px;
     &::placeholder {
       color: #aaa2d8;
@@ -426,6 +449,12 @@ onMounted(() => {
     right: 10px;
     top: 50%;
     transform: translate(0, -50%);
+    &-static {
+      border-radius: 10px !important;
+      padding-top: 17px;
+      padding-bottom: 17px;
+      font-size: 18px;
+    }
   }
 
   @media (max-width: 979px) {

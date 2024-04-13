@@ -41,7 +41,7 @@ definePageMeta({
 
 <template>
   <div class="container mx-auto xl:mt-14 px-5">
-    <div class="grid xl:grid-cols-2 sm:grid-cols-1 xl:gap-20">
+    <!-- <div class="grid xl:grid-cols-2 sm:grid-cols-1 xl:gap-20">
       <div>
         <div class="xl:mt-12 mt-4">
           <VacancyList />
@@ -55,8 +55,19 @@ definePageMeta({
           <ArticlesList />
         </div>
       </div>
+    </div> -->
+    <div class="flex flex-col">
+      <VacancyList class="block" />
+      <!-- <ProfessionList class="block" /> -->
+      <ProfessionTrialsView class="block" />
+      <ArticlesList class="block" />
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.block {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+</style>

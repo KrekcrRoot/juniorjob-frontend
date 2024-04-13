@@ -23,6 +23,7 @@
     <input
       v-model="message"
       @keyup.enter="sendMessage"
+      placeholder="Сообщение"
       type="text"
       class="field w-full"
     />

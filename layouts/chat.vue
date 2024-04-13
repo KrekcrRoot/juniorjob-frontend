@@ -18,7 +18,7 @@ onMounted(async () => {
 <template>
   <div class="chat">
     <header class="chat__header">
-      <div class="xl:container mx-auto">
+      <div class="xl:container ml-2">
         <NuxtLink to="/chat" class="flex items-center chat__back">
           <img src="@/assets/images/icons/arrow_white-left.svg" alt="" />
           <div v-if="user" class="chat__user">
@@ -83,6 +83,7 @@ onMounted(async () => {
       img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
       }
     }
   }
