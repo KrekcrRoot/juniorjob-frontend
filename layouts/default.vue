@@ -216,7 +216,7 @@ onMounted(() => {
           <div
             class="header-search-wrapper mt-[40px] grid xl:grid-cols-12 md:grid-cols-1 gap-4"
           >
-            <div class="header__search-wrapper col-start-1 col-span-8">
+            <div class="header__search-wrapper col-start-1 col-span-10">
               <!-- кнопка поиска -->
               <!-- <button @click="search" class="header__search-button">
                 <img src="@/assets/images/icons/search.svg" alt="" />
@@ -231,7 +231,7 @@ onMounted(() => {
             </div>
             <button
               @click="search"
-              class="btn header__search-button-static col-start-9 col-span-2"
+              class="btn header__search-button-static col-start-11 col-span-2"
             >
               Найти
             </button>
@@ -386,8 +386,8 @@ onMounted(() => {
 .header-search-wrapper {
   @media (max-width: 979px) {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: row;
     position: absolute;
     left: 0;
     bottom: calc(-50% + 15px);

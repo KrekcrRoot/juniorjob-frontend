@@ -405,20 +405,21 @@ async function unregister(uuid) {
 <style scoped lang="scss">
 .professional {
   padding-top: 60px;
-  padding-bottom: 140px;
+  padding-bottom: 60px;
   &__title {
     font-weight: 600;
     font-size: 30px;
-    line-height: 67%;
+
     color: #2c1b47;
     margin-bottom: 28px;
     @media screen and (max-width: 678px) {
-      font-size: 20px;
+      font-size: 28px;
       padding-left: 10px;
       padding-right: 10px;
     }
   }
   @media screen and (max-width: 678px) {
+    padding-top: 20px;
     padding-bottom: 40px;
   }
   &__delete {

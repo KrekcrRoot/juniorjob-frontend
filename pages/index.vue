@@ -68,6 +68,6 @@ definePageMeta({
 <style scoped lang="scss">
 .block {
   margin-top: 25px;
-  margin-bottom: 25px;
+  margin-bottom: 25px !important;
 }
 </style>
