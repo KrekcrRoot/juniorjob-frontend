@@ -213,48 +213,50 @@ onMounted(() => {
               Выход
             </button>
           </div> -->
-          <div
-            class="header-search-wrapper mt-[40px] grid xl:grid-cols-12 md:grid-cols-1 gap-4"
-          >
-            <div class="header__search-wrapper col-start-1 col-span-10">
-              <!-- кнопка поиска -->
-              <!-- <button @click="search" class="header__search-button">
-                <img src="@/assets/images/icons/search.svg" alt="" />
-              </button> -->
-              <!-- //кнопка поиска -->
-              <input
-                type="text"
-                class="header__search col-start-1 col-span-5"
-                :placeholder="searchPlaceholder"
-                v-model="searchQuery"
-              />
-            </div>
-            <button
-              @click="search"
-              class="btn header__search-button-static col-start-11 col-span-2"
-            >
-              Найти
-            </button>
-            <!-- <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2"> -->
-            <!-- <button class="filter-btn">
-              <div class="filter-btn__icon">
-                <img src="@/assets/images/icons/filter_alt.svg" alt="" />
-              </div>
-              <span> Фильтры </span>
-            </button> -->
-            <!-- <button class="filter-btn">
-              <div class="filter-btn__icon">
-                <img src="@/assets/images/icons/sync_alt.svg" alt="" />
-              </div>
-              <span> Сортировка </span>
-            </button> -->
-            <!-- </div> -->
-          </div>
         </div>
       </header>
     </div>
     <!-- main content -->
     <div class="main-wrapper">
+      <div class="xl:container mx-auto px-5">
+        <div
+          class="header-search-wrapper mt-[40px] grid xl:grid-cols-12 md:grid-cols-1 gap-4"
+        >
+          <div class="header__search-wrapper col-start-1 col-span-10">
+            <!-- кнопка поиска -->
+            <!-- <button @click="search" class="header__search-button">
+          <img src="@/assets/images/icons/search.svg" alt="" />
+        </button> -->
+            <!-- //кнопка поиска -->
+            <input
+              type="text"
+              class="header__search col-start-1 col-span-5"
+              :placeholder="searchPlaceholder"
+              v-model="searchQuery"
+            />
+          </div>
+          <button
+            @click="search"
+            class="btn header__search-button-static col-start-11 col-span-2"
+          >
+            Найти
+          </button>
+          <!-- <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2"> -->
+          <!-- <button class="filter-btn">
+        <div class="filter-btn__icon">
+          <img src="@/assets/images/icons/filter_alt.svg" alt="" />
+        </div>
+        <span> Фильтры </span>
+      </button> -->
+          <!-- <button class="filter-btn">
+        <div class="filter-btn__icon">
+          <img src="@/assets/images/icons/sync_alt.svg" alt="" />
+        </div>
+        <span> Сортировка </span>
+      </button> -->
+          <!-- </div> -->
+        </div>
+      </div>
       <slot />
     </div>
     <footer class="footer">
@@ -387,10 +389,7 @@ onMounted(() => {
   @media (max-width: 979px) {
     width: 100%;
     display: flex !important;
-    flex-direction: row;
-    position: absolute;
-    left: 0;
-    bottom: calc(-50% + 15px);
+    flex-direction: column;
     padding-left: 20px;
     padding-right: 20px;
     z-index: 1200;
@@ -596,7 +595,6 @@ onMounted(() => {
     min-height: calc(100vh - 300px);
     position: relative;
     margin-top: -25px;
-    padding-top: 100px;
     background: #fff;
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;

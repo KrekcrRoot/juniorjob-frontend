@@ -278,11 +278,8 @@ onMounted(() => {
 .header-search-wrapper {
   @media (max-width: 979px) {
     width: 100%;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
-    position: absolute;
-    left: 0;
-    bottom: calc(-50% + 15px);
     padding-left: 20px;
     padding-right: 20px;
     z-index: 1200;
@@ -464,7 +461,6 @@ onMounted(() => {
     min-height: calc(100vh - 300px);
     position: relative;
     margin-top: -25px;
-    padding-top: 100px;
     background: #fff;
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
