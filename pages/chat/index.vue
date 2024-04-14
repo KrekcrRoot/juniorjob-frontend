@@ -1,69 +1,148 @@
 <template>
   <div class="xl:container mx-auto chat-page">
-    <h1 class="chat__title">Сообщения</h1>
-    <div v-if="chats && chats.length > 0" class="chat__chats">
-      <NuxtLink
-        v-for="(chat, index) in useUserStore().chats"
-        :to="{
-          name: 'chat-user-id',
-          params: { id: chat?.user?.uuid },
-          query: { chat: chat.uuid },
-        }"
-        :key="index"
-        class="chat__chats-item"
-      >
-        <div class="chat__chats-item-avatar">
-          <img
-            v-if="
-              (chat.user.image && chat.user.image === 'image.png') ||
-              !chat.user.image
-            "
-            src="@/assets/images/profile/profile.svg"
-            alt="profile"
-          />
-          <img
-            v-else
-            :src="`${$config.public.baseURL}/storage/users/${chat.user.image}`"
-            alt=""
-          />
-        </div>
-        <div class="chat__chats-item-content">
-          <template v-if="chat.user.role.current === 'legal_entity'">
-            <p
-              v-if="chat.user.userData.title === ''"
-              class="chat__chats-item-title"
+    <div class="grid xl:grid-cols-12">
+      <div class="chat__chats col-start-1 col-span-4">
+        <h1 class="chat__title">Сообщения</h1>
+        <div v-if="chats && chats.length > 0">
+          <template v-if="isMobile">
+            <NuxtLink
+              v-for="(chat, index) in useUserStore().chats"
+              :to="{
+                name: 'chat-user-id',
+                params: { id: chat?.user?.uuid },
+                query: { chat: chat.uuid },
+              }"
+              :key="index"
+              class="chat__chats-item"
             >
-              Пользователь
-            </p>
-            <div v-else class="flex items-center gap-2">
-              <p class="chat__chats-item-title">
-                {{ chat.user.userData.title }}
-              </p>
-            </div>
+              <div class="chat__chats-item-avatar">
+                <img
+                  v-if="
+                    (chat.user.image && chat.user.image === 'image.png') ||
+                    !chat.user.image
+                  "
+                  src="@/assets/images/profile/profile.svg"
+                  alt="profile"
+                />
+                <img
+                  v-else
+                  :src="`${$config.public.baseURL}/storage/users/${chat.user.image}`"
+                  alt=""
+                />
+              </div>
+              <div class="chat__chats-item-content">
+                <template v-if="chat.user.role.current === 'legal_entity'">
+                  <p
+                    v-if="chat.user.userData.title === ''"
+                    class="chat__chats-item-title"
+                  >
+                    Пользователь
+                  </p>
+                  <div v-else class="flex items-center gap-2">
+                    <p class="chat__chats-item-title">
+                      {{ chat.user.userData.title }}
+                    </p>
+                  </div>
+                </template>
+                <template v-else>
+                  <p
+                    v-if="
+                      chat.user.userData.name === '' &&
+                      chat.user.userData.surname === ''
+                    "
+                    class="chat__chats-item-title"
+                  >
+                    Пользователь
+                  </p>
+                  <div v-else class="flex items-center gap-2">
+                    <p class="chat__chats-item-title">
+                      {{ chat.user.userData.name }}
+                      {{ chat.user.userData.surname }}
+                    </p>
+                  </div>
+                </template>
+
+                <p class="chat__chats-item-text" v-html="chat.lastMsg"></p>
+                <div class="chat__new" v-if="chat.unreadMessages"></div>
+              </div>
+            </NuxtLink>
           </template>
           <template v-else>
-            <p
-              v-if="
-                chat.user.userData.name === '' &&
-                chat.user.userData.surname === ''
-              "
-              class="chat__chats-item-title"
+            <button
+              v-for="(chat, index) in useUserStore().chats"
+              @click="chooseDesktopChat(chat?.user?.uuid, chat.uuid)"
+              :key="index"
+              class="chat__chats-item"
             >
-              Пользователь
-            </p>
-            <div v-else class="flex items-center gap-2">
-              <p class="chat__chats-item-title">
-                {{ chat.user.userData.name }} {{ chat.user.userData.surname }}
-              </p>
-            </div>
-          </template>
+              <template v-if="chat.lastMsg !== ''">
+                <div class="chat__chats-item-avatar">
+                  <img
+                    v-if="
+                      (chat.user.image && chat.user.image === 'image.png') ||
+                      !chat.user.image
+                    "
+                    src="@/assets/images/profile/profile.svg"
+                    alt="profile"
+                  />
+                  <img
+                    v-else
+                    :src="`${$config.public.baseURL}/storage/users/${chat.user.image}`"
+                    alt=""
+                  />
+                </div>
+                <div class="chat__chats-item-content">
+                  <template v-if="chat.user.role.current === 'legal_entity'">
+                    <p
+                      v-if="chat.user.userData.title === ''"
+                      class="chat__chats-item-title"
+                    >
+                      Пользователь
+                    </p>
+                    <div v-else class="flex items-center gap-2">
+                      <p class="chat__chats-item-title">
+                        {{ chat.user.userData.title }}
+                      </p>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <p
+                      v-if="
+                        chat.user.userData.name === '' &&
+                        chat.user.userData.surname === ''
+                      "
+                      class="chat__chats-item-title"
+                    >
+                      Пользователь
+                    </p>
+                    <div v-else class="flex items-center gap-2">
+                      <p class="chat__chats-item-title">
+                        {{ chat.user.userData.name }}
+                        {{ chat.user.userData.surname }}
+                      </p>
+                    </div>
+                  </template>
 
-          <p class="chat__chats-item-text" v-html="chat.lastMsg"></p>
-          <div class="chat__new" v-if="chat.unreadMessages"></div>
+                  <p class="chat__chats-item-text" v-html="chat.lastMsg"></p>
+                  <div class="chat__new" v-if="chat.unreadMessages"></div>
+                </div>
+              </template>
+            </button>
+          </template>
         </div>
-      </NuxtLink>
+        <p v-else>У вас нет чатов</p>
+      </div>
+
+      <div v-if="!isMobile" class="col-start-5 col-span-6 mt-10">
+        <template v-if="activeChat && activeUser">
+          <ChatMessages
+            :user="activeUser"
+            :chat="activeChat"
+            :isScroll.sync="isScroll"
+          />
+        </template>
+        <template v-else> Выберите, кому хотите написать </template>
+      </div>
     </div>
-    <p v-else>У вас нет чатов</p>
   </div>
 </template>
 
@@ -80,6 +159,16 @@ const chatsData = ref([]);
 
 const chats = ref([]);
 
+const isMobile = ref(false);
+
+const activeChat = ref(null);
+const activeUser = ref(null);
+const isScroll = ref(false);
+
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 980;
+};
+
 const showlastMsg = async (chatId, chatmateName) => {
   const msgs = await api.chat.get_chat_messages(chatId);
   if (msgs.length > 0) {
@@ -95,6 +184,12 @@ const showlastMsg = async (chatId, chatmateName) => {
     }
   }
   return "";
+};
+
+const chooseDesktopChat = (user, chat) => {
+  activeChat.value = chat;
+  activeUser.value = user;
+  isScroll.value = true;
 };
 // const chats = computed(async () => {
 //   const user = await api.users.getById(obj.second_user);
@@ -126,6 +221,8 @@ async function fetchUsersAndUpdateChats() {
 }
 
 onMounted(async () => {
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
   chatsData.value = await api.chat.get_my_chats();
   await fetchUsersAndUpdateChats();
   useUserStore().chats = chats.value;
