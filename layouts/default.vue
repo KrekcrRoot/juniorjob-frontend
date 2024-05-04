@@ -142,18 +142,18 @@ onMounted(() => {
               </button>
             </div>
             <template v-if="isLoggedIn">
-<!--6767-->
-              <div class="mobile-hide flex items-center gap-5">
-                <NuxtLink to="/chat" class="header__icon">
-                  <img src="@/assets/images/icons/chat_bubble.svg" alt="Чат" />
-                </NuxtLink>
-                <div class="header__icon">
-                  <img src="@/assets/images/icons/notifications.svg" alt="Уведомления" />
-                </div>
-                <NuxtLink to="/login-welcome" class="header__icon">
-                  <img src="@/assets/images/icons/account_circle.svg" alt="Профиль" />
-                </NuxtLink>
-              </div>
+<!--test-->
+<div class="mobile-hide  flex items-center gap-5">
+  <NuxtLink to="/chat" class="header__icon">
+    <img src="@/assets/images/icons/chat_bubble.svg" alt="Чат" />
+  </NuxtLink>
+  <div class="header__icon">
+    <img src="@/assets/images/icons/notifications.svg" alt="Уведомления" />
+  </div>
+  <NuxtLink to="/login-welcome" class="header__icon">
+    <img src="@/assets/images/icons/account_circle.svg" alt="Профиль" />
+  </NuxtLink>
+</div>
 
             </template>
 
