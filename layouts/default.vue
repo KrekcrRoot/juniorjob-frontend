@@ -109,66 +109,29 @@ onMounted(() => {
       <header>
         <div class="header-wrapper xl:container mx-auto px-5">
           <div class="header">
-            <div
-              class="header__control-nav mobile-show flex items-center gap-1"
-            >
-              <button
-                @click="isBurgerMenuVisible = true"
-                class="burger-menu mobile-show mr-4"
-              >
+            <div class="header__control-nav mobile-show flex items-center gap-1">
+              <button @click="isBurgerMenuVisible = true" class="burger-menu mobile-show mr-4">
                 <img src="@/assets/images/icons/menu.svg" alt="" />
               </button>
               <div class="flex items-center gap-3">
-                <NuxtLink
-                  to="/chat"
-                  class="burger-menu burger-menu--mobile-icon mobile-show"
-                >
-                  <img
-                    src="@/assets/images/icons/chat_bubble-white.svg"
-                    alt=""
-                  />
+                <NuxtLink to="/chat" class="burger-menu burger-menu--mobile-icon mobile-show">
+                  <img src="@/assets/images/icons/chat_bubble-white.svg" alt="" />
                 </NuxtLink>
-                <button
-                  class="burger-menu burger-menu--mobile-icon mobile-show"
-                >
-                  <img
-                    src="@/assets/images/icons/notifications-white.svg"
-                    alt=""
-                  />
+                <button class="burger-menu burger-menu--mobile-icon mobile-show">
+                  <img src="@/assets/images/icons/notifications-white.svg" alt="" />
                 </button>
-                <NuxtLink
-                  to="/login-welcome"
-                  class="burger-menu burger-menu--mobile-icon mobile-show"
-                >
-                  <img
-                    src="@/assets/images/icons/account_circle-white.svg"
-                    alt=""
-                  />
+                <NuxtLink to="/login-welcome" class="burger-menu burger-menu--mobile-icon mobile-show">
+                  <img src="@/assets/images/icons/account_circle-white.svg" alt="" />
                 </NuxtLink>
               </div>
             </div>
 
             <NuxtLink to="/" class="logo">
-              <img
-                v-if="!isMobile"
-                src="@/assets/images/logo.svg"
-                alt="JuniorJob"
-              />
-              <img
-                v-else
-                src="@/assets/images/logo-white.svg"
-                alt="JuniorJob"
-              />
+              <img v-if="!isMobile" src="@/assets/images/logo.svg" alt="JuniorJob" />
+              <img v-else src="@/assets/images/logo-white.svg" alt="JuniorJob" />
             </NuxtLink>
-            <div
-              class="mobile-hide main-menu flex justify-between my-4 gap-[60px]"
-            >
-              <RouterLink
-                v-for="(menuItem, index) in menu"
-                :to="menuItem.link"
-                :key="index"
-                class="main-menu__link"
-              >
+            <div class="mobile-hide main-menu flex justify-between my-4 gap-[20px]">
+              <RouterLink v-for="(menuItem, index) in menu" :to="menuItem.link" :key="index" class="main-menu__link">
                 <span class="main-menu__link--icon">
                   <img :src="menuItem.icon" />
                 </span>
@@ -178,28 +141,25 @@ onMounted(() => {
                 Выход
               </button>
             </div>
-            <div v-if="isLoggedIn" class="mobile-hide flex items-center gap-5">
-              <NuxtLink to="/chat" class="header__icon">
-                <img src="@/assets/images/icons/chat_bubble.svg" alt="Чат" />
-              </NuxtLink>
-              <div class="header__icon">
-                <img
-                  src="@/assets/images/icons/notifications.svg"
-                  alt="Уведомления"
-                />
+            <template v-if="isLoggedIn">
+<!--6767-->
+              <div class="mobile-hide flex items-center gap-5">
+                <NuxtLink to="/chat" class="header__icon">
+                  <img src="@/assets/images/icons/chat_bubble.svg" alt="Чат" />
+                </NuxtLink>
+                <div class="header__icon">
+                  <img src="@/assets/images/icons/notifications.svg" alt="Уведомления" />
+                </div>
+                <NuxtLink to="/login-welcome" class="header__icon">
+                  <img src="@/assets/images/icons/account_circle.svg" alt="Профиль" />
+                </NuxtLink>
               </div>
-              <NuxtLink to="/login-welcome" class="header__icon">
-                <img
-                  src="@/assets/images/icons/account_circle.svg"
-                  alt="Профиль"
-                />
-              </NuxtLink>
-            </div>
+
+            </template>
+
             <div v-else>
-              <div class="flex gap-3 items-center">
-                <NuxtLink to="/register-welcome" class="register-btn"
-                  >Зарегистрироваться</NuxtLink
-                >
+              <div class="btns-reg flex gap-3 items-center">
+                <NuxtLink to="/register-welcome" class="register-btn">Зарегистрироваться</NuxtLink>
                 <NuxtLink to="/login" class="login-btn btn">Войти</NuxtLink>
               </div>
             </div>
@@ -237,11 +197,7 @@ onMounted(() => {
 
         <div class="footer__contacts">
           <div class="flex justify-center flex-col">
-            <a
-              target="_blank"
-              href="https://vk.com/ivanthe93"
-              class="footer__text"
-            >
+            <a target="_blank" href="https://vk.com/ivanthe93" class="footer__text">
               Руководитель проекта <br />
               Чернявский Иван Дмитриевич: vk.com/ivanthe93
             </a>
@@ -249,22 +205,14 @@ onMounted(() => {
           </div>
 
           <div>
-            <a
-              target="_blank"
-              style="cursor: pointer"
-              href="https://vk.com/junijob"
-              class="flex items-center gap-2 mb-1"
-            >
+            <a target="_blank" style="cursor: pointer" href="https://vk.com/junijob"
+              class="flex items-center gap-2 mb-1">
               <div class="footer__icon">
                 <img src="@/assets/images/icons/VKLogo.svg" alt="" />
               </div>
               <p class="footer__text">Сообщество Вконтакте</p>
             </a>
-            <a
-              style="cursor: pointer"
-              href="mailto:ivanplaying7@gmail.com"
-              class="flex items-center gap-2"
-            >
+            <a style="cursor: pointer" href="mailto:ivanplaying7@gmail.com" class="flex items-center gap-2">
               <div class="footer__icon">
                 <img src="@/assets/images/icons/mail.svg" alt="" />
               </div>
@@ -275,54 +223,36 @@ onMounted(() => {
       </div>
     </footer>
     <div class="relative h-full h-100">
-      <div
-        class="sidebar-backdrop"
-        @click="isBurgerMenuVisible = false"
-        v-if="isBurgerMenuVisible"
-      >
+      <div class="sidebar-backdrop" @click="isBurgerMenuVisible = false" v-if="isBurgerMenuVisible">
         1
       </div>
       <transition name="slide">
-        <div
-          v-if="isBurgerMenuVisible"
-          @click.stop
-          class="sidebar-panel burger-menu-content"
-        >
+        <div v-if="isBurgerMenuVisible" @click.stop class="sidebar-panel burger-menu-content">
           <div class="flex-col">
             <div class="flex items-center gap-3">
               <div class="burger-menu-content__icon">
-                <img
-                  src="@/assets/images/icons/account_circle.svg"
-                  alt="Профиль"
-                />
+                <img src="@/assets/images/icons/account_circle.svg" alt="Профиль" />
               </div>
               <div v-if="userStore.user && userStore.access_token">
                 <NuxtLink to="/profile" class="block bolder-title mb-2">
-                  <template
-                    v-if="userStore.user.role.current === 'legal_entity'"
-                  >
+
+                  <template v-if="userStore.user.role.current === 'legal_entity'">
                     {{ userStore.user.userData.title }}
                   </template>
+
                   <template v-else>
                     {{ userStore.user.userData.name }}
                   </template>
                 </NuxtLink>
               </div>
               <div v-else>
-                <NuxtLink to="/register-welcome" class="block bolder-title mb-2"
-                  >Регистрация</NuxtLink
-                >
+                <NuxtLink to="/register-welcome" class="block bolder-title mb-2">Регистрация</NuxtLink>
                 <NuxtLink to="/login" class="block bolder-title">Вход</NuxtLink>
               </div>
             </div>
             <div class="mt-6">
-              <RouterLink
-                @click="closeMenu"
-                v-for="(menuItem, index) in menu"
-                :to="menuItem.link"
-                :key="index"
-                class="main-menu__link my-3"
-              >
+              <RouterLink @click="closeMenu" v-for="(menuItem, index) in menu" :to="menuItem.link" :key="index"
+                class="main-menu__link my-3">
                 <span class="main-menu__link--icon">
                   <img :src="menuItem.icon" />
                 </span>
@@ -335,11 +265,7 @@ onMounted(() => {
               <button class="btn mt-4">Помогите!</button>
             </div>
 
-            <button
-              v-if="isLoggedIn"
-              @click="logout"
-              class="burger-menu__logout-btn btn mt-4 w-full"
-            >
+            <button v-if="isLoggedIn" @click="logout" class="burger-menu__logout-btn btn mt-4 w-full">
               Выход
             </button>
           </div>
@@ -355,6 +281,7 @@ onMounted(() => {
 .header-wrapper {
   position: relative;
 }
+
 .header-search-wrapper {
   @media (max-width: 979px) {
     width: 100%;
@@ -365,6 +292,7 @@ onMounted(() => {
     z-index: 1200;
   }
 }
+
 .header {
   display: flex;
   flex-direction: row;
@@ -402,12 +330,14 @@ onMounted(() => {
     background: #f5f5fb;
     padding: 17px 21px;
     padding-left: 22px;
+
     &::placeholder {
       color: #aaa2d8;
       font-size: 18px;
       font-weight: 300;
     }
   }
+
   &__search-wrapper {
     width: 100%;
     position: relative;
@@ -418,6 +348,7 @@ onMounted(() => {
     right: 10px;
     top: 50%;
     transform: translate(0, -50%);
+
     &-static {
       border-radius: 10px !important;
       padding-top: 17px;
@@ -448,6 +379,7 @@ onMounted(() => {
   justify-content: center;
   gap: 10px;
   flex-shrink: 0;
+
   @media (max-width: 979px) {
     flex: 1 0 auto;
   }
@@ -455,16 +387,19 @@ onMounted(() => {
   &__icon {
     width: 24px;
     height: 24px;
+
     @media (max-width: 390px) {
       width: 20px;
       height: 20px;
     }
+
     & img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
   }
+
   @media (max-width: 390px) {
     padding: 8px 15px;
     gap: 6px;
@@ -492,9 +427,11 @@ onMounted(() => {
     z-index: 3100;
     box-shadow: 3px 0 10px 3px rgba(0, 0, 0, 0.4);
     padding: 32px;
+
     &__icon {
       width: 32px;
       height: 32px;
+
       & img {
         width: 100%;
         height: 100%;
@@ -518,6 +455,7 @@ onMounted(() => {
   &__logout-btn {
     width: 100%;
   }
+
   &--mobile-icon {
     width: 23px;
     height: 23px;
@@ -526,6 +464,7 @@ onMounted(() => {
 
 .main-menu {
   flex-direction: row;
+
   &__link {
     display: flex;
     align-items: center;
@@ -539,6 +478,7 @@ onMounted(() => {
       object-fit: contain;
     }
   }
+
   @media screen and (max-width: 979px) {
     flex-direction: column;
     align-items: center;
@@ -548,6 +488,7 @@ onMounted(() => {
 .logo {
   user-select: none;
   height: 50px;
+
   @media screen and (max-width: 979px) {
     height: 43px;
   }
@@ -561,6 +502,7 @@ onMounted(() => {
 
 .main-wrapper {
   padding-bottom: 170px;
+
   @media (max-width: 979px) {
     min-height: calc(100vh - 300px);
     position: relative;
@@ -570,6 +512,7 @@ onMounted(() => {
     border-top-left-radius: 30px;
     box-shadow: 0px -10px 15px 0px rgba(44, 27, 71, 0.08);
   }
+
   @media screen and (max-width: 1265px) {
     padding-bottom: 70px;
   }
@@ -585,16 +528,20 @@ onMounted(() => {
   font-weight: 400;
   line-height: 110%;
 }
+
 .slide-enter-active {
   animation: bounce-in 0.5s;
 }
+
 .slide-leave-active {
   animation: bounce-in 0.5s reverse;
 }
+
 @keyframes bounce-in {
   0% {
     transform: translateX(-300px);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -616,14 +563,17 @@ onMounted(() => {
 .sidebar-panel {
   overflow-y: auto;
   position: fixed;
-  left: 0px; /* Изначально сдвигаем меню за пределы экрана */
+  left: 0px;
+  /* Изначально сдвигаем меню за пределы экрана */
   top: 0;
   height: 100vh;
   z-index: 5000;
   padding: 3rem 20px 2rem 20px;
   width: 300px;
-  transition: 0.25s; /* Добавляем анимацию сдвига меню */
+  transition: 0.25s;
+  /* Добавляем анимацию сдвига меню */
 }
+
 .footer {
   &__container {
     padding-top: 25px;
@@ -632,6 +582,7 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     @media screen and (max-width: 806px) {
       flex-direction: column;
     }
@@ -641,43 +592,52 @@ onMounted(() => {
     width: 183px;
     display: block;
     height: 60px;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
   }
+
   &__icon {
     width: 24px;
     height: 24px;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
   }
+
   &__text {
     color: #3d337e;
     font-size: 16px;
     font-weight: 600;
+
     &:hover {
       color: #9820dd;
     }
   }
+
   &__contacts {
     display: flex;
     gap: 30px;
+
     @media screen and (max-width: 820px) {
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
+
     & .footer__text {
       @media screen and (max-width: 820px) {
         text-align: center;
       }
     }
   }
+
   margin-top: 120px;
   position: absolute;
   z-index: 3000;
@@ -685,6 +645,7 @@ onMounted(() => {
   left: 0;
   bottom: 0;
   background: #d8d4f1;
+
   @media screen and (max-width: 1265px) {
     margin-top: 10px;
     // position: relative;
@@ -701,17 +662,25 @@ onMounted(() => {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .register-btn {
   cursor: pointer;
   font-size: 18px;
   color: #604d9e;
   padding: 10px 25px;
 }
+
 .login-btn {
   cursor: pointer;
   padding: 10px 25px !important;
   border-radius: 5px;
   font-size: 14px;
   line-height: normal;
+}
+.btns-reg {
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    display: none;
+  }
 }
 </style>
