@@ -178,7 +178,7 @@ onMounted(() => {
                 Выход
               </button>
             </div>
-            <div class="mobile-hide flex items-center gap-5">
+            <div v-if="isLoggedIn" class="mobile-hide flex items-center gap-5">
               <NuxtLink to="/chat" class="header__icon">
                 <img src="@/assets/images/icons/chat_bubble.svg" alt="Чат" />
               </NuxtLink>
@@ -194,6 +194,14 @@ onMounted(() => {
                   alt="Профиль"
                 />
               </NuxtLink>
+            </div>
+            <div v-else>
+              <div class="flex gap-3 items-center">
+                <NuxtLink to="/register-welcome" class="register-btn"
+                  >Зарегистрироваться</NuxtLink
+                >
+                <NuxtLink to="/login" class="login-btn btn">Войти</NuxtLink>
+              </div>
             </div>
           </div>
 
@@ -218,45 +226,7 @@ onMounted(() => {
     </div>
     <!-- main content -->
     <div class="main-wrapper">
-      <div class="xl:container mx-auto px-5">
-        <div
-          class="header-search-wrapper mt-[40px] grid xl:grid-cols-12 md:grid-cols-1 gap-4"
-        >
-          <div class="header__search-wrapper col-start-1 col-span-10">
-            <!-- кнопка поиска -->
-            <!-- <button @click="search" class="header__search-button">
-          <img src="@/assets/images/icons/search.svg" alt="" />
-        </button> -->
-            <!-- //кнопка поиска -->
-            <input
-              type="text"
-              class="header__search col-start-1 col-span-5"
-              :placeholder="searchPlaceholder"
-              v-model="searchQuery"
-            />
-          </div>
-          <button
-            @click="search"
-            class="btn header__search-button-static col-start-11 col-span-2"
-          >
-            Найти
-          </button>
-          <!-- <div class="flex s:flex-col items-center md:gap-4 gap-3 col-span-2"> -->
-          <!-- <button class="filter-btn">
-        <div class="filter-btn__icon">
-          <img src="@/assets/images/icons/filter_alt.svg" alt="" />
-        </div>
-        <span> Фильтры </span>
-      </button> -->
-          <!-- <button class="filter-btn">
-        <div class="filter-btn__icon">
-          <img src="@/assets/images/icons/sync_alt.svg" alt="" />
-        </div>
-        <span> Сортировка </span>
-      </button> -->
-          <!-- </div> -->
-        </div>
-      </div>
+      <div class="xl:container mx-auto px-5"></div>
       <slot />
     </div>
     <footer class="footer">
@@ -730,5 +700,18 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.register-btn {
+  cursor: pointer;
+  font-size: 18px;
+  color: #604d9e;
+  padding: 10px 25px;
+}
+.login-btn {
+  cursor: pointer;
+  padding: 10px 25px !important;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: normal;
 }
 </style>
