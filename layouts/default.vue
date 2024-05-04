@@ -158,7 +158,7 @@ onMounted(() => {
             </template>
 
             <div v-else>
-              <div class="btns-reg flex gap-3 items-center">
+              <div class="btns-reg">
                 <NuxtLink to="/register-welcome" class="register-btn">Зарегистрироваться</NuxtLink>
                 <NuxtLink to="/login" class="login-btn btn">Войти</NuxtLink>
               </div>
@@ -678,6 +678,9 @@ onMounted(() => {
   line-height: normal;
 }
 .btns-reg {
+  display: flex;
+  gap: 20px;
+  align-items: center;
   @media screen and (max-width: 500px) {
     flex-direction: column;
     display: none;
