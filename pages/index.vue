@@ -126,6 +126,10 @@ const search = () => {
         Новые вакансии
       </h1>
       <VacancyList class="block" />
+      <h1 class="title-main">
+        Статьи
+      </h1>
+      <ArticlesList />
     </div>
   </div>
 </template>

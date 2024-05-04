@@ -50,8 +50,8 @@ const vacancyResponse = async (data) => {
 };
 
 const searchResponse = (id) => {
-  if (userStore.roles.current === "applicant") {
-    return !!vacanciesStore.vacanciesResponses.find((w) => {
+  if (userStore.roles.current === "applicant" && vacanciesStore.vacanciesResponses) {
+    return !!vacanciesStore?.vacanciesResponses?.find((w) => {
       return w.vacancy.uuid === id;
     });
   }

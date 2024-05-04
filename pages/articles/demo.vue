@@ -140,6 +140,10 @@
 <style scoped lang="scss">
 .articles {
   margin-top: 50px;
+  @media screen and (max-width: 800px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   &__image {
     width: 100%;
     min-height: 110px;
@@ -179,7 +183,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    height: 480px;
+    min-height: 480px;
     margin: 0 auto;
     margin-top: 15px;
     img {
