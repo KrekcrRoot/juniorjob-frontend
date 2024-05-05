@@ -142,8 +142,7 @@ onMounted(() => {
               </button>
             </div>
             <template v-if="isLoggedIn">
-<!--test-->
-<div class="mobile-hide  flex items-center gap-5">
+<div class="mobile-hide test-header-class">
   <NuxtLink to="/chat" class="header__icon">
     <img src="@/assets/images/icons/chat_bubble.svg" alt="Чат" />
   </NuxtLink>
@@ -685,5 +684,10 @@ onMounted(() => {
     flex-direction: column;
     display: none;
   }
+}
+.test-header-class {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 </style>
