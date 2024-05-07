@@ -178,22 +178,8 @@ onMounted(() => {
                 Выход
               </button>
             </div>
-            <div v-if="isLoggedIn" class="mobile-hide flex items-center gap-5">
-              <NuxtLink to="/chat" class="header__icon">
-                <img src="@/assets/images/icons/chat_bubble.svg" alt="Чат" />
-              </NuxtLink>
-              <div class="header__icon">
-                <img
-                  src="@/assets/images/icons/notifications.svg"
-                  alt="Уведомления"
-                />
-              </div>
-              <NuxtLink to="/login-welcome" class="header__icon">
-                <img
-                  src="@/assets/images/icons/account_circle.svg"
-                  alt="Профиль"
-                />
-              </NuxtLink>
+            <div v-if="isLoggedIn">
+              <div class="mobile-hide flex items-center gap-5"></div>
             </div>
             <div v-else>
               <div class="flex gap-3 items-center">
