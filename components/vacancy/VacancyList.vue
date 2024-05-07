@@ -59,12 +59,12 @@ if (process.client) {
 
 <template>
   <div class="relative">
-    <h1 class="main-title">Новые вакансии</h1>
+    <!-- <h1 class="main-title">Новые вакансии</h1> -->
     <!-- Экран загрузки -->
     <template v-if="loading">
       <UiLoader />
     </template>
-    <div class="xl:mt-3 mt-2 grid xl:grid-cols-3 sm:grid-cols-1 xl:gap-10">
+    <div class="vacancies-items">
       <VacancyItem
         v-for="vacancyItem in vacancyList"
         :vacancy="vacancyItem"
@@ -74,4 +74,42 @@ if (process.client) {
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.vacancies-items {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    &__item {
+      width: calc(25% - 8px);
+  
+      border: 1px solid #e6e0ff;
+      border-radius: 10px;
+      padding: 24px;
+      max-width: 304px;
+      width: 100%;
+
+  
+      box-shadow: 0 4px 20px 0 rgba(96, 77, 158, 0.08);
+      background: #fff;
+      display: flex;
+  
+      gap: 15px;
+    }
+    &__image {
+      width: 55px;
+      height: 55px;
+      flex-shrink: 0;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+    &__title {
+      font-weight: 500;
+  font-size: 18px;
+  line-height: 122%;
+  color: #000;
+    }
+  }</style>

@@ -13,7 +13,6 @@ const articlesList = [
 
 <template>
   <div>
-    <h1 class="main-title">Статьи</h1>
     <div class="grid xl:grid-cols-3 gap-3 xl:mt-7 mt-3">
       <ArticlesItem
         v-for="articlesItem in articlesList"

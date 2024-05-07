@@ -1,11 +1,17 @@
 <script setup>
-import { onMounted } from "vue";
-// import { io } from "socket.io-client";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 definePageMeta({
   layout: "default",
 });
 
+const textSearch = ref(null);
+const searchQuery = ref("");
+const router = useRouter();
+const search = () => {
+  router.push(`/search/${searchQuery.value}`);
+};
 // const socket = io("wss://socket.junior-job.ru", {
 //   query: {
 //     user_uuid: "78dce235-cc1a-48ca-89d7-0faf47e7d867",
@@ -70,15 +76,16 @@ definePageMeta({
             Наш сайт предлагает молодым людям и подросткам уникальную
             возможность найти работу своей мечты
           </p>
-          <div class="flex items-center gap-2">
+          <div class="search-main flex items-center gap-2 mt-3">
             <input
-              placeholder="Найти вакансию"
+              placeholder="Найти вакансию или исполнителя"
               type="text"
               class="banner__field"
+              v-model="searchQuery"
             />
-            <button class="banner__btn btn">Btn</button>
+            <button @click="search" class="banner__btn btn">Найти</button>
           </div>
-          <a href="" class="banner__link">Я ищу сотрудника</a>
+         
         </div>
         <div>
           <img src="@/assets/images/banner.png" alt="" />
@@ -89,20 +96,40 @@ definePageMeta({
           Мы предлагаем вакансии в различных сферах деятельности: от работы в
           кафе и ресторанах до фриланса и удаленной работы
         </h3>
-        <p class="banner__text">34534545355</p>
-        <div class="vacancies-items">
-          <div class="vacancies-items__item">1</div>
-          <div class="vacancies-items__item">1</div>
-          <div class="vacancies-items__item">2</div>
-          <div class="vacancies-items__item">1</div>
-          <div class="vacancies-items__item">1</div>
-          <div class="vacancies-items__item">1</div>
-          <div class="vacancies-items__item">1</div>
-          <div class="vacancies-items__item">1</div>
-          <div class="vacancies-items__item">1</div>
-          <div class="vacancies-items__item">1</div>
+        <p class="banner__text">Вы можете выбрать удобный график и условия работы, которые подойдут именно вам</p>
+        <CategoryList />
+      </div>
+      <h1 class="title-main">
+        Как найти работу на нашем сайте
+      </h1>
+      <div class="steps">
+        <div class="steps__item">
+          <img width="50" height="50" src="@/assets/images/1.svg" alt="">
+          <p class="steps__item-title">Зарегистрируйтесь</p>
+          <img src="@/assets/images/find-job1.png" alt="">
+          <p class="text-center">Зарегистрируйтесь и войдите в личный кабинет</p>
+        </div>
+        <div class="steps__item">
+          <img width="50" height="50" src="@/assets/images/2.svg" alt="">
+          <p class="steps__item-title">Найдите вакансию</p>
+          <img src="@/assets/images/find-job2.png" alt="">
+          <p class="text-center">Нажмите на категорию и выберите подходящую вакансию</p>
+        </div>
+        <div class="steps__item">
+          <img width="50" height="50" src="@/assets/images/3.svg" alt="">
+          <p class="steps__item-title">Нажмите “Откликнуться”</p>
+          <img src="@/assets/images/find-job3.png" alt="">
+          <p class="text-center">Откройте вакансию, нажмите “Откликнуться” и напишите немного о ваших навыках</p>
         </div>
       </div>
+      <h1 class="title-main">
+        Новые вакансии
+      </h1>
+      <VacancyList class="block" />
+      <h1 class="title-main">
+        Статьи
+      </h1>
+      <ArticlesList />
     </div>
   </div>
 </template>
@@ -118,6 +145,9 @@ definePageMeta({
   width: 100%;
   padding-bottom: 50px;
   padding-top: 50px;
+  @media screen and (max-width:500px) {
+    flex-direction: column;
+  }
   &__decor {
     position: absolute;
     top: 20px;
@@ -128,69 +158,117 @@ definePageMeta({
     font-size: 40px;
     color: #2c1b47;
     line-height: 40px;
+    margin-bottom: 25px;
+    @media screen and (max-width:500px) {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 30px;
+    }
   }
   &__title--purple {
     font-weight: 600;
     font-size: 40px;
     line-height: 150%;
     color: #7152d7;
+    @media screen and (max-width: 500px) {
+      font-size: 28px;
+    }
   }
   &__text {
     font-weight: 500;
     font-size: 20px;
+    max-width: 518px;
     color: #000;
+    line-height: normal;
+    @media screen and (max-width:500px) {
+      font-size: 14px;
+    }
   }
   &__field {
-    padding: 20px 25px;
+    padding: 10px 25px;
     width: 463px;
     border-radius: 8px;
     border: 1px solid #5453882c;
     &::placeholder {
       font-weight: 500;
-      font-size: 20px;
+      font-size: 15px;
       line-height: 300%;
       color: #676767;
     }
+    @media screen and (max-width:500px) {
+      width: auto;
+    }
   }
   &__btn {
-    height: 57px;
+    padding: 8px 20px;
+    border-radius: 10px;
   }
   &__link {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 122%;
     text-decoration: underline;
     text-decoration-skip-ink: none;
     color: #755eff;
+    margin-top: 10px;
   }
 }
 .about {
   &__title {
+    max-width: 588px;
     font-weight: 600;
     font-size: 28px;
     line-height: 28px;
+    margin-bottom: 20px;
     color: #2c1b47;
+    @media screen and (max-width:500px) {
+      font-size: 16px;
+      line-height: 16px;
+    }
   }
 }
-.vacancies-items {
+
+.title-main {
+  font-weight: 600;
+  font-size: 40px;
+  color: #000;
+  margin-top: 80px;
+  @media screen and (max-width:500px) {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+}
+.steps {
+  margin-top: 60px;
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  
+  align-items: flex-start;
   gap: 16px;
-  &__item {
-    width: calc(25% - 16px);
-
-    border: 1px solid #e6e0ff;
-    border-radius: 10px;
-    padding: 24px 45px;
-    min-width: 304px;
-    height: 123px;
-
-    box-shadow: 0 4px 20px 0 rgba(96, 77, 158, 0.08);
-    background: #fff;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  flex-wrap: wrap;
+  @media screen and (max-width: 500px) {
+    margin-top: 20px;
+    flex-direction: column;
+  }
+}
+.steps__item {
+  width: calc(33% - 16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  &-title {
+    font-weight: 600;
+    text-align: center;
+    font-size: 24px;
+    color: #000;
+  }
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
+}
+.search-main {
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
   }
 }
 </style>

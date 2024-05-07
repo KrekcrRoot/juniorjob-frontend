@@ -37,7 +37,7 @@
         <img src="@/assets/images/500.svg" alt="" />
       </div>
       <div class="error-main__title">500</div>
-      <div class="error-main__postitle">Ремонтируем сервер</div>
+      <div class="error-main__postitle">{{error}}</div>
     </template>
   </div>
 </template>

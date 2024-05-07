@@ -289,6 +289,7 @@ onMounted(() => {
                   >
                     {{ userStore.user.userData.title }}
                   </template>
+
                   <template v-else>
                     {{ userStore.user.userData.name }}
                   </template>
@@ -341,6 +342,7 @@ onMounted(() => {
 .header-wrapper {
   position: relative;
 }
+
 .header-search-wrapper {
   @media (max-width: 979px) {
     width: 100%;
@@ -351,6 +353,7 @@ onMounted(() => {
     z-index: 1200;
   }
 }
+
 .header {
   display: flex;
   flex-direction: row;
@@ -388,12 +391,14 @@ onMounted(() => {
     background: #f5f5fb;
     padding: 17px 21px;
     padding-left: 22px;
+
     &::placeholder {
       color: #aaa2d8;
       font-size: 18px;
       font-weight: 300;
     }
   }
+
   &__search-wrapper {
     width: 100%;
     position: relative;
@@ -404,6 +409,7 @@ onMounted(() => {
     right: 10px;
     top: 50%;
     transform: translate(0, -50%);
+
     &-static {
       border-radius: 10px !important;
       padding-top: 17px;
@@ -434,6 +440,7 @@ onMounted(() => {
   justify-content: center;
   gap: 10px;
   flex-shrink: 0;
+
   @media (max-width: 979px) {
     flex: 1 0 auto;
   }
@@ -441,16 +448,19 @@ onMounted(() => {
   &__icon {
     width: 24px;
     height: 24px;
+
     @media (max-width: 390px) {
       width: 20px;
       height: 20px;
     }
+
     & img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
   }
+
   @media (max-width: 390px) {
     padding: 8px 15px;
     gap: 6px;
@@ -478,9 +488,11 @@ onMounted(() => {
     z-index: 3100;
     box-shadow: 3px 0 10px 3px rgba(0, 0, 0, 0.4);
     padding: 32px;
+
     &__icon {
       width: 32px;
       height: 32px;
+
       & img {
         width: 100%;
         height: 100%;
@@ -504,6 +516,7 @@ onMounted(() => {
   &__logout-btn {
     width: 100%;
   }
+
   &--mobile-icon {
     width: 23px;
     height: 23px;
@@ -512,6 +525,7 @@ onMounted(() => {
 
 .main-menu {
   flex-direction: row;
+
   &__link {
     display: flex;
     align-items: center;
@@ -525,6 +539,7 @@ onMounted(() => {
       object-fit: contain;
     }
   }
+
   @media screen and (max-width: 979px) {
     flex-direction: column;
     align-items: center;
@@ -534,6 +549,7 @@ onMounted(() => {
 .logo {
   user-select: none;
   height: 50px;
+
   @media screen and (max-width: 979px) {
     height: 43px;
   }
@@ -547,6 +563,7 @@ onMounted(() => {
 
 .main-wrapper {
   padding-bottom: 170px;
+
   @media (max-width: 979px) {
     min-height: calc(100vh - 300px);
     position: relative;
@@ -556,6 +573,7 @@ onMounted(() => {
     border-top-left-radius: 30px;
     box-shadow: 0px -10px 15px 0px rgba(44, 27, 71, 0.08);
   }
+
   @media screen and (max-width: 1265px) {
     padding-bottom: 70px;
   }
@@ -571,16 +589,20 @@ onMounted(() => {
   font-weight: 400;
   line-height: 110%;
 }
+
 .slide-enter-active {
   animation: bounce-in 0.5s;
 }
+
 .slide-leave-active {
   animation: bounce-in 0.5s reverse;
 }
+
 @keyframes bounce-in {
   0% {
     transform: translateX(-300px);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -602,14 +624,17 @@ onMounted(() => {
 .sidebar-panel {
   overflow-y: auto;
   position: fixed;
-  left: 0px; /* Изначально сдвигаем меню за пределы экрана */
+  left: 0px;
+  /* Изначально сдвигаем меню за пределы экрана */
   top: 0;
   height: 100vh;
   z-index: 5000;
   padding: 3rem 20px 2rem 20px;
   width: 300px;
-  transition: 0.25s; /* Добавляем анимацию сдвига меню */
+  transition: 0.25s;
+  /* Добавляем анимацию сдвига меню */
 }
+
 .footer {
   &__container {
     padding-top: 25px;
@@ -618,6 +643,7 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     @media screen and (max-width: 806px) {
       flex-direction: column;
     }
@@ -627,43 +653,52 @@ onMounted(() => {
     width: 183px;
     display: block;
     height: 60px;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
   }
+
   &__icon {
     width: 24px;
     height: 24px;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
   }
+
   &__text {
     color: #3d337e;
     font-size: 16px;
     font-weight: 600;
+
     &:hover {
       color: #9820dd;
     }
   }
+
   &__contacts {
     display: flex;
     gap: 30px;
+
     @media screen and (max-width: 820px) {
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
+
     & .footer__text {
       @media screen and (max-width: 820px) {
         text-align: center;
       }
     }
   }
+
   margin-top: 120px;
   position: absolute;
   z-index: 3000;
@@ -671,6 +706,7 @@ onMounted(() => {
   left: 0;
   bottom: 0;
   background: #d8d4f1;
+
   @media screen and (max-width: 1265px) {
     margin-top: 10px;
     // position: relative;
@@ -687,17 +723,33 @@ onMounted(() => {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .register-btn {
   cursor: pointer;
   font-size: 18px;
   color: #604d9e;
   padding: 10px 25px;
 }
+
 .login-btn {
   cursor: pointer;
   padding: 10px 25px !important;
   border-radius: 5px;
   font-size: 14px;
   line-height: normal;
+}
+.btns-reg {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    display: none;
+  }
+}
+.test-header-class {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 </style>
