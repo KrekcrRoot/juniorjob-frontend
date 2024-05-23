@@ -752,4 +752,10 @@ onMounted(() => {
   align-items: center;
   gap: 20px;
 }
+.login-btn,
+.register-btn {
+  @media screen and (max-width: 490px) {
+    display: none;
+  }
+}
 </style>
