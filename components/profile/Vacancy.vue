@@ -50,7 +50,10 @@ const vacancyResponse = async (data) => {
 };
 
 const searchResponse = (id) => {
-  if (userStore.roles.current === "applicant" && vacanciesStore.vacanciesResponses) {
+  if (
+    userStore.roles.current === "applicant" &&
+    vacanciesStore.vacanciesResponses
+  ) {
     return !!vacanciesStore?.vacanciesResponses?.find((w) => {
       return w.vacancy.uuid === id;
     });
@@ -259,7 +262,7 @@ onBeforeUnmount(() => {
         </p>
         <template v-if="userStore.access_token !== ''">
           <div
-            class="w-full flex items-center flex-col mt-3 mb-3"
+            class="w-full flex items-center flex-col mt-3 mb-3 gap-3"
             v-if="userStore.user.role.current === 'applicant'"
           >
             <p class="vacancy__check" v-if="searchResponse(vacancy?.uuid)">
@@ -738,13 +741,13 @@ onBeforeUnmount(() => {
   position: relative;
   display: flex;
   align-items: flex-start;
-  max-height: 60px;
+  min-height: 60px;
 }
 
 .profile-mobile-main {
   @media screen and (max-width: 500px) {
-    position: absolute;
-    top: 0;
+    /*position: absolute;
+    top: 0;*/
     margin-top: 0;
     padding-top: 0;
     gap: 10px;

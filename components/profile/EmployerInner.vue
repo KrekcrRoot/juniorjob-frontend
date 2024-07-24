@@ -60,6 +60,16 @@ onMounted(async () => {
 </script>
 <template>
   <div class="xl:container mx-auto">
+    9
+    <template v-if="process.client">
+      <NuxtLink
+        v-if="
+          useUserStore().roles && useUserStore().roles.current === 'moderator'
+        "
+      >
+        Панель управления
+      </NuxtLink>
+    </template>
     <div class="profile profile-about-mobile mt-10">
       <div class="profile__left">
         <h1 class="profile__title">Мои вакансии</h1>
